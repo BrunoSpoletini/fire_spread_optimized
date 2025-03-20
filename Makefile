@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -Werror
+CXXFLAGS = -Wall -Wextra -Werror -fopenmp
 INCLUDE = -I./src
 CXXCMD = $(CXX) $(CXXFLAGS) $(INCLUDE)
 
