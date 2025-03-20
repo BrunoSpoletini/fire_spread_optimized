@@ -6,11 +6,11 @@
 #include <sstream>
 #include <vector>
 
-std::string_view CSVRow::operator[](std::size_t index) const {
+std::string_view CSVRow::operator[](std::unsigned int index) const {
   return std::string_view(&m_line[m_data[index] + 1], m_data[index + 1] - (m_data[index] + 1));
 }
 
-std::size_t CSVRow::size() const {
+std::unsigned int CSVRow::size() const {
   return m_data.size() - 1;
 }
 
