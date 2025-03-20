@@ -5,7 +5,7 @@
 #include "landscape.hpp"
 #include "matrix.hpp"
 
-Fire read_fire(size_t width, size_t height, std::string filename) {
+Fire read_fire(unsigned int width, unsigned int height, std::string filename) {
 
   std::ifstream burned_ids_file(filename);
 
@@ -18,14 +18,14 @@ Fire read_fire(size_t width, size_t height, std::string filename) {
 
   Matrix<bool> burned_layer(width, height);
 
-  std::vector<std::pair<size_t, size_t>> burned_ids;
+  std::vector<std::pair<unsigned int, unsigned int>> burned_ids;
 
   for (; loop != CSVIterator(); ++loop) {
     if (loop->size() < 2) {
       throw std::runtime_error("Invalid fire file");
     }
-    size_t x = atoi((*loop)[0].data());
-    size_t y = atoi((*loop)[1].data());
+    unsigned int x = atoi((*loop)[0].data());
+    unsigned int y = atoi((*loop)[1].data());
     if (x >= width || y >= height) {
       throw std::runtime_error("Invalid fire file");
     }

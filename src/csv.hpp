@@ -8,8 +8,8 @@
 
 class CSVRow {
 public:
-  std::string_view operator[](std::size_t index) const;
-  std::size_t size() const;
+  std::string_view operator[](unsigned int index) const;
+  unsigned int size() const;
   void readNextRow(std::istream& str);
 
 private:
@@ -23,7 +23,7 @@ class CSVIterator {
 public:
   typedef std::input_iterator_tag iterator_category;
   typedef CSVRow value_type;
-  typedef std::size_t difference_type;
+  typedef unsigned int difference_type;
   typedef CSVRow* pointer;
   typedef CSVRow& reference;
 
