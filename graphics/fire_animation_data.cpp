@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
         landscape, ignition_cells, params, DISTANCE, ELEVATION_MEAN, ELEVATION_SD,
         UPPER_LIMIT
     );
-
+/*
     // Print the fire
 
     std::cout << "Landscape size: " << landscape.width << " " << landscape.height << std::endl;
@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
       }
       step++;
     }
-
+*/
   } catch (std::runtime_error& e) {
     std::cerr << "ERROR: " << e.what() << std::endl;
     return EXIT_FAILURE;
