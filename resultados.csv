@@ -1,0 +1,2 @@
+Compilador,Optimizador,Landscape,Tiempo promedio de ejecuciones,Celdas quemadas por segundo
+g++,-O0,./data/2000_8,0.046862,0.7103325624999999
