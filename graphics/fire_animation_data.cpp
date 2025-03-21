@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
   try {
 
     // check if the number of arguments is correct
-    if (argc != 2) {
+    if (argc < 2 || argc > 3) {
       std::cerr << "Usage: " << argv[0] << " <landscape_file_prefix>" << std::endl;
       return EXIT_FAILURE;
     }
@@ -40,24 +40,25 @@ int main(int argc, char* argv[]) {
         landscape, ignition_cells, params, DISTANCE, ELEVATION_MEAN, ELEVATION_SD,
         UPPER_LIMIT
     );
-/*
-    // Print the fire
 
-    std::cout << "Landscape size: " << landscape.width << " " << landscape.height << std::endl;
-
-    size_t step = 0;
-    size_t i = 0;
-    for (size_t j : fire.burned_ids_steps) {
-      if (i >= j) {
-        continue;
+    if (argc == 2 || atoi(argv[2])) {
+      // Print the fire
+  
+      std::cout << "Landscape size: " << landscape.width << " " << landscape.height << std::endl;
+  
+      size_t step = 0;
+      size_t i = 0;
+      for (size_t j : fire.burned_ids_steps) {
+        if (i >= j) {
+          continue;
+        }
+        std::cout << "Step " << step << ":" << std::endl;
+        for (; i < j; i++) {
+          std::cout << fire.burned_ids[i].first << " " << fire.burned_ids[i].second << std::endl;
+        }
+        step++;
       }
-      std::cout << "Step " << step << ":" << std::endl;
-      for (; i < j; i++) {
-        std::cout << fire.burned_ids[i].first << " " << fire.burned_ids[i].second << std::endl;
-      }
-      step++;
     }
-*/
   } catch (std::runtime_error& e) {
     std::cerr << "ERROR: " << e.what() << std::endl;
     return EXIT_FAILURE;
