@@ -2,7 +2,7 @@ import subprocess
 import os
 import csv
 
-#compiladores = ["g++", "clang++"]
+#compiladores = ["g++", "clang++ -std=c++17"]
 compiladores = ["g++"]
 optimizadores = ["-O0", "-O1", "-O2", "-O3", "-Ofast"]
 landscapes = [("./data/2000_8", 1)]

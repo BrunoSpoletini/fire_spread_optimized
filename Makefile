@@ -1,6 +1,5 @@
-CXX = clang++
-CLANGFLAGS = -fopenmp -std=c++17  # Para que ande cling clang
-CXXFLAGS = -Wall -Wextra -Werror $(CLANGFLAGS)
+CXX = g++
+CXXFLAGS = -Wall -Wextra -Werror -fopenmp
 CXXOPT = -O0
 INCLUDE = -I./src 
 CXXCMD = $(CXX) $(CXXFLAGS) $(CXXOPT) $(INCLUDE)
