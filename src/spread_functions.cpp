@@ -149,7 +149,7 @@ Fire simulate_fire(
     burned_ids_steps.push_back(end);
   }
   //printf("celdas incendiadas por segundo : %lf\n", burned_ids.size() / (omp_get_wtime() - t));
-  fprintf(stderr, "celdas incendiadas por segundo : %lf\n", burned_ids.size() / (1E06 * (omp_get_wtime()-t)));
+  fprintf(stderr, "celdas incendiadas por microsegundo : %lf\n", burned_ids.size() / (1E06 * (omp_get_wtime()-t)));
 
   return { n_col, n_row, burned_bin, burned_ids, burned_ids_steps };
 }
