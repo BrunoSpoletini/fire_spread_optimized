@@ -2,11 +2,13 @@ import subprocess
 import os
 import csv
 
-compiladores = ["g++"] #["g++", "clang"]
-optimizadores = ["-O0"]
-#optimizadores = ["-O0", "-O1", "-O2", "-O3", "-Ofast"]
-landscapes = [("./data/2000_8", 16)] # 16
-#landscapes = [("./data/2000_8", 16), ("./data/1999_27j_S", 16), ("./data/2015_50", 4)]
+#compiladores = ["g++"] #["g++", "clang++"]
+compiladores = ["g++", "clang++"]
+#compiladores = ["clang++"]
+#optimizadores = ["-O0"]
+optimizadores = ["-O0", "-O1", "-O2", "-O3", "-Ofast"]
+#landscapes = [("./data/2000_8", 1)]
+landscapes = [("./data/2000_8", 16), ("./data/1999_27j_S", 16), ("./data/2015_50", 4)]
 
 # Filtra el tiempo de usuario promedio de todas las ejecuciones
 def filtrarPerf(res):
@@ -18,15 +20,15 @@ def filtrarPerf(res):
             break
     return tiempo_promedio
 
-# Promedia la cantidad de celdas quemadas por segundo de varias ejecuciones
-def mediaCeldasPorSeg(res):
+# Numero maximo de celdas quemadas por segundo de varias ejecuciones
+def maxCeldasPorSeg(res):
     lines = res.stderr.splitlines()
-    sumaCeldas = 0
+    sumaCeldas = []
     for line in lines:
         partes = line.strip().split()
         num = partes[-1]
-        sumaCeldas += float(num)
-    return sumaCeldas/len(lines)
+        sumaCeldas.append(float(num))
+    return max(sumaCeldas)
 
 def main():
 
@@ -58,7 +60,7 @@ def main():
                     resCells = subprocess.run(comandoCells, stderr=subprocess.PIPE, text=True)
 
                     # exportar datos a csv:
-                    writer.writerow([comp, opt, landscape[0], filtrarPerf(resPerf), mediaCeldasPorSeg(resCells)])
+                    writer.writerow([comp, opt, landscape[0], filtrarPerf(resPerf), maxCeldasPorSeg(resCells)])
 
 if __name__ == "__main__":
     main()

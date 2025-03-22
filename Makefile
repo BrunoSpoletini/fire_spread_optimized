@@ -1,7 +1,8 @@
-CXX = g++
-CXXFLAGS = -Wall -Wextra -Werror -fopenmp
+CXX = clang++
+CLANGFLAGS = -fopenmp -std=c++17  # Para que ande cling clang
+CXXFLAGS = -Wall -Wextra -Werror $(CLANGFLAGS)
 CXXOPT = -O0
-INCLUDE = -I./src
+INCLUDE = -I./src 
 CXXCMD = $(CXX) $(CXXFLAGS) $(CXXOPT) $(INCLUDE)
 
 headers = $(wildcard ./src/*.hpp)
