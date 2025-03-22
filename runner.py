@@ -2,9 +2,11 @@ import subprocess
 import os
 import csv
 
-compiladores = ["g++", "clang++"]
+#compiladores = ["g++", "clang++"]
+compiladores = ["g++"]
 optimizadores = ["-O0", "-O1", "-O2", "-O3", "-Ofast"]
-landscapes = [("./data/2000_8", 16), ("./data/1999_27j_S", 16), ("./data/2015_50", 4)]
+landscapes = [("./data/2000_8", 1)]
+#landscapes = [("./data/2000_8", 16), ("./data/1999_27j_S", 16), ("./data/2015_50", 4)]
 
 # Filtra el tiempo de usuario promedio de todas las ejecuciones
 def filtrarPerf(res):
@@ -48,11 +50,11 @@ def main():
 
                 for opt in optimizadores:
                     os.system("make clean && make CXX=" + comp + " CXXOPT=" + opt)
-                    comandoPerf = ["/usr/lib/linux-tools/5.15.0-134-generic/perf", "stat", "-r", str(landscape[1]), "./graphics/fire_animation_data" , landscape[0], "0"]
+                    comandoPerf = ["perf", "stat", "-r", str(landscape[1]), "./graphics/fire_animation_data" , landscape[0], "0"]
                     resPerf = subprocess.run(comandoPerf, stderr=subprocess.PIPE, text=True)
 
-                    comandoCells = ["/usr/lib/linux-tools/5.15.0-134-generic/perf", "stat", "-r", str(landscape[1]), "--quiet", "./graphics/fire_animation_data" , landscape[0], "0"]
-                    resCells = subprocess.run(comandoCells, stderr=subprocess.PIPE, text=True)
+                    #comandoCells = ["/usr/lib/linux-tools/5.15.0-134-generic/perf", "stat", "-r", str(landscape[1]), "--quiet", "./graphics/fire_animation_data" , landscape[0], "0"]
+                    #resCells = subprocess.run(comandoCells, stderr=subprocess.PIPE, text=True)
 
                     # exportar datos a csv:
                     writer.writerow([comp, opt, landscape[0], filtrarPerf(resPerf), maxCeldasPorSeg(resPerf)])
