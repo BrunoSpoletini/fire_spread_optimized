@@ -23,7 +23,7 @@ def maxCeldasPorSeg(res):
     sumaCeldas = []
     for linea in res.stderr.splitlines():
         if "celdas incendiadas por microsegundo" in linea:
-            partes = line.strip().split()
+            partes = linea.strip().split()
             sumaCeldas.append(float(partes[-1]))
     return max(sumaCeldas)
 
