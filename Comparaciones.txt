@@ -1,0 +1,18 @@
+Optimizamos el uso de la memoria y agregamos una metrica que ve la cantidad de celdas incendiadas por microsegundo
+
+Notamos que al aumentar el tamaño del landscape aumenta la cantidad de celdas incendiadas por segundo. 
+Suponemos que esto se debe a que se desestima mayormente el ruido de maquina. (este afecta mas a casos mas cortos)
+
+
+Que comparaciones vamos a hacer?
+1) Comparar en 3 landscapes, corridas con clang++ y g++, y con las
+combinaciones de o0, o1, ..., ofast
+2) En los 3 landscapes, agarramos el mejor compilador con la mejor opt, y lo
+corremos con optimizaciones extras.
+3) Teniendo g++ con las mejores flags, hacemos la comparacion de:
+correr el programa sin opt en local, sin opt en atom,
+con opt en local y con opt en atom.
+(local puede ser en mi ryzen y el intel de nano para testear dist. arquitecturas)
+Concluir (quiza) que es mas conveniente optimizar antes que
+comprar un procesador mejor.
+Por ahi esto convenga hacerlo con un solo landscape para que sea mas facil mostrar la comparacion.
