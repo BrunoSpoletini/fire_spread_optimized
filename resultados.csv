@@ -1,6 +1,0 @@
-Compilador,Optimizador,Landscape,Celdas quemadas por microsegundo
-g++,-Ofast,./data/2000_8,4.545043
-g++,-Ofast -march=native,./data/2000_8,4.597319
-g++,-Ofast -mtune=native,./data/2000_8,4.559113
-g++,-Ofast -flto,./data/2000_8,5.076821
-g++,-Ofast -funroll-loops,./data/2000_8,4.629768
