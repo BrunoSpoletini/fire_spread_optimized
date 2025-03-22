@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -Wall -Wextra -Werror -fopenmp
 CXXOPT = -O0
-INCLUDE = -I./src 
+INCLUDE = -I./src
 CXXCMD = $(CXX) $(CXXFLAGS) $(CXXOPT) $(INCLUDE)
 
 headers = $(wildcard ./src/*.hpp)
