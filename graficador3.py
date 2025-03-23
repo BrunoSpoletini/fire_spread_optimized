@@ -3,13 +3,17 @@ import matplotlib.pyplot as plt
 import os
 
 # Crear carpeta si no existe
-output_dir = "./comp3Atom"
+output_dir = "./comp3"
+#output_dir = "./comp3Atom"
 os.makedirs(output_dir, exist_ok=True)
 
 # Lista de archivos con sus etiquetas
 archivos = {
-    "Reduced": "resultadosComp3AtomReduced.csv",
-    "Original": "resultadosComp3AtomOriginal.csv"
+    "Atom": "resultadosComp3Atom.csv",
+    "Local1": "resultadosComp3Local1.csv",
+    "Local2": "resultadosComp3Local2.csv"
+    #"Reduced": "resultadosComp3AtomReduced.csv",
+    #"Original": "resultadosComp3AtomReduced.csv",
 }
 
 # Diccionario para almacenar los datos
