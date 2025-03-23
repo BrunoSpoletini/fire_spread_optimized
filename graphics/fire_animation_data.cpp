@@ -46,9 +46,9 @@ int main(int argc, char* argv[]) {
   
       std::cout << "Landscape size: " << landscape.width << " " << landscape.height << std::endl;
   
-      unsigned int step = 0;
-      unsigned int i = 0;
-      for (unsigned int j : fire.burned_ids_steps) {
+      size_t step = 0;
+      size_t i = 0;
+      for (size_t j : fire.burned_ids_steps) {
         if (i >= j) {
           continue;
         }

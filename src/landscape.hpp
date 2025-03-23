@@ -14,23 +14,23 @@ enum VegetationType {
 static_assert( sizeof(VegetationType) == 1 );
 
 struct Cell {
-  float elevation;
-  float wind_direction;
+  double elevation;
+  double wind_direction;
   bool burnable;
   VegetationType vegetation_type;
-  float fwi;
-  float aspect;
+  double fwi;
+  double aspect;
 };
 
 struct Landscape {
-  unsigned int width;
-  unsigned int height;
+  size_t width;
+  size_t height;
 
-  Landscape(unsigned int width, unsigned int height);
+  Landscape(size_t width, size_t height);
   Landscape(std::string metadata_filename, std::string data_filename);
 
-  Cell operator[](std::pair<unsigned int, unsigned int> index) const;
-  Cell& operator[](std::pair<unsigned int, unsigned int> index);
+  Cell operator[](std::pair<size_t, size_t> index) const;
+  Cell& operator[](std::pair<size_t, size_t> index);
 
   Matrix<Cell> cells;
 };
