@@ -6,19 +6,19 @@
 #include "landscape.hpp"
 
 struct SimulationParams {
-  double independent_pred;
-  double wind_pred;
-  double elevation_pred;
-  double slope_pred;
-  double subalpine_pred;
-  double wet_pred;
-  double dry_pred;
-  double fwi_pred;
-  double aspect_pred;
+  float independent_pred;
+  float wind_pred;
+  float elevation_pred;
+  float slope_pred;
+  float subalpine_pred;
+  float wet_pred;
+  float dry_pred;
+  float fwi_pred;
+  float aspect_pred;
 };
 
 Fire simulate_fire(
-    const Landscape& landscape, const std::vector<std::pair<size_t, size_t>>& ignition_cells,
-    SimulationParams params, double distance, double elevation_mean, double elevation_sd,
-    double upper_limit
+    const Landscape& landscape, const std::vector<std::pair<unsigned int, unsigned int>>& ignition_cells,
+    SimulationParams params, float distance, float elevation_mean, float elevation_sd,
+    float upper_limit
 );

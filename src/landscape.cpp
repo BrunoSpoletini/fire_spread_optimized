@@ -4,7 +4,7 @@
 #include <cstddef>
 #include <string>
 
-Landscape::Landscape(size_t width, size_t height)
+Landscape::Landscape(unsigned int width, unsigned int height)
     : width(width), height(height), cells(width, height) {}
 
 Landscape::Landscape(std::string metadata_filename, std::string data_filename) : cells(0, 0) {
@@ -36,8 +36,8 @@ Landscape::Landscape(std::string metadata_filename, std::string data_filename) :
   CSVIterator loop_csv(landscape_file);
   ++loop_csv;
 
-  for (size_t j = 0; j < height; j++) {
-    for (size_t i = 0; i < width; i++, ++loop_csv) {
+  for (unsigned int j = 0; j < height; j++) {
+    for (unsigned int i = 0; i < width; i++, ++loop_csv) {
       if (loop_csv == CSVIterator() || (*loop_csv).size() < 8) {
         throw std::runtime_error("Invalid landscape file");
       }
@@ -61,10 +61,10 @@ Landscape::Landscape(std::string metadata_filename, std::string data_filename) :
   landscape_file.close();
 }
 
-Cell Landscape::operator[](std::pair<size_t, size_t> index) const {
+Cell Landscape::operator[](std::pair<unsigned int, unsigned int> index) const {
   return cells[index];
 }
 
-Cell& Landscape::operator[](std::pair<size_t, size_t> index) {
+Cell& Landscape::operator[](std::pair<unsigned int, unsigned int> index) {
   return cells[index];
 }

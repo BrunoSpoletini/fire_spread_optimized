@@ -37,14 +37,14 @@ int main(int argc, char* argv[]) {
       0, 0.5, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2
     };
 
-    Matrix<size_t> burned_amounts = burned_amounts_per_cell(
+    Matrix<unsigned int> burned_amounts = burned_amounts_per_cell(
         landscape, ignition_cells, params, DISTANCE, ELEVATION_MEAN, ELEVATION_SD, UPPER_LIMIT,
         SIMULATIONS
     );
     std::cout << "Landscape size: " << landscape.width << " " << landscape.height << std::endl;
     std::cout << "Simulations: " << SIMULATIONS << std::endl;
-    for (size_t i = 0; i < landscape.height; i++) {
-      for (size_t j = 0; j < landscape.width; j++) {
+    for (unsigned int i = 0; i < landscape.height; i++) {
+      for (unsigned int j = 0; j < landscape.width; j++) {
         if (j != 0) {
           std::cout << " ";
         }

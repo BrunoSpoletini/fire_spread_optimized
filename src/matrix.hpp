@@ -1,16 +1,16 @@
 #pragma once
 
 template <typename T> struct Matrix {
-  size_t width;
-  size_t height;
+  unsigned int width;
+  unsigned int height;
 
-  Matrix(size_t width, size_t height) : width(width), height(height), elems(width * height){};
+  Matrix(unsigned int width, unsigned int height) : width(width), height(height), elems(width * height){};
 
-  const T operator[](std::pair<size_t, size_t> index) const {
+  const T operator[](std::pair<unsigned int, unsigned int> index) const {
     return elems[index.second * width + index.first];
   };
 
-  T& operator[](std::pair<size_t, size_t> index) {
+  T& operator[](std::pair<unsigned int, unsigned int> index) {
     return elems[index.second * width + index.first];
   };
 
@@ -19,7 +19,7 @@ template <typename T> struct Matrix {
       return false;
     }
 
-    for (size_t i = 0; i < width * height; i++) {
+    for (unsigned int i = 0; i < width * height; i++) {
       if (elems[i] != other.elems[i]) {
         return false;
       }
@@ -32,18 +32,18 @@ template <typename T> struct Matrix {
 };
 
 template <> struct Matrix<bool> {
-  size_t width;
-  size_t height;
+  unsigned int width;
+  unsigned int height;
 
-  Matrix(size_t width, size_t height) : width(width), height(height), elems(width * height){};
+  Matrix(unsigned int width, unsigned int height) : width(width), height(height), elems(width * height){};
 
-  bool operator[](std::pair<size_t, size_t> index) const {
+  bool operator[](std::pair<unsigned int, unsigned int> index) const {
     return elems[index.second * width + index.first];
   };
 
   struct SmartReference {
     std::vector<bool>& values;
-    size_t index;
+    unsigned int index;
     operator bool() const {
       return values[index];
     }
@@ -53,7 +53,7 @@ template <> struct Matrix<bool> {
     }
   };
 
-  SmartReference operator[](std::pair<size_t, size_t> index) {
+  SmartReference operator[](std::pair<unsigned int, unsigned int> index) {
     return SmartReference{ elems, index.second * width + index.first };
   }
 
@@ -62,7 +62,7 @@ template <> struct Matrix<bool> {
       return false;
     }
 
-    for (size_t i = 0; i < width * height; i++) {
+    for (unsigned int i = 0; i < width * height; i++) {
       if (elems[i] != other.elems[i]) {
         return false;
       }

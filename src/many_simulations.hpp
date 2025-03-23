@@ -9,8 +9,8 @@
 /* Make `n_replicates` simulation and return a matrix with the number of simulations each cell
  * was burned.
  */
-Matrix<size_t> burned_amounts_per_cell(
-    const Landscape& landscape, const std::vector<std::pair<size_t, size_t>>& ignition_cells,
-    SimulationParams params, double distance, double elevation_mean, double elevation_sd,
-    double upper_limit, size_t n_replicates
+Matrix<unsigned int> burned_amounts_per_cell(
+    const Landscape& landscape, const std::vector<std::pair<unsigned int, unsigned int>>& ignition_cells,
+    SimulationParams params, float distance, float elevation_mean, float elevation_sd,
+    float upper_limit, unsigned int n_replicates
 );
