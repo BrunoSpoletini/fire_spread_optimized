@@ -1,0 +1,7 @@
+Compilador,Optimizador,Landscape,Celdas quemadas por microsegundo
+g++,,./data/2000_8,0.740932
+g++,-Ofast -flto,./data/2000_8,4.961599
+g++,,./data/1999_27j_S,0.768879
+g++,-Ofast -flto,./data/1999_27j_S,5.67584
+g++,,./data/2015_50,0.779676
+g++,-Ofast -flto,./data/2015_50,5.7489

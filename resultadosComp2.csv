@@ -1,16 +1,16 @@
 Compilador,Optimizador,Landscape,Celdas quemadas por microsegundo
-g++,-Ofast,./data/2000_8,4.51204
-g++,-Ofast -march=native,./data/2000_8,4.606245
-g++,-Ofast -mtune=native,./data/2000_8,4.485067
-g++,-Ofast -flto,./data/2000_8,4.73159
-g++,-Ofast -funroll-loops,./data/2000_8,4.551918
-g++,-Ofast,./data/1999_27j_S,5.164597
-g++,-Ofast -march=native,./data/1999_27j_S,5.191003
-g++,-Ofast -mtune=native,./data/1999_27j_S,5.143324
-g++,-Ofast -flto,./data/1999_27j_S,5.507543
-g++,-Ofast -funroll-loops,./data/1999_27j_S,5.157118
-g++,-Ofast,./data/2015_50,5.199287
-g++,-Ofast -march=native,./data/2015_50,5.234297
-g++,-Ofast -mtune=native,./data/2015_50,5.258027
-g++,-Ofast -flto,./data/2015_50,5.583933
-g++,-Ofast -funroll-loops,./data/2015_50,5.24449
+g++,-Ofast,./data/2000_8,4.688897
+g++,-Ofast -march=native,./data/2000_8,4.790175
+g++,-Ofast -mtune=native,./data/2000_8,4.601055
+g++,-Ofast -flto,./data/2000_8,5.046109
+g++,-Ofast -funroll-loops,./data/2000_8,4.682341
+g++,-Ofast,./data/1999_27j_S,5.270749
+g++,-Ofast -march=native,./data/1999_27j_S,5.40866
+g++,-Ofast -mtune=native,./data/1999_27j_S,5.339011
+g++,-Ofast -flto,./data/1999_27j_S,5.734988
+g++,-Ofast -funroll-loops,./data/1999_27j_S,5.301887
+g++,-Ofast,./data/2015_50,5.363549
+g++,-Ofast -march=native,./data/2015_50,5.412282
+g++,-Ofast -mtune=native,./data/2015_50,5.327885
+g++,-Ofast -flto,./data/2015_50,5.774431
+g++,-Ofast -funroll-loops,./data/2015_50,5.421957
