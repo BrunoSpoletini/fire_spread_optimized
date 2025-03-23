@@ -27,8 +27,8 @@ def plot_comparacion_celdas(csv_path):
     # Crear el gráfico de barras agrupadas
     ax = pivot.plot(kind='bar', figsize=(10, 6))
     ax.set_xlabel("Opción de optimización")
-    ax.set_ylabel("Celdas quemadas por microsegundo")
-    ax.set_title("Comparación de celdas quemadas por microsegundo usando g++ -Ofast")
+    ax.set_ylabel("Celdas incendiadas por microsegundo")
+    ax.set_title("Celdas incendiadas por microsegundo vs Parámetros")
     ax.legend(title="Landscape", loc="lower left")
     
     # Modificar las etiquetas del eje x para que no muestren "-Ofast"
@@ -42,7 +42,7 @@ def plot_comparacion_celdas(csv_path):
         ax.bar_label(container, fmt="%.2f")
     
     plt.tight_layout()
-    plt.savefig("grafica2.png")
+    plt.savefig("comp2.png")
 
 # Ejemplo de uso:
 plot_comparacion_celdas("resultadosComp2.csv")

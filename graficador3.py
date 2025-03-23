@@ -3,14 +3,13 @@ import matplotlib.pyplot as plt
 import os
 
 # Crear carpeta si no existe
-output_dir = "./comp3"
+output_dir = "./comp3Atom"
 os.makedirs(output_dir, exist_ok=True)
 
 # Lista de archivos con sus etiquetas
 archivos = {
-    "Atom": "resultadosComp3Atom.csv",
-    "Local1": "resultadosComp3Local1.csv",
-    "Local2": "resultadosComp3Local2.csv"
+    "Reduced": "resultadosComp3AtomReduced.csv",
+    "Original": "resultadosComp3AtomOriginal.csv"
 }
 
 # Diccionario para almacenar los datos
@@ -50,9 +49,9 @@ for landscape in landscapes:
     # Graficar
     ax = pivot.plot(kind="bar", figsize=(10, 6))
     ax.set_xlabel("Optimizador")
-    ax.set_ylabel("Celdas quemadas por microsegundo (promedio)")
-    ax.set_title(f"Comparación de celdas quemadas - {landscape}")
-    ax.legend(title="Fuente de datos (ordenado por rapidez)", loc="upper left")
+    ax.set_ylabel("Celdas incendiadas por microsegundo")
+    ax.set_title(f"{landscape}\nCeldas incendiadas por microsegundo vs Parámetros")
+    ax.legend(title="Fuente de datos", loc="upper left")
     
     # Agregar etiquetas de valores en las barras
     for container in ax.containers:
@@ -64,6 +63,4 @@ for landscape in landscapes:
     # Guardar la imagen
     filename = os.path.join(output_dir, f"{landscape}.png")
     plt.savefig(filename)
-    plt.close()  # Cerrar la figura para liberar memoria
-
-    print(f"Gráfico guardado como {filename}")
+    plt.close()

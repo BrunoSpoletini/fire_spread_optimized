@@ -15,10 +15,10 @@ for landscape in landscapes:
     pivot = df_l.pivot(index='Optimizador', columns='Compilador', values='Celdas quemadas por segundo')
 
     ax = pivot.plot(kind='bar', figsize=(8, 6), rot=0)
-    ax.set_title(f'Comparación de celdas quemadas por segundo\nLandscape: {landscape}')
+    ax.set_title(f'{name}\nCeldas incendiadas por microsegundo vs Compilador y Optimizador')
     ax.set_xlabel('Optimizador')
-    ax.set_ylabel('Celdas quemadas por segundo')
+    ax.set_ylabel('Celdas incendiadas por microsegundo')
     ax.legend(title='Compilador')
 
     plt.tight_layout()
-    plt.savefig(name + ".png")
+    plt.savefig("./comp1/" + name + ".png")
