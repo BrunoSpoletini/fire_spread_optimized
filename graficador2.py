@@ -5,26 +5,37 @@ def plot_comparacion_celdas(csv_path):
     # Leer el archivo CSV
     df = pd.read_csv(csv_path)
     
-    # Crear una tabla dinámica (pivot):
-    #   - Índice: Optimizador
-    #   - Columnas: Landscape
-    #   - Valores: Celdas quemadas por microsegundo
+    # Calcular el promedio de "Celdas quemadas por microsegundo" para cada optimizador
+    promedio_opt = df.groupby("Optimizador")["Celdas quemadas por microsegundo"].mean()
+    # Ordenar de mayor a menor (la mayor cantidad implica mejor rendimiento)
+    optimizer_order = promedio_opt.sort_values(ascending=True).index.tolist()
+    
+    # Crear la tabla dinámica: filas = Optimizador, columnas = Landscape,
+    # valores = Celdas quemadas por microsegundo
     pivot = df.pivot(index="Optimizador", columns="Landscape", values="Celdas quemadas por microsegundo")
     
-    # Reordenar los optimizadores si se desea un orden específico
-    orden_optimizadores = ["-Ofast", "-Ofast -march=native", "-Ofast -mtune=native", "-Ofast -flto", "-Ofast -funroll-loops"]
-    pivot = pivot.reindex(orden_optimizadores)
+    # Reordenar los optimizadores según el promedio (más rápido primero)
+    pivot = pivot.reindex(optimizer_order)
     
-    # Crear el gráfico de barras comparativo
+    # Reordenar las columnas según el orden deseado:
+    # Se asume que los Landscape tienen nombres como "./data/2000_8", "./data/1999_27j_S", "./data/2015_50"
+    orden_landscapes = ["./data/2000_8", "./data/1999_27j_S", "./data/2015_50"]
+    pivot = pivot[orden_landscapes]
+    
+    # Crear el gráfico de barras agrupadas
     ax = pivot.plot(kind='bar', figsize=(10, 6))
-    ax.set_xlabel("Optimizador")
+    ax.set_xlabel("Opción de optimización")
     ax.set_ylabel("Celdas quemadas por microsegundo")
-    ax.set_title("Comparación de celdas quemadas por microsegundo")
-    ax.legend(title="Landscape")
+    ax.set_title("Comparación de celdas quemadas por microsegundo usando g++ -Ofast")
+    ax.legend(title="Landscape", loc="lower left")
     
-    # Añadir etiquetas de valor encima de cada barra
+    # Modificar las etiquetas del eje x para que no muestren "-Ofast"
+    nuevos_labels = [opt.replace("-Ofast", "").strip() for opt in pivot.index]
+    ax.set_xticklabels(nuevos_labels)
+    
+    # Añadir etiquetas con el valor encima de cada barra
     for container in ax.containers:
-        ax.bar_label(container, fmt='%.3f')
+        ax.bar_label(container, fmt="%.2f")
     
     plt.tight_layout()
     plt.savefig("grafica2.png")
