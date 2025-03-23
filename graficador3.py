@@ -2,6 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
+# Crear carpeta si no existe
+output_dir = "./comp3"
+os.makedirs(output_dir, exist_ok=True)
+
 # Lista de archivos con sus etiquetas
 archivos = {
     "Atom": "resultadosComp3Atom.csv",
@@ -40,12 +44,15 @@ for landscape in landscapes:
     # Ordenar las optimizaciones para que "base" esté primero
     pivot = pivot.reindex(sorted(pivot.index, key=lambda x: (x != "base", x)))
     
+    # Ordenar las fuentes de datos según la más rápida (menor promedio)
+    pivot = pivot[pivot.mean().sort_values().index]
+    
     # Graficar
     ax = pivot.plot(kind="bar", figsize=(10, 6))
     ax.set_xlabel("Optimizador")
     ax.set_ylabel("Celdas quemadas por microsegundo (promedio)")
     ax.set_title(f"Comparación de celdas quemadas - {landscape}")
-    ax.legend(title="Fuente de datos", loc="upper left")
+    ax.legend(title="Fuente de datos (ordenado por rapidez)", loc="upper left")
     
     # Agregar etiquetas de valores en las barras
     for container in ax.containers:
@@ -55,7 +62,7 @@ for landscape in landscapes:
     plt.tight_layout()
     
     # Guardar la imagen
-    filename = f"./comp2/{landscape}.png"
+    filename = os.path.join(output_dir, f"{landscape}.png")
     plt.savefig(filename)
     plt.close()  # Cerrar la figura para liberar memoria
 

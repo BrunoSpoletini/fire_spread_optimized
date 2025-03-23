@@ -42,7 +42,7 @@ def plot_comparacion_celdas(csv_path):
         ax.bar_label(container, fmt="%.2f")
     
     plt.tight_layout()
-    plt.savefig("grafica2v2.png")
+    plt.savefig("grafica2.png")
 
 # Ejemplo de uso:
 plot_comparacion_celdas("resultadosComp2.csv")
