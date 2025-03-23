@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-df = pd.read_csv("resultados.csv")
+df = pd.read_csv("resultadosComp1.csv")
 
 landscapes = df['Landscape'].unique()
 

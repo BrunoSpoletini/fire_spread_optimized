@@ -14,12 +14,14 @@ def plot_comparacion_celdas(csv_path):
     # valores = Celdas quemadas por microsegundo
     pivot = df.pivot(index="Optimizador", columns="Landscape", values="Celdas quemadas por microsegundo")
     
+    # Eliminar el prefijo "./data/" de los nombres de las columnas
+    pivot.columns = pivot.columns.str.replace(r"^\.\/data\/", "", regex=True)
+    
     # Reordenar los optimizadores según el promedio (más rápido primero)
     pivot = pivot.reindex(optimizer_order)
     
-    # Reordenar las columnas según el orden deseado:
-    # Se asume que los Landscape tienen nombres como "./data/2000_8", "./data/1999_27j_S", "./data/2015_50"
-    orden_landscapes = ["./data/2000_8", "./data/1999_27j_S", "./data/2015_50"]
+    # Ahora se define el orden deseado sin el prefijo
+    orden_landscapes = ["2000_8", "1999_27j_S", "2015_50"]
     pivot = pivot[orden_landscapes]
     
     # Crear el gráfico de barras agrupadas
@@ -31,6 +33,8 @@ def plot_comparacion_celdas(csv_path):
     
     # Modificar las etiquetas del eje x para que no muestren "-Ofast"
     nuevos_labels = [opt.replace("-Ofast", "").strip() for opt in pivot.index]
+    
+    nuevos_labels = ["base" if label == "" else label for label in nuevos_labels]
     ax.set_xticklabels(nuevos_labels)
     
     # Añadir etiquetas con el valor encima de cada barra
@@ -38,7 +42,7 @@ def plot_comparacion_celdas(csv_path):
         ax.bar_label(container, fmt="%.2f")
     
     plt.tight_layout()
-    plt.savefig("grafica2.png")
+    plt.savefig("grafica2v2.png")
 
 # Ejemplo de uso:
 plot_comparacion_celdas("resultadosComp2.csv")

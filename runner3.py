@@ -16,14 +16,14 @@ def maxCeldasPorSeg(res):
 
 def main():
 
-    with open('resultadosComp3Atom.csv', mode='w') as file:
+    with open('resultadosComp3Local2.csv', mode='w') as file:
         writer = csv.writer(file)
         writer.writerow(["Compilador", "Optimizador", "Landscape", "Celdas quemadas por microsegundo"])
         for landscape in landscapes:
             for comp in compiladores:
                 for opt in optimizadores:
                     os.system("make clean && make CXX=\"" + comp + "\" CXXOPT=\"" + opt + "\"")
-                    comandoPerf = ["/usr/lib/linux-tools/5.15.0-134-generic/perf", "stat", "-r", str(landscape[1]), "./graphics/fire_animation_data" , landscape[0], "0"]
+                    comandoPerf = ["perf", "stat", "-r", str(landscape[1]), "./graphics/fire_animation_data" , landscape[0], "0"]
                     resPerf = subprocess.run(comandoPerf, stderr=subprocess.PIPE, text=True)
 
                     writer.writerow([comp, opt, landscape[0], maxCeldasPorSeg(resPerf)])

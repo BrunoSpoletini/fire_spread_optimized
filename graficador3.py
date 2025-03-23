@@ -1,56 +1,62 @@
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+import os
 
-# Cargar los datos desde los archivos CSV
-df_atom = pd.read_csv('resultadosComp3Atom.csv')
-df_local = pd.read_csv('resultadosComp3Local.csv')
+# Lista de archivos con sus etiquetas
+archivos = {
+    "Atom": "resultadosComp3Atom.csv",
+    "Local1": "resultadosComp3Local1.csv",
+    "Local2": "resultadosComp3Local2.csv"
+}
 
-# Unir (merge) los dataframes por las columnas comunes
-df_merged = pd.merge(
-    df_atom, df_local,
-    on=['Compilador', 'Optimizador', 'Landscape'],
-    suffixes=('_Atom', '_Local')
-)
+# Diccionario para almacenar los datos
+data_frames = {}
 
-# Calcular el promedio de los dos sistemas para cada fila
-df_merged['Promedio'] = df_merged[['Celdas quemadas por microsegundo_Atom',
-                                   'Celdas quemadas por microsegundo_Local']].mean(axis=1)
+# Leer los archivos y agregarlos al diccionario
+for etiqueta, archivo in archivos.items():
+    df = pd.read_csv(archivo)
+    df["Fuente"] = etiqueta  # Agregar columna para identificar la fuente
+    data_frames[etiqueta] = df
 
-# Filtrar solo el landscape '2015_50'
-df_filtered = df_merged[df_merged['Landscape'] == '2015_50']
+# Unir todos los dataframes en uno solo
+df_total = pd.concat(data_frames.values())
 
-# Crear una tabla pivote: índice = Landscape, columnas = Optimizador, valores = Promedio
-pivot = df_filtered.pivot(index='Landscape', columns='Optimizador', values='Promedio')
+# Eliminar el prefijo "./data/" en Landscape
+df_total["Landscape"] = df_total["Landscape"].str.replace(r"^\.\/data\/", "", regex=True)
 
-# Configurar la gráfica de barras agrupadas
-fig, ax = plt.subplots(figsize=(8, 6))
-landscapes = pivot.index.tolist()  # Será una lista con un solo elemento: ['2015_50']
-optimizers = pivot.columns.tolist()
+# Reemplazar valores vacíos en la columna Optimizador con "base"
+df_total["Optimizador"] = df_total["Optimizador"].fillna("base")
 
-x = np.arange(len(landscapes))   # Posiciones para cada Landscape (solo 1)
-width = 0.2                      # Ancho de cada barra
+# Obtener los nombres únicos de los landscapes
+landscapes = df_total["Landscape"].unique()
 
-# Para centrar las barras en el grupo, calculamos un offset según la cantidad de optimizadores
-n_opts = len(optimizers)
-offset = (n_opts - 1) / 2.0
+# Crear un gráfico para cada Landscape
+for landscape in landscapes:
+    df_landscape = df_total[df_total["Landscape"] == landscape]
+    
+    # Crear tabla pivote: filas = Optimizador, columnas = Fuente, valores = promedio de Celdas quemadas
+    pivot = df_landscape.pivot_table(index="Optimizador", columns="Fuente", values="Celdas quemadas por microsegundo", aggfunc="mean")
+    
+    # Ordenar las optimizaciones para que "base" esté primero
+    pivot = pivot.reindex(sorted(pivot.index, key=lambda x: (x != "base", x)))
+    
+    # Graficar
+    ax = pivot.plot(kind="bar", figsize=(10, 6))
+    ax.set_xlabel("Optimizador")
+    ax.set_ylabel("Celdas quemadas por microsegundo (promedio)")
+    ax.set_title(f"Comparación de celdas quemadas - {landscape}")
+    ax.legend(title="Fuente de datos", loc="upper left")
+    
+    # Agregar etiquetas de valores en las barras
+    for container in ax.containers:
+        ax.bar_label(container, fmt="%.2f")
+    
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    
+    # Guardar la imagen
+    filename = f"./comp2/{landscape}.png"
+    plt.savefig(filename)
+    plt.close()  # Cerrar la figura para liberar memoria
 
-# Dibujar una barra para cada optimizador
-for i, opt in enumerate(optimizers):
-    values = pivot[opt].values
-    ax.bar(x + (i - offset) * width, values, width, label=str(opt))
-
-# Configurar etiquetas y título
-ax.set_xticks(x)
-ax.set_xticklabels(landscapes, rotation=0)
-ax.set_ylabel('Celdas quemadas por microsegundo (Promedio)')
-ax.set_title('Comparación por optimizador en Landscape 2015_50')
-ax.legend(title='Optimizador')
-
-plt.tight_layout()
-plt.grid(True)
-
-# Guardar la gráfica en un archivo PNG
-plt.savefig("grafica3.png")
-
-
+    print(f"Gráfico guardado como {filename}")
