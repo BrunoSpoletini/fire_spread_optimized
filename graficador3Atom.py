@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 
 # Crear carpeta si no existe
-output_dir = "./comp3Atom"
+output_dir = "./comp3Reduced"
 os.makedirs(output_dir, exist_ok=True)
 
 # Lista de archivos con sus etiquetas

@@ -28,7 +28,7 @@ def plot_comparacion_celdas(csv_path):
     ax = pivot.plot(kind='bar', figsize=(10, 6))
     ax.set_xlabel("Opción de optimización")
     ax.set_ylabel("Celdas incendiadas por microsegundo")
-    ax.set_title("Celdas incendiadas por microsegundo vs Parámetros")
+    ax.set_title("g++ y -Ofast\nCeldas incendiadas por microsegundo vs Parámetros")
     ax.legend(title="Landscape", loc="lower left")
     
     # Modificar las etiquetas del eje x para que no muestren "-Ofast"
