@@ -71,7 +71,7 @@ Fire simulate_fire(
     burned_bin[{ cell_0, cell_1 }] = 1;
   }
 
-  float t = omp_get_wtime();
+  double t = omp_get_wtime();
   while (burning_size > 0) {
     unsigned int end_forward = end;
 
