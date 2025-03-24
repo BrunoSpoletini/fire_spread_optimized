@@ -5,6 +5,7 @@ import csv
 #compiladores = ["g++", "clang++ -std=c++17"]
 compiladores = ["g++", "clang++ -std=c++17", "icpx", "nvc++"]
 optimizadores = ["-O0", "-O1", "-O2", "-O3", "-Ofast"]
+optimizadores2 = ["-O0", "-O1", "-O2", "-O3", "-fast"]
 landscapes = [("./data/2000_8", 16), ("./data/1999_27j_S", 16), ("./data/2015_50", 4)]
 
 def maxCeldasPorSeg(res):
@@ -24,9 +25,12 @@ def main():
         writer.writerow(["Compilador", "Optimizador", "Landscape", "Celdas quemadas por microsegundo"])
         for landscape in landscapes:
             for comp in compiladores:
-
-                for opt in optimizadores:
-                    os.system("make clean && make CXX=" + comp + " CXXOPT=" + opt)
+                if comp == "nvc++":
+                    optimizadores3 = optimizadores2
+                else
+                    optimizadores3 = optimizadores
+                for opt in optimizadores3:
+                    os.system("make clean && make CXX=\"" + comp + "\" CXXOPT=\"" + opt + "\"")
                     comandoPerf = ["/usr/lib/linux-tools/5.15.0-134-generic/perf", "stat", "-r", str(landscape[1]), "./graphics/fire_animation_data" , landscape[0], "0"]
                     resPerf = subprocess.run(comandoPerf, stderr=subprocess.PIPE, text=True)
 
