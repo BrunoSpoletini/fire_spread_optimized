@@ -15,7 +15,7 @@ def maxCeldasPorSeg(res):
     return max(sumaCeldas)
 
 def createCsvFile(filename, src, id=""):
-    with open(filename + ".csv", mode='w') as file:
+    with open(filename + "_" + id + ".csv", mode='w') as file:
         writer = csv.writer(file)
         writer.writerow(["Compilador", "Optimizador", "Landscape", "Celdas quemadas por microsegundo"])
         for landscape in landscapes:
