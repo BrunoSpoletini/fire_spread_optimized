@@ -17,9 +17,6 @@ def maxCeldasPorSeg(res):
     return max(sumaCeldas)
 
 def main():
-
-    resultados = dict()
-
     with open('resultados.csv', mode='w') as file:
         writer = csv.writer(file)
         writer.writerow(["Compilador", "Optimizador", "Landscape", "Celdas quemadas por microsegundo"])
@@ -28,7 +25,7 @@ def main():
             for comp in compiladores:
                 if comp == "nvc++":
                     optimizadores3 = optimizadores2
-                else
+                else:
                     optimizadores3 = optimizadores
                 for opt in optimizadores3:
                     os.system("make clean && make CXX=\"" + comp + "\" CXXOPT=\"" + opt + "\"")
