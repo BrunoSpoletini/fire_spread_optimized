@@ -24,6 +24,7 @@ def main():
         writer = csv.writer(file)
         writer.writerow(["Compilador", "Optimizador", "Landscape", "Celdas quemadas por microsegundo"])
         for landscape in landscapes:
+
             for comp in compiladores:
                 if comp == "nvc++":
                     optimizadores3 = optimizadores2

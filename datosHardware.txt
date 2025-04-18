@@ -1,0 +1,4 @@
+Sistema, Procesador, Arquitectura, Bandwidth, RAM Mem, Vel Ram, GFLOPs/sec, SO, Version
+Local 1, AMD Ryzen 7 1700X, x86_64, 18GB/s, 16GB, 1067MHz, 27.9, Ubuntu, 22.04.5 
+Local 2, Intel Core i5-8400, x86_64, 10GB/s, 8GB, 2400MHz, 25.4, Ubuntu, 22.04.3 
+Atom, AMD EPYC 7643, x86_64, 85GB/s, 125GB, -, 57.4, Debian, 13
