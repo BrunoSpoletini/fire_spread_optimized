@@ -14,38 +14,51 @@ def maxCeldasPorSeg(res):
             sumaCeldas.append(float(partes[-1]))
     return max(sumaCeldas)
 
-def createCsvFile(filename, src, id="", compiladores=None, optimizadores=None):
-    with open(filename + "_" + id + ".csv", mode='w') as file:
+def createCsvFile(filename, src, compiladores=None, optimizadores=None):
+    with open(filename + "_" + ".csv", mode='w') as file:
         writer = csv.writer(file)
         writer.writerow(["Compilador", "Optimizador", "Landscape", "Celdas quemadas por microsegundo"])
         for landscape in landscapes:
             for comp in compiladores:
                 for opt in optimizadores:
-                    os.system("cd .. && make clean && make SOURCE=\"" + src + "\" CXX=\"" + comp + "\" CXXOPT=\"" + opt + "\"")
+                    if src == "srcBase":
+                        os.system("cd .. && make -f MakefileBase clean && make -f MakefileBase CXX=\"" + comp + "\" CXXOPT=\"" + opt + "\"")
+                    else:
+                        os.system("cd .. && make -f MakefileVect clean && make -f MakefileVect CXX=\"" + comp + "\" CXXOPT=\"" + opt + "\"")
+
                     comandoPerf = ["perf", "stat", "-r", str(landscape[1]), "../graphics/fire_animation_data" , landscape[0], "0"]
                     resPerf = subprocess.run(comandoPerf, stderr=subprocess.PIPE, text=True)
                     writer.writerow([comp, opt, landscape[0], maxCeldasPorSeg(resPerf)])
 
+
+def get_vectorization_info():
+    optims = ["-O0", "-O1", "-O2", "-O3", "-Ofast"]
+    for opt in optims:
+        os.system("cd .. && make -f MakefileVect clean && make -f MakefileVect CXX=g++ CXXOPT=\"" + opt +" -fopt-info-vec=vector_srcVect_" + opt + ".log\"")
+
+def get_vectorization_info_not_vectorized():
+    optims = ["-O0", "-O1", "-O2", "-O3", "-Ofast"]
+    for opt in optims:
+        os.system("cd .. && make -f MakefileVect clean && make -f MakefileVect CXX=g++ CXXOPT=\"" + opt +" -fopt-info-missed=not_vectorized_srcVect_" + opt + ".log\"")
+
+
 def main():
-    compiladoresOptiAutomatica = ["g++"]
-    optimizadoresAuto = [   "-O0 -march=native -flto -ftree-vectorize",
-                            "-O1 -march=native -flto -ftree-vectorize", #deberia agregar -flto
-                            "-O2 -march=native -flto -ftree-vectorize", 
-                            "-O3 -march=native -flto -ftree-vectorize",
-                            "-Ofast -march=native -flto -ftree-vectorize"]
+    compiladores = ["g++"]
+    optimizadores = ["-O0", "-O1", "-O2", "-O3","-Ofast"]
 
-    compiladoresVectManual = ["g++"]
-    optimizadoresVectManual = ["-O0 -march=native -flto -fopenmp-simd", 
-                               "-O1 -march=native -flto -fopenmp-simd", 
-                               "-O2 -march=native -flto -fopenmp-simd", 
-                               "-O3 -march=native -flto -fopenmp-simd",
-                                "-Ofast -march=native -flto -fopenmp-simd"]
+    optimizadoresBase = list (map(lambda x: x + " -flto", optimizadores))
+    optimizadoresVectAuto = list (map(lambda x: x + " -flto -ftree-vectorize", optimizadores))
+    optimizadoresVectManual = list (map(lambda x: x + " -flto", optimizadores))
 
 
-    createCsvFile("resultadosBase", "srcBase", "1", compiladoresOptiAutomatica, optimizadoresAuto)
 
-    #createCsvFile("resultadosSrc", "srcVect", "6", compiladoresVectManual, optimizadoresVectManual)
+    # createCsvFile("resultadosBase", "srcBase", compiladores, optimizadoresBase)
+    # createCsvFile("resultadosVectAuto", "srcBase", compiladores, optimizadoresVectAuto)
+    # createCsvFile("resultadosVectManual_SinFlagDeSimd", "srcVect", compiladores, optimizadoresVectManual)
+    createCsvFile("resultadosVectManual_SOA", "srcVect", compiladores, optimizadoresVectManual)
 
+    # get_vectorization_info_not_vectorized()
+    # get_vectorization_info()
 
 if __name__ == "__main__":
     main()

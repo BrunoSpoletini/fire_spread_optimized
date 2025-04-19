@@ -1,13 +1,13 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -Werror -fopenmp
+CXXFLAGS = -Wall -Wextra -Werror -fopenmp -march=native
 CXXOPT = -O0
-INCLUDE = -I./$(SRC)
+INCLUDE = -I./srcVect
 CXXCMD = $(CXX) $(CXXFLAGS) $(CXXOPT) $(INCLUDE)
 
-headers = $(wildcard ./$(SRC)/*.hpp)
-sources = $(wildcard ./$(SRC)/*.cpp)
-objects_names = $(sources:./$(SRC)/%.cpp=%)
-objects = $(objects_names:%=./$(SRC)/%.o)
+headers = $(wildcard ./srcVect/*.hpp)
+sources = $(wildcard ./srcVect/*.cpp)
+objects_names = $(sources:./srcVect/%.cpp=%)
+objects = $(objects_names:%=./srcVect/%.o)
 
 mains = graphics/burned_probabilities_data graphics/fire_animation_data
 

@@ -1,0 +1,200 @@
+srcVect/spread_functions.cpp:163:67: missed:   will not early inline: Fire simulate_fire(const Landscape&, const std::vector<std::pair<unsigned int, unsigned int> >&, SimulationParams, float, float, float, float)/2216->std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = unsigned int; _Alloc = std::allocator<unsigned int>]/2583, growth 15 exceeds --param early-inlining-insns
+srcVect/spread_functions.cpp:163:67: missed:   will not early inline: Fire simulate_fire(const Landscape&, const std::vector<std::pair<unsigned int, unsigned int> >&, SimulationParams, float, float, float, float)/2216->std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = std::pair<unsigned int, unsigned int>; _Alloc = std::allocator<std::pair<unsigned int, unsigned int> >]/2580, growth 13 exceeds --param early-inlining-insns divided by number of calls
+srcVect/spread_functions.cpp:159:31: missed:   will not early inline: Fire simulate_fire(const Landscape&, const std::vector<std::pair<unsigned int, unsigned int> >&, SimulationParams, float, float, float, float)/2216->void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = unsigned int; _Alloc = std::allocator<unsigned int>]/2564, growth 8 exceeds --param early-inlining-insns divided by number of calls
+srcVect/spread_functions.cpp:131:35: missed:   will not early inline: Fire simulate_fire(const Landscape&, const std::vector<std::pair<unsigned int, unsigned int> >&, SimulationParams, float, float, float, float)/2216->float spread_probability(const Cell&, const Cell&, float, float, float, float, float, float, float, float, float, float, float, float, float, float)/2182, growth 24 exceeds --param early-inlining-insns
+srcVect/spread_functions.cpp:63:29: missed:   will not early inline: Fire simulate_fire(const Landscape&, const std::vector<std::pair<unsigned int, unsigned int> >&, SimulationParams, float, float, float, float)/2216->void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = unsigned int; _Alloc = std::allocator<unsigned int>]/2564, growth 8 exceeds --param early-inlining-insns divided by number of calls
+srcVect/spread_functions.cpp:59:25: missed:   will not early inline: Fire simulate_fire(const Landscape&, const std::vector<std::pair<unsigned int, unsigned int> >&, SimulationParams, float, float, float, float)/2216->void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = std::pair<unsigned int, unsigned int>; _Alloc = std::allocator<std::pair<unsigned int, unsigned int> >]/2563, growth 9 exceeds --param early-inlining-insns divided by number of calls
+srcVect/spread_functions.cpp:161:107: missed:   not inlinable: Fire simulate_fire(const Landscape&, const std::vector<std::pair<unsigned int, unsigned int> >&, SimulationParams, float, float, float, float)/2216 -> double omp_get_wtime()/3361, function body not available
+srcVect/spread_functions.cpp:142:34: missed:   not inlinable: Fire simulate_fire(const Landscape&, const std::vector<std::pair<unsigned int, unsigned int> >&, SimulationParams, float, float, float, float)/2216 -> int rand()/3363, function body not available
+srcVect/spread_functions.cpp:120:71: missed:   not inlinable: Fire simulate_fire(const Landscape&, const std::vector<std::pair<unsigned int, unsigned int> >&, SimulationParams, float, float, float, float)/2216 -> Cell Landscape::operator[](std::pair<unsigned int, unsigned int>) const/3362, function body not available
+srcVect/spread_functions.cpp:95:78: missed:   not inlinable: Fire simulate_fire(const Landscape&, const std::vector<std::pair<unsigned int, unsigned int> >&, SimulationParams, float, float, float, float)/2216 -> Cell Landscape::operator[](std::pair<unsigned int, unsigned int>) const/3362, function body not available
+srcVect/spread_functions.cpp:81:27: missed:   not inlinable: Fire simulate_fire(const Landscape&, const std::vector<std::pair<unsigned int, unsigned int> >&, SimulationParams, float, float, float, float)/2216 -> double omp_get_wtime()/3361, function body not available
+srcVect/spread_functions.cpp:39:38: missed:   not inlinable: float spread_probability(const Cell&, const Cell&, float, float, float, float, float, float, float, float, float, float, float, float, float, float)/2182 -> double exp(double)/3360, function body not available
+srcVect/spread_functions.cpp:21:24: missed:   not inlinable: float spread_probability(const Cell&, const Cell&, float, float, float, float, float, float, float, float, float, float, float, float, float, float)/2182 -> double cos(double)/3359, function body not available
+srcVect/spread_functions.cpp:20:25: missed:   not inlinable: float spread_probability(const Cell&, const Cell&, float, float, float, float, float, float, float, float, float, float, float, float, float, float)/2182 -> double sin(double)/3358, function body not available
+srcVect/spread_functions.cpp:20:25: missed:   not inlinable: float spread_probability(const Cell&, const Cell&, float, float, float, float, float, float, float, float, float, float, float, float, float, float)/2182 -> double atan(double)/3357, function body not available
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _26 = exp (_25);
+srcVect/spread_functions.cpp:44:6: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:44:6: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _385 = exp (_384);
+srcVect/spread_functions.cpp:120:71: missed: statement clobbers memory: neighbour_cell_list[i_438] = Landscape::operator[] (landscape_81(D), D.81007); [return slot optimization]
+srcVect/spread_functions.cpp:44:6: missed: not vectorized: more than one data ref in stmt: *__cur_645 = *__first$_M_current_644;
+srcVect/spread_functions.cpp:91:36: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:91:36: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+srcVect/spread_functions.cpp:92:49: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:92:49: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+srcVect/spread_functions.cpp:140:20: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:140:20: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:128:13: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:128:13: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:115:41: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:115:41: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:69:30: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:59:42: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:59:42: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:142:34: missed: statement clobbers memory: _39 = rand ();
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _385 = exp (_384);
+srcVect/spread_functions.cpp:120:71: missed: statement clobbers memory: neighbour_cell_list[i_438] = Landscape::operator[] (landscape_81(D), D.81007); [return slot optimization]
+srcVect/spread_functions.cpp:44:6: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:44:6: missed: splitting region at control altering definition _342 = operator new (_341);
+srcVect/spread_functions.cpp:44:6: missed: not vectorized: more than one data ref in stmt: *prephitmp_574 = MEM[(const struct pair *)_182];
+srcVect/spread_functions.cpp:44:6: missed: not vectorized: statement can throw an exception: resx 32
+srcVect/spread_functions.cpp:81:27: missed: statement clobbers memory: t_115 = omp_get_wtime ();
+srcVect/spread_functions.cpp:95:78: missed: not vectorized: statement can throw an exception: D.80688 = Landscape::operator[] (landscape_81(D), D.80677); [return slot optimization]
+srcVect/spread_functions.cpp:120:71: missed: statement clobbers memory: neighbour_cell_list[i_438] = Landscape::operator[] (landscape_81(D), D.81007); [return slot optimization]
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _385 = exp (_384);
+srcVect/spread_functions.cpp:142:34: missed: statement clobbers memory: _39 = rand ();
+srcVect/spread_functions.cpp:44:6: missed: not vectorized: more than one data ref in stmt: *_389 = D.81019;
+srcVect/spread_functions.cpp:139:31: missed: splitting region at loop 4 exit at bb155
+srcVect/spread_functions.cpp:91:36: missed: splitting region at dominance boundary bb52
+srcVect/spread_functions.cpp:91:36: missed: splitting region at loop 3 exit at bb55
+srcVect/spread_functions.cpp:82:23: missed: splitting region at dominance boundary bb59
+srcVect/spread_functions.cpp:82:23: missed: splitting region at control altering definition _436 = operator new (_435);
+srcVect/spread_functions.cpp:161:107: missed: statement clobbers memory: _45 = omp_get_wtime ();
+srcVect/spread_functions.cpp:163:67: missed: splitting region at dominance boundary bb63
+srcVect/spread_functions.cpp:44:6: missed: not vectorized: statement can throw an exception: resx 33
+srcVect/spread_functions.cpp:44:6: missed: not vectorized: more than one data ref in stmt: *__cur_645 = *__first$_M_current_644;
+srcVect/spread_functions.cpp:83:18: missed: splitting region at dominance boundary bb129
+srcVect/spread_functions.cpp:83:18: missed: splitting region at dominance boundary bb130
+srcVect/spread_functions.cpp:83:18: missed: splitting region at dominance boundary bb131
+srcVect/spread_functions.cpp:83:18: missed: splitting region at dominance boundary bb106
+srcVect/spread_functions.cpp:83:18: missed: splitting region at dominance boundary bb107
+srcVect/spread_functions.cpp:83:18: missed: splitting region at dominance boundary bb110
+srcVect/spread_functions.cpp:44:6: missed: not vectorized: statement can throw an exception: resx 4
+srcVect/spread_functions.cpp:44:6: missed: not vectorized: statement can throw an exception: resx 3
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:20:42: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:20:42: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:14:7: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:14:7: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:20:42: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:20:42: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:14:7: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:14:7: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:20:42: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:20:42: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:14:7: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:14:7: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:20:42: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:20:42: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:14:7: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:14:7: missed: not vectorized: control flow in loop.
+srcVect/spread_functions.cpp:20:42: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:20:62: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:21:41: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:26:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:34:35: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:35:38: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);
+srcVect/spread_functions.cpp:39:38: missed: statement clobbers memory: _52 = exp (_51);

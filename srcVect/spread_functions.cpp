@@ -10,32 +10,33 @@
 #include "fires.hpp"
 #include "landscape.hpp"
 
+#pragma omp declare simd
 float spread_probability(
-    const Cell& burning, const Cell& neighbour, SimulationParams params, float angle,
-    float distance, float elevation_mean, float elevation_sd, float upper_limit = 1.0
+    const Cell& burning, const Cell& neighbour, float independent_pred, float subalpine_pred,
+    float wet_pred, float dry_pred, float fwi_pred, float aspect_pred, float wind_pred,
+    float elevation_pred, float slope_pred, float angle, float distance, float elevation_mean,
+    float elevation_sd, float upper_limit = 1.0
 ) {
-
   float slope_term = sin(atan((neighbour.elevation - burning.elevation) / distance));
   float wind_term = cos(angle - burning.wind_direction);
   float elev_term = (neighbour.elevation - elevation_mean) / elevation_sd;
 
-  float linpred = params.independent_pred;
+  float linpred = independent_pred;
 
   if (neighbour.vegetation_type == SUBALPINE) {
-    linpred += params.subalpine_pred;
+      linpred += subalpine_pred;
   } else if (neighbour.vegetation_type == WET) {
-    linpred += params.wet_pred;
+      linpred += wet_pred;
   } else if (neighbour.vegetation_type == DRY) {
-    linpred += params.dry_pred;
+      linpred += dry_pred;
   }
 
-  linpred += params.fwi_pred * neighbour.fwi;
-  linpred += params.aspect_pred * neighbour.aspect;
+  linpred += fwi_pred * neighbour.fwi;
+  linpred += aspect_pred * neighbour.aspect;
 
-  linpred += wind_term * params.wind_pred + elev_term * params.elevation_pred +
-             slope_term * params.slope_pred;
+  linpred += wind_term * wind_pred + elev_term * elevation_pred + slope_term * slope_pred;
 
-             float prob = upper_limit / (1 + exp(-linpred));
+  float prob = upper_limit / (1 + exp(-linpred));
 
   return prob;
 }
@@ -71,6 +72,12 @@ Fire simulate_fire(
     burned_bin[{ cell_0, cell_1 }] = 1;
   }
 
+  constexpr float angles[8] = { M_PI * 3 / 4, M_PI, M_PI * 5 / 4, M_PI / 2, M_PI * 3 / 2,
+                                M_PI / 4,     0,    M_PI * 7 / 4 };
+
+  constexpr int moves[8][2] = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 },
+                                { 0, 1 },   { 1, -1 }, { 1, 0 },  { 1, 1 } };
+
   double t = omp_get_wtime();
   while (burning_size > 0) {
     unsigned int end_forward = end;
@@ -79,65 +86,71 @@ Fire simulate_fire(
 
     // b is going to keep the position in burned_ids that have to be evaluated
     // in this burn cycle
+
+		// LOOP POR CELULAS QUEMADAS
     for (unsigned int b = start; b < end; b++) {
       unsigned int burning_cell_0 = burned_ids[b].first;
       unsigned int burning_cell_1 = burned_ids[b].second;
 
       const Cell& burning_cell = landscape[{ burning_cell_0, burning_cell_1 }];
 
-      constexpr int moves[8][2] = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 },
-                                    { 0, 1 },   { 1, -1 }, { 1, 0 },  { 1, 1 } };
-
-      int neighbors_coords[2][8];
-
-      for (unsigned int i = 0; i < 8; i++) {
-        neighbors_coords[0][i] = int(burning_cell_0) + moves[i][0];
-        neighbors_coords[1][i] = int(burning_cell_1) + moves[i][1];
-      }
-      // Note that in the case 0 - 1 we will have size_t_MAX
-
       // Loop over neighbors_coords of the focal burning cell
+
+      // Arreglos para almacenar los resultados del bucle vectorizado
+      int neighbor_x[8], neighbor_y[8];
+      bool in_range[8], is_burnable[8];
+      bool should_burn[8];
+			float prob[8];
+			Cell neighbour_cell_list[8];
+
       #pragma omp simd
-      for (unsigned int n = 0; n < 8; n++) {
+      for (unsigned int i = 0; i < 8; i++) {
+        neighbor_x[i] = int(burning_cell_0) + moves[i][0];
+        neighbor_y[i] = int(burning_cell_1) + moves[i][1];
+			}
+			
+      #pragma omp simd
+      for (unsigned int i = 0; i < 8; i++) {
+        // Verificar si está en rango
+        in_range[i] = !(0 > neighbor_x[i] || neighbor_x[i] >= int(n_col) ||
+                       0 > neighbor_y[i] || neighbor_y[i] >= int(n_row));
 
-        int neighbour_cell_0 = neighbors_coords[0][n];
-        int neighbour_cell_1 = neighbors_coords[1][n];
+				// Verificar si está quemado
+				if (in_range[i]) {
+					neighbour_cell_list[i] = landscape[{neighbor_x[i], neighbor_y[i]}];
+          
 
-        // Is the cell in range?
-        bool out_of_range = 0 > neighbour_cell_0 || neighbour_cell_0 >= int(n_col) ||
-                            0 > neighbour_cell_1 || neighbour_cell_1 >= int(n_row);
 
-        if (out_of_range)
-          continue;
-
-        const Cell& neighbour_cell = landscape[{ neighbour_cell_0, neighbour_cell_1 }];
-
-        // Is the cell burnable?
-        bool burnable_cell =
-            !burned_bin[{ neighbour_cell_0, neighbour_cell_1 }] && neighbour_cell.burnable;
-
-        if (!burnable_cell)
-          continue;
-
-        constexpr float angles[8] = { M_PI * 3 / 4, M_PI, M_PI * 5 / 4, M_PI / 2, M_PI * 3 / 2,
-                                       M_PI / 4,     0,    M_PI * 7 / 4 };
-
-        // simulate fire
-        float prob = spread_probability(
-            burning_cell, neighbour_cell, params, angles[n], distance, elevation_mean,
-            elevation_sd, upper_limit
-        );
-
-        // Burn with probability prob (Bernoulli)
-        bool burn = (float)rand() / (float)RAND_MAX < prob;
-
-        if (burn == 0)
-          continue;
-
-        // If burned, store id of recently burned cell and set 1 in burned_bin
-        end_forward += 1;
-        burned_ids.push_back({ neighbour_cell_0, neighbour_cell_1 });
-        burned_bin[{ neighbour_cell_0, neighbour_cell_1 }] = true;
+					// Verificar si es quemable
+					is_burnable[i] = !burned_bin[{neighbor_x[i], neighbor_y[i]}] && neighbour_cell_list[i].burnable;
+				} 
+			}
+			// Calcular la probabilidad de que se queme cada cel neighbor_cell
+			#pragma omp simd
+			for (unsigned int n = 0; n < 8; n++) {
+				prob[n] = 0.0;
+				if (in_range[n] && is_burnable[n]){
+        	// Calcular probabilidad
+					prob[n] = {spread_probability(
+						burning_cell, neighbour_cell_list[n], params.independent_pred, params.subalpine_pred,
+						params.wet_pred, params.dry_pred, params.fwi_pred, params.aspect_pred,
+						params.wind_pred, params.elevation_pred, params.slope_pred, angles[n],
+						distance, elevation_mean, elevation_sd, upper_limit
+				)};
+			}
+		}
+			for (unsigned int n = 0; n < 8; n++) {
+					if (in_range[n] && is_burnable[n]){
+					// Determinar si se quema
+					should_burn[n] = (float)rand() / (float)RAND_MAX < prob[n];
+					
+					if (should_burn[n]) {
+						// Si se quema, actualizar las estructuras de datos
+						end_forward += 1;
+						burned_ids.push_back({neighbor_x[n], neighbor_y[n]});
+						burned_bin[{neighbor_x[n], neighbor_y[n]}] = true;
+					}
+				}
       }
     }
 
