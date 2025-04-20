@@ -12,27 +12,18 @@
 
 #pragma omp declare simd
 float spread_probability(
-    const Cell& burning, const Cell& neighbour, float independent_pred, float subalpine_pred,
-    float wet_pred, float dry_pred, float fwi_pred, float aspect_pred, float wind_pred,
+    float burning_cell_elevation, float burning_cell_wind_direction, float neighbour_fwi, float neighbour_aspect, float neighbour_elevation, 
+    float linpred,
+    float fwi_pred, float aspect_pred, float wind_pred,
     float elevation_pred, float slope_pred, float angle, float distance, float elevation_mean,
     float elevation_sd, float upper_limit = 1.0
 ) {
-  float slope_term = sin(atan((neighbour.elevation - burning.elevation) / distance));
-  float wind_term = cos(angle - burning.wind_direction);
-  float elev_term = (neighbour.elevation - elevation_mean) / elevation_sd;
+  float slope_term = sin(atan((neighbour_elevation - burning_cell_elevation) / distance));
+  float wind_term = cos(angle - burning_cell_wind_direction);
+  float elev_term = (neighbour_elevation - elevation_mean) / elevation_sd;
 
-  float linpred = independent_pred;
-
-  if (neighbour.vegetation_type == SUBALPINE) {
-      linpred += subalpine_pred;
-  } else if (neighbour.vegetation_type == WET) {
-      linpred += wet_pred;
-  } else if (neighbour.vegetation_type == DRY) {
-      linpred += dry_pred;
-  }
-
-  linpred += fwi_pred * neighbour.fwi;
-  linpred += aspect_pred * neighbour.aspect;
+  linpred += fwi_pred * neighbour_fwi;
+  linpred += aspect_pred * neighbour_aspect;
 
   linpred += wind_term * wind_pred + elev_term * elevation_pred + slope_term * slope_pred;
 
@@ -103,6 +94,15 @@ Fire simulate_fire(
 			float prob[8];
 			Cell neighbour_cell_list[8];
 
+      // SOA for neighbour_cell_list
+      float neighbour_fwi[8];
+      float neighbour_aspect[8];
+      float neighbour_elevation[8];
+      float neighbour_vegetation_type[8];
+      float linpred_list[8];
+      float burning_cell_elevation = burning_cell.elevation;
+      float burning_cell_wind_direction = burning_cell.wind_direction;
+
       #pragma omp simd
       for (unsigned int i = 0; i < 8; i++) {
         neighbor_x[i] = int(burning_cell_0) + moves[i][0];
@@ -111,33 +111,56 @@ Fire simulate_fire(
 			
       #pragma omp simd
       for (unsigned int i = 0; i < 8; i++) {
+        // Inicializamos la probabilidad de quema en 0
+        prob[i] = 0.0;
         // Verificar si está en rango
         in_range[i] = !(0 > neighbor_x[i] || neighbor_x[i] >= int(n_col) ||
                        0 > neighbor_y[i] || neighbor_y[i] >= int(n_row));
 
 				// Verificar si está quemado
 				if (in_range[i]) {
-					neighbour_cell_list[i] = landscape[{neighbor_x[i], neighbor_y[i]}];
-          
-
+          // Load SOA
+          neighbour_cell_list[i] = landscape[{ neighbor_x[i], neighbor_y[i] }];
+          neighbour_fwi[i] = neighbour_cell_list[i].fwi;
+          neighbour_aspect[i] = neighbour_cell_list[i].aspect;
+          neighbour_elevation[i] = neighbour_cell_list[i].elevation;
+          neighbour_vegetation_type[i] = neighbour_cell_list[i].vegetation_type;
 
 					// Verificar si es quemable
 					is_burnable[i] = !burned_bin[{neighbor_x[i], neighbor_y[i]}] && neighbour_cell_list[i].burnable;
-				} 
+          if (is_burnable[i]) {
+            // linpred
+            linpred_list[i] = params.independent_pred;
+            if (neighbour_vegetation_type[i] == SUBALPINE) {
+              linpred_list[i] += params.subalpine_pred;
+            } else if (neighbour_vegetation_type[i] == WET) {
+                linpred_list[i] += params.wet_pred;
+            } else if (neighbour_vegetation_type[i] == DRY) {
+                linpred_list[i] += params.dry_pred;
+            }
+          }
+
+				}
 			}
 			// Calcular la probabilidad de que se queme cada cel neighbor_cell
 			#pragma omp simd
-			for (unsigned int n = 0; n < 8; n++) {
-				prob[n] = 0.0;
-				if (in_range[n] && is_burnable[n]){
+			for (int n = 0; n < 8; n++) {
+
+        float mask = (in_range[n] && is_burnable[n]) ? 1.0f : 0.0f;
+
+				//if (in_range[n] && is_burnable[n]){
         	// Calcular probabilidad
-					prob[n] = {spread_probability(
-						burning_cell, neighbour_cell_list[n], params.independent_pred, params.subalpine_pred,
-						params.wet_pred, params.dry_pred, params.fwi_pred, params.aspect_pred,
+
+					float temp_prob = {spread_probability(
+						burning_cell_elevation, burning_cell_wind_direction, neighbour_fwi[n], neighbour_aspect[n], neighbour_elevation[n], 
+            linpred_list[n],
+						params.fwi_pred, params.aspect_pred,
 						params.wind_pred, params.elevation_pred, params.slope_pred, angles[n],
 						distance, elevation_mean, elevation_sd, upper_limit
 				)};
-			}
+
+        prob[n] = temp_prob * mask;
+			//}
 		}
 			for (unsigned int n = 0; n < 8; n++) {
 					if (in_range[n] && is_burnable[n]){

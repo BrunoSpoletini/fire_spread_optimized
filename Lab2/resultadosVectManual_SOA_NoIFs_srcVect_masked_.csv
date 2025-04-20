@@ -1,0 +1,11 @@
+Compilador,Optimizador,Landscape,Celdas quemadas por microsegundo
+g++,-O0 -flto -fopenmp-simd,../data/2000_8,0.565035
+g++,-O1 -flto -fopenmp-simd,../data/2000_8,1.645739
+g++,-O2 -flto -fopenmp-simd,../data/2000_8,1.691849
+g++,-O3 -flto -fopenmp-simd,../data/2000_8,1.791386
+g++,-Ofast -flto -fopenmp-simd,../data/2000_8,3.278847
+g++,-O0 -flto -fopenmp-simd,../data/1999_27j_S,0.56891
+g++,-O1 -flto -fopenmp-simd,../data/1999_27j_S,1.659856
+g++,-O2 -flto -fopenmp-simd,../data/1999_27j_S,1.780097
+g++,-O3 -flto -fopenmp-simd,../data/1999_27j_S,1.794104
+g++,-Ofast -flto -fopenmp-simd,../data/1999_27j_S,3.370122

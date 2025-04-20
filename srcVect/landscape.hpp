@@ -13,7 +13,7 @@ enum VegetationType {
 
 static_assert( sizeof(VegetationType) == 1 );
 
-struct Cell {
+struct alignas(32) Cell { 
   float elevation;
   float wind_direction;
   bool burnable;

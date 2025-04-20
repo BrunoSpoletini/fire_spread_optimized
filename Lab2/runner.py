@@ -39,7 +39,7 @@ def get_vectorization_info():
 def get_vectorization_info_not_vectorized():
     optims = ["-O0", "-O1", "-O2", "-O3", "-Ofast"]
     for opt in optims:
-        os.system("cd .. && make -f MakefileVect clean && make -f MakefileVect CXX=g++ CXXOPT=\"" + opt +" -fopt-info-missed=not_vectorized_srcVect_" + opt + ".log\"")
+        os.system("cd .. && make -f MakefileVect clean && make -f MakefileVect CXX=g++ CXXOPT=\"" + opt +" -fopt-info-missed=not_vectorized_srcVect_AAAA" + opt + ".log\"")
 
 
 def main():
@@ -47,17 +47,17 @@ def main():
     optimizadores = ["-O0", "-O1", "-O2", "-O3","-Ofast"]
 
     optimizadoresBase = list (map(lambda x: x + " -flto", optimizadores))
-    optimizadoresVectAuto = list (map(lambda x: x + " -flto -ftree-vectorize", optimizadores))
-    optimizadoresVectManual = list (map(lambda x: x + " -flto", optimizadores))
+    optimizadoresVectAuto = list (map(lambda x: x + " -flto -ftree-vectorize --ffast-math", optimizadores))
+    optimizadoresVectManual = list (map(lambda x: x + " -flto -fopenmp-simd", optimizadores))
 
 
 
     # createCsvFile("resultadosBase", "srcBase", compiladores, optimizadoresBase)
     # createCsvFile("resultadosVectAuto", "srcBase", compiladores, optimizadoresVectAuto)
     # createCsvFile("resultadosVectManual_SinFlagDeSimd", "srcVect", compiladores, optimizadoresVectManual)
-    createCsvFile("resultadosVectManual_SOA", "srcVect", compiladores, optimizadoresVectManual)
+    #createCsvFile("resultadosVectManual_SOA_NoIFs_srcVect_masked_fastMath", "srcVect", compiladores, optimizadoresVectManual)
 
-    # get_vectorization_info_not_vectorized()
+    get_vectorization_info_not_vectorized()
     # get_vectorization_info()
 
 if __name__ == "__main__":
