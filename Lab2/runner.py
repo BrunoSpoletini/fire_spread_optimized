@@ -3,8 +3,9 @@ import os
 import csv
 
 #optimizadores = ["-O1", "-O2", "-O3","-Ofast"]
-landscapes = [("../data/2000_8", 16), ("../data/1999_27j_S", 4)]#, ("../data/2015_50", 1)]
+#landscapes = [("../data/2000_8", 16), ("../data/1999_27j_S", 4)]#, ("../data/2015_50", 1)]
 #landscapes = [("../data/2000_8", 32), ("../data/1999_27j_S", 16), ("../data/2015_50", 4)]
+landscapes = [("../data/1999_27j_S", 1)]
 
 def maxCeldasPorSeg(res):
     sumaCeldas = []
@@ -34,31 +35,38 @@ def createCsvFile(filename, src, compiladores=None, optimizadores=None):
 def get_vectorization_info():
     optims = ["-O0", "-O1", "-O2", "-O3", "-Ofast"]
     for opt in optims:
-        os.system("cd .. && make -f MakefileVect clean && make -f MakefileVect CXX=g++ CXXOPT=\"" + opt +" -fopt-info-vec=vector_srcVect_" + opt + ".log\"")
+        os.system("cd .. && make -f MakefileVect clean && make -f MakefileVect CXX=g++ CXXOPT=\"" + opt +"  -mavx2 -fopt-info-vec=vector_srcVect_" + opt + ".log\"")
 
-def get_vectorization_info_not_vectorized():
-    optims = ["-O0", "-O1", "-O2", "-O3", "-Ofast"]
+def get_vectorization_info_not_vectorized(optims=None):
+    i=0
     for opt in optims:
-        os.system("cd .. && make -f MakefileVect clean && make -f MakefileVect CXX=g++ CXXOPT=\"" + opt +" -fopt-info-missed=not_vectorized_srcVect_AAAA" + opt + ".log\"")
-
+        os.system("cd .. && make -f MakefileVect clean && make -f MakefileVect CXX=g++ CXXOPT=\"" + opt +" -fopt-info-missed=not_vectorized_srcVectAVX2" + str(i) +".log\"")
+        i+=1
 
 def main():
     compiladores = ["g++"]
-    optimizadores = ["-O0", "-O1", "-O2", "-O3","-Ofast"]
+    #optimizadores = ["-O0", "-O1", "-O2", "-O3", "-Ofast"]
+    optimizadores = ["-O3"]
 
     optimizadoresBase = list (map(lambda x: x + " -flto", optimizadores))
-    optimizadoresVectAuto = list (map(lambda x: x + " -flto -ftree-vectorize --ffast-math", optimizadores))
-    optimizadoresVectManual = list (map(lambda x: x + " -flto -fopenmp-simd", optimizadores))
+    optimizadoresVectAuto = list (map(lambda x: x + " -flto -ftree-vectorize -ffast-math ", optimizadores))
+    optimizadoresVectManual = list (map(lambda x: x + " -flto -fopenmp-simd -mavx2", optimizadores))
 
+    #optimizadoresVectAutoVX2 = list (map(lambda x: x + " -flto -ftree-vectorize -ffast-math -mavx2", optimizadores))
 
-
-    # createCsvFile("resultadosBase", "srcBase", compiladores, optimizadoresBase)
     # createCsvFile("resultadosVectAuto", "srcBase", compiladores, optimizadoresVectAuto)
     # createCsvFile("resultadosVectManual_SinFlagDeSimd", "srcVect", compiladores, optimizadoresVectManual)
-    #createCsvFile("resultadosVectManual_SOA_NoIFs_srcVect_masked_fastMath", "srcVect", compiladores, optimizadoresVectManual)
+    #createCsvFile("resultadosVectManual_SOA_NoIFs_srcVect_masked_fastMath_spreadLimpio_AVX2_vectManual_rearrenged_again_floatArray_remade_final_2", "srcVect", compiladores, optimizadoresVectManual)
 
-    get_vectorization_info_not_vectorized()
-    # get_vectorization_info()
+    #optimizadoresParaVerParalelismo = ["-O2"] 
+
+    #createCsvFile("asd", "srcBase", compiladores, optimizadoresBase)
+    createCsvFile("asd", "srcVect", compiladores, optimizadoresVectManual)
+    
+
+
+    #get_vectorization_info_not_vectorized(optimizadoresVectManual)
+    #get_vectorization_info()
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,11 @@
+Compilador,Optimizador,Landscape,Celdas quemadas por microsegundo
+g++,-O0 -flto -ftree-vectorize -ffast-math -mavx2,../data/2000_8,0.251738
+g++,-O1 -flto -ftree-vectorize -ffast-math -mavx2,../data/2000_8,3.212937
+g++,-O2 -flto -ftree-vectorize -ffast-math -mavx2,../data/2000_8,3.417073
+g++,-O3 -flto -ftree-vectorize -ffast-math -mavx2,../data/2000_8,3.403286
+g++,-Ofast -flto -ftree-vectorize -ffast-math -mavx2,../data/2000_8,3.313348
+g++,-O0 -flto -ftree-vectorize -ffast-math -mavx2,../data/1999_27j_S,0.240352
+g++,-O1 -flto -ftree-vectorize -ffast-math -mavx2,../data/1999_27j_S,3.424324
+g++,-O2 -flto -ftree-vectorize -ffast-math -mavx2,../data/1999_27j_S,3.405582
+g++,-O3 -flto -ftree-vectorize -ffast-math -mavx2,../data/1999_27j_S,3.425943
+g++,-Ofast -flto -ftree-vectorize -ffast-math -mavx2,../data/1999_27j_S,3.54259

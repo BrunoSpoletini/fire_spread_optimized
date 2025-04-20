@@ -1,0 +1,9 @@
+prefix=/mnt/c/Users/bruno/Desktop/fire_spread_optimized/install
+libdir=/mnt/c/Users/bruno/Desktop/fire_spread_optimized/install/lib
+includedir=/mnt/c/Users/bruno/Desktop/fire_spread_optimized/install/include
+
+Name: SLEEF
+Description: SIMD Library for Evaluating Elementary Functions, vectorized libm and DFT
+Version: 4.0.0
+Cflags: -I${includedir}
+Libs: -L${libdir} -lsleef

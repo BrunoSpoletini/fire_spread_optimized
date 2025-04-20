@@ -44,8 +44,9 @@ Fire simulate_fire(
     const Landscape& landscape, const std::vector<std::pair<unsigned int, unsigned int>>& ignition_cells,
     SimulationParams params, float distance, float elevation_mean, float elevation_sd,
     float upper_limit = 1.0
-) {
-
+  ) {
+    
+  double t = omp_get_wtime();
   unsigned int n_row = landscape.height;
   unsigned int n_col = landscape.width;
 
@@ -71,7 +72,11 @@ Fire simulate_fire(
     burned_bin[{ cell_0, cell_1 }] = 1;
   }
 
-  double t = omp_get_wtime();
+    // random number generation
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<float> dist(0.0f, 1.0f);
+
   while (burning_size > 0) {
     unsigned int end_forward = end;
 
@@ -129,7 +134,7 @@ Fire simulate_fire(
         );
 
         // Burn with probability prob (Bernoulli)
-        bool burn = (float)rand() / (float)RAND_MAX < prob;
+        bool burn = dist(gen) < prob;
 
         if (burn == 0)
           continue;

@@ -1,0 +1,743 @@
+/usr/include/c++/11/bits/basic_ios.h:450:45: missed:   will not early inline: std::basic_ios<char, std::char_traits<char> >::widen(char) const/1064->std::ctype<char>::widen(char) const/560, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:6573:50: missed:   will not early inline: std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)std::basic_istream<char, std::char_traits<char> >&/956->std::basic_ios<char, std::char_traits<char> >::widen(char) const/1064, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<int, std::allocator<int> >::~vector()/977->std::_Vector_base<int, std::allocator<int> >::~_Vector_base()/974, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:672:19: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()/804->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()/1001, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/alloc_traits.h:464:28: missed:   will not early inline: std::allocator_traits<std::allocator<int> >::allocate(std::allocator<int>&, unsigned long)/1227->__gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*)/1277, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:305:26: missed:   will not early inline: std::_Vector_base<int, std::allocator<int> >::_Vector_base(unsigned long, std::allocator<int> const&)/1095->std::_Vector_base<int, std::allocator<int> >::_M_create_storage(unsigned long)/1171, growth 8 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/basic_string.tcc:225:25: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)void/1235->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char*, char*)/1280, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:255:23: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)void/1166->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)void/1235, growth 21 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/vector.tcc:436:14: missed:   will not early inline: std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&)void/1071->std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const/1150, growth 11 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/vector.tcc:121:21: missed:   will not early inline: std::vector<int, std::allocator<int> >::emplace_back<int>(int&&)int&/960->std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&)void/1071, call is cold and code would grow at least by 39
+/usr/include/c++/11/bits/vector.tcc:436:14: missed:   will not early inline: std::vector<int, std::allocator<int> >::_M_realloc_insert<unsigned long&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, unsigned long&)void/1074->std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const/1150, growth 11 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/vector.tcc:121:21: missed:   will not early inline: std::vector<int, std::allocator<int> >::emplace_back<unsigned long&>(unsigned long&)int&/962->std::vector<int, std::allocator<int> >::_M_realloc_insert<unsigned long&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, unsigned long&)void/1074, call is cold and code would grow at least by 39
+srcVect/csv.cpp:29:22: missed:   will not early inline: CSVRow::readNextRow(std::basic_istream<char, std::char_traits<char> >&)/647->std::vector<int, std::allocator<int> >::emplace_back<unsigned long&>(unsigned long&)int&/962, growth 10 exceeds --param early-inlining-insns
+srcVect/csv.cpp:24:24: missed:   will not early inline: CSVRow::readNextRow(std::basic_istream<char, std::char_traits<char> >&)/647->std::vector<int, std::allocator<int> >::emplace_back<unsigned long&>(unsigned long&)int&/962, growth 10 exceeds --param early-inlining-insns
+srcVect/csv.cpp:21:22: missed:   will not early inline: CSVRow::readNextRow(std::basic_istream<char, std::char_traits<char> >&)/647->std::vector<int, std::allocator<int> >::emplace_back<int>(int&&)int&/960, growth 10 exceeds --param early-inlining-insns
+srcVect/csv.cpp:18:15: missed:   will not early inline: CSVRow::readNextRow(std::basic_istream<char, std::char_traits<char> >&)/647->std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)std::basic_istream<char, std::char_traits<char> >&/956, call is cold and code would grow at least by 8
+srcVect/csv.cpp:33:19: missed:   will not early inline: operator>>(std::basic_istream<char, std::char_traits<char> >&, CSVRow&)/648->CSVRow::readNextRow(std::basic_istream<char, std::char_traits<char> >&)/647, call is cold and code would grow at least by 28
+srcVect/csv.cpp:38:11: missed:   will not early inline: CSVIterator::CSVIterator(std::basic_istream<char, std::char_traits<char> >&)/667->CSVIterator::operator++()/672, growth 11 exceeds --param early-inlining-insns
+srcVect/csv.cpp:76:30: missed:   will not early inline: CSVRange::begin() const/702->CSVIterator::CSVIterator(std::basic_istream<char, std::char_traits<char> >&)/667, call is cold and code would grow at least by 14
+srcVect/csv.hpp:9:7: missed:   will not early inline: CSVRow::CSVRow(CSVRow const&)/674->std::vector<int, std::allocator<int> >::vector(std::vector<int, std::allocator<int> > const&)/984, call is cold and code would grow at least by 12
+srcVect/csv.hpp:9:7: missed:   will not early inline: CSVRow::CSVRow(CSVRow const&)/674->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)/981, growth 5 exceeds --param early-inlining-insns divided by number of calls
+srcVect/csv.hpp:22:7: missed:   will not early inline: CSVIterator::CSVIterator(CSVIterator const&)/677->CSVRow::CSVRow(CSVRow const&)/674, call is cold and code would grow at least by 7
+srcVect/csv.cpp:54:11: missed:   will not early inline: CSVIterator::operator++(int)/694->CSVIterator::operator++()/672, growth 11 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/basic_ios.h:450:45: missed:   will not early inline: std::basic_ios<char, std::char_traits<char> >::widen(char) const/1064->std::ctype<char>::widen(char) const/560, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:6573:50: missed:   will not early inline: std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)std::basic_istream<char, std::char_traits<char> >&/956->std::basic_ios<char, std::char_traits<char> >::widen(char) const/1064, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<int, std::allocator<int> >::~vector()/977->std::_Vector_base<int, std::allocator<int> >::~_Vector_base()/974, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:672:19: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()/804->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()/1001, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/alloc_traits.h:464:28: missed:   will not early inline: std::allocator_traits<std::allocator<int> >::allocate(std::allocator<int>&, unsigned long)/1227->__gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*)/1277, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:305:26: missed:   will not early inline: std::_Vector_base<int, std::allocator<int> >::_Vector_base(unsigned long, std::allocator<int> const&)/1095->std::_Vector_base<int, std::allocator<int> >::_M_create_storage(unsigned long)/1171, growth 8 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/basic_string.tcc:225:25: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)void/1235->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char*, char*)/1280, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:255:23: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)void/1166->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)void/1235, growth 21 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/vector.tcc:436:14: missed:   will not early inline: std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&)void/1071->std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const/1150, growth 11 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/vector.tcc:121:21: missed:   will not early inline: std::vector<int, std::allocator<int> >::emplace_back<int>(int&&)int&/960->std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&)void/1071, call is cold and code would grow at least by 39
+/usr/include/c++/11/bits/vector.tcc:436:14: missed:   will not early inline: std::vector<int, std::allocator<int> >::_M_realloc_insert<unsigned long&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, unsigned long&)void/1074->std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const/1150, growth 11 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/vector.tcc:121:21: missed:   will not early inline: std::vector<int, std::allocator<int> >::emplace_back<unsigned long&>(unsigned long&)int&/962->std::vector<int, std::allocator<int> >::_M_realloc_insert<unsigned long&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, unsigned long&)void/1074, call is cold and code would grow at least by 39
+srcVect/csv.cpp:29:22: missed:   will not early inline: CSVRow::readNextRow(std::basic_istream<char, std::char_traits<char> >&)/647->std::vector<int, std::allocator<int> >::emplace_back<unsigned long&>(unsigned long&)int&/962, growth 10 exceeds --param early-inlining-insns
+srcVect/csv.cpp:24:24: missed:   will not early inline: CSVRow::readNextRow(std::basic_istream<char, std::char_traits<char> >&)/647->std::vector<int, std::allocator<int> >::emplace_back<unsigned long&>(unsigned long&)int&/962, growth 10 exceeds --param early-inlining-insns
+srcVect/csv.cpp:21:22: missed:   will not early inline: CSVRow::readNextRow(std::basic_istream<char, std::char_traits<char> >&)/647->std::vector<int, std::allocator<int> >::emplace_back<int>(int&&)int&/960, growth 10 exceeds --param early-inlining-insns
+srcVect/csv.cpp:18:15: missed:   will not early inline: CSVRow::readNextRow(std::basic_istream<char, std::char_traits<char> >&)/647->std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)std::basic_istream<char, std::char_traits<char> >&/956, call is cold and code would grow at least by 8
+srcVect/csv.cpp:33:19: missed:   will not early inline: operator>>(std::basic_istream<char, std::char_traits<char> >&, CSVRow&)/648->CSVRow::readNextRow(std::basic_istream<char, std::char_traits<char> >&)/647, call is cold and code would grow at least by 28
+srcVect/csv.cpp:38:11: missed:   will not early inline: CSVIterator::CSVIterator(std::basic_istream<char, std::char_traits<char> >&)/667->CSVIterator::operator++()/672, growth 11 exceeds --param early-inlining-insns
+srcVect/csv.cpp:76:30: missed:   will not early inline: CSVRange::begin() const/702->CSVIterator::CSVIterator(std::basic_istream<char, std::char_traits<char> >&)/667, call is cold and code would grow at least by 14
+srcVect/csv.hpp:9:7: missed:   will not early inline: CSVRow::CSVRow(CSVRow const&)/674->std::vector<int, std::allocator<int> >::vector(std::vector<int, std::allocator<int> > const&)/984, call is cold and code would grow at least by 12
+srcVect/csv.hpp:9:7: missed:   will not early inline: CSVRow::CSVRow(CSVRow const&)/674->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)/981, growth 5 exceeds --param early-inlining-insns divided by number of calls
+srcVect/csv.hpp:22:7: missed:   will not early inline: CSVIterator::CSVIterator(CSVIterator const&)/677->CSVRow::CSVRow(CSVRow const&)/674, call is cold and code would grow at least by 7
+srcVect/csv.cpp:54:11: missed:   will not early inline: CSVIterator::operator++(int)/694->CSVIterator::operator++()/672, growth 11 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_bvector.h:257:17: missed:   will not early inline: std::_Bit_iterator::operator++()/122->std::_Bit_iterator_base::_M_bump_up()/104, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:287:14: missed:   will not early inline: std::_Bit_iterator::operator+=(long)/126->std::_Bit_iterator_base::_M_incr(long)/106, growth 9 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_bvector.h:353:17: missed:   will not early inline: std::_Bit_const_iterator::operator++()/143->std::_Bit_iterator_base::_M_bump_up()/104, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:907:23: missed:   will not early inline: std::vector<bool, std::allocator<bool> >::operator[](unsigned long)/1005->std::_Bit_iterator::operator[](long) const/128, growth 6 exceeds --param early-inlining-insns divided by number of calls
+srcVect/matrix.hpp:51:23: missed:   will not early inline: Matrix<bool>::SmartReference::operator=(bool const&)/658->std::_Bit_reference::operator=(bool)/93, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/fstream:573:7: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1027->std::basic_filebuf<char, std::char_traits<char> >::~basic_filebuf()/1189, call is cold and code would grow at least by 18
+/usr/include/c++/11/fstream:572:12: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1027->std::basic_ifstream<char, std::char_traits<char> >::open(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1192, call is cold and code would grow at least by 11
+/usr/include/c++/11/fstream:569:38: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1027->std::basic_istream<char, std::char_traits<char> >::basic_istream()/1182, call is cold and code would grow at least by 7
+/usr/include/c++/11/fstream:569:38: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1027->std::basic_ios<char, std::char_traits<char> >::basic_ios()/1175, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/fstream:605:9: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()/1030->std::basic_filebuf<char, std::char_traits<char> >::~basic_filebuf()/1189, call is cold and code would grow at least by 18
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~vector()/1046->std::_Vector_base<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~_Vector_base()/1043, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:672:19: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()/843->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()/1089, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:543:28: missed:   will not early inline: std::_Bvector_base<std::allocator<bool> >::~_Bvector_base()/1168->std::_Bvector_base<std::allocator<bool> >::_M_deallocate()/1298, growth 12 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<int, std::allocator<int> >::~vector()/1034->std::_Vector_base<int, std::allocator<int> >::~_Vector_base()/1198, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/alloc_traits.h:464:28: missed:   will not early inline: std::allocator_traits<std::allocator<unsigned long> >::allocate(std::allocator<unsigned long>&, unsigned long)/1433->__gnu_cxx::new_allocator<unsigned long>::allocate(unsigned long, void const*)/1501, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:657:21: missed:   will not early inline: std::vector<bool, std::allocator<bool> >::vector(unsigned long, bool const&, std::allocator<bool> const&)/1162->std::vector<bool, std::allocator<bool> >::_M_initialize_value(bool)/1297, growth 9 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_bvector.h:644:31: missed:   will not early inline: std::vector<bool, std::allocator<bool> >::vector(unsigned long, std::allocator<bool> const&)/999->std::vector<bool, std::allocator<bool> >::vector(unsigned long, bool const&, std::allocator<bool> const&)/1162, growth 10 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/alloc_traits.h:464:28: missed:   will not early inline: std::allocator_traits<std::allocator<std::pair<unsigned int, unsigned int> > >::allocate(std::allocator<std::pair<unsigned int, unsigned int> >&, unsigned long)/1494->__gnu_cxx::new_allocator<std::pair<unsigned int, unsigned int> >::allocate(unsigned long, void const*)/1535, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:305:26: missed:   will not early inline: std::_Vector_base<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_Vector_base(unsigned long, std::allocator<std::pair<unsigned int, unsigned int> > const&)/1236->std::_Vector_base<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_create_storage(unsigned long)/1344, growth 8 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_algobase.h:385:18: missed:   will not early inline: std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/1551->std::_Bit_reference::operator=(bool)/93, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_algobase.h:495:30: missed:   will not early inline: std::__copy_move_a2<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/1538->std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/1551, call is cold and code would grow at least by 18
+/usr/include/c++/11/bits/stl_algobase.h:529:31: missed:   will not early inline: std::__copy_move_a<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/1440->std::__copy_move_a1<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/1507, call is cold and code would grow at least by 8
+/usr/include/c++/11/bits/stl_algobase.h:620:7: missed:   will not early inline: std::copy<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/1339->std::__copy_move_a<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/1440, call is cold and code would grow at least by 10
+/usr/include/c++/11/bits/stl_bvector.h:1132:18: missed:   will not early inline: std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)/1231->std::copy<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/1339, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:664:17: missed:   will not early inline: std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&)/1056->std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)/1231, call is cold and code would grow at least by 7
+srcVect/matrix.hpp:34:20: missed:   will not early inline: Matrix<bool>::Matrix(Matrix<bool> const&)/726->std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&)/1056, call is cold and code would grow at least by 27
+/usr/include/c++/11/bits/vector.tcc:436:14: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_realloc_insert<std::pair<unsigned int, unsigned int> >(__gnu_cxx::__normal_iterator<std::pair<unsigned int, unsigned int>*, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > >, std::pair<unsigned int, unsigned int>&&)void/1322->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_check_len(unsigned long, char const*) const/1415, growth 11 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/vector.tcc:121:21: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::emplace_back<std::pair<unsigned int, unsigned int> >(std::pair<unsigned int, unsigned int>&&)std::pair<unsigned int, unsigned int>&/1216->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_realloc_insert<std::pair<unsigned int, unsigned int> >(__gnu_cxx::__normal_iterator<std::pair<unsigned int, unsigned int>*, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > >, std::pair<unsigned int, unsigned int>&&)void/1322, call is cold and code would grow at least by 36
+/usr/include/c++/11/bits/stl_vector.h:1204:21: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::push_back(std::pair<unsigned int, unsigned int>&&)/1053->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::emplace_back<std::pair<unsigned int, unsigned int> >(std::pair<unsigned int, unsigned int>&&)std::pair<unsigned int, unsigned int>&/1216, growth 10 exceeds --param early-inlining-insns
+srcVect/fires.cpp:39:1: missed:   will not early inline: read_fire(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/741->std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()/1030, call is cold and code would grow at least by 10
+srcVect/fires.cpp:39:1: missed:   will not early inline: read_fire(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/741->std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()/1030, call is cold and code would grow at least by 10
+srcVect/fires.cpp:38:56: missed:   will not early inline: read_fire(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/741->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::vector(std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&)/1059, call is cold and code would grow at least by 10
+srcVect/fires.cpp:36:24: missed:   will not early inline: read_fire(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/741->std::basic_ifstream<char, std::char_traits<char> >::close()/1054, growth 5 exceeds --param early-inlining-insns divided by number of calls
+srcVect/fires.cpp:32:30: missed:   will not early inline: read_fire(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/741->Matrix<bool>::SmartReference::operator=(bool const&)/658, call is cold and code would grow at least by 11
+srcVect/fires.cpp:19:42: missed:   will not early inline: read_fire(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/741->Matrix<bool>::Matrix(unsigned int, unsigned int)/654, growth 4 exceeds --param early-inlining-insns divided by number of calls
+srcVect/fires.cpp:10:41: missed:   will not early inline: read_fire(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/741->std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1027, call is cold and code would grow at least by 28
+/usr/include/c++/11/fstream:573:7: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/982->std::basic_filebuf<char, std::char_traits<char> >::~basic_filebuf()/1106, call is cold and code would grow at least by 18
+/usr/include/c++/11/fstream:572:12: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/982->std::basic_ifstream<char, std::char_traits<char> >::open(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1109, call is cold and code would grow at least by 11
+/usr/include/c++/11/fstream:569:38: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/982->std::basic_istream<char, std::char_traits<char> >::basic_istream()/1099, call is cold and code would grow at least by 7
+/usr/include/c++/11/fstream:569:38: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/982->std::basic_ios<char, std::char_traits<char> >::basic_ios()/1092, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/fstream:605:9: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()/985->std::basic_filebuf<char, std::char_traits<char> >::~basic_filebuf()/1106, call is cold and code would grow at least by 18
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~vector()/998->std::_Vector_base<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~_Vector_base()/995, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:672:19: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()/813->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()/1025, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<int, std::allocator<int> >::~vector()/1001->std::_Vector_base<int, std::allocator<int> >::~_Vector_base()/1127, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/alloc_traits.h:464:28: missed:   will not early inline: std::allocator_traits<std::allocator<std::pair<unsigned int, unsigned int> > >::allocate(std::allocator<std::pair<unsigned int, unsigned int> >&, unsigned long)/1322->__gnu_cxx::new_allocator<std::pair<unsigned int, unsigned int> >::allocate(unsigned long, void const*)/1346, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/vector.tcc:436:14: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_realloc_insert<std::pair<unsigned int, unsigned int> >(__gnu_cxx::__normal_iterator<std::pair<unsigned int, unsigned int>*, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > >, std::pair<unsigned int, unsigned int>&&)void/1204->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_check_len(unsigned long, char const*) const/1268, growth 11 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/vector.tcc:121:21: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::emplace_back<std::pair<unsigned int, unsigned int> >(std::pair<unsigned int, unsigned int>&&)std::pair<unsigned int, unsigned int>&/1133->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_realloc_insert<std::pair<unsigned int, unsigned int> >(__gnu_cxx::__normal_iterator<std::pair<unsigned int, unsigned int>*, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > >, std::pair<unsigned int, unsigned int>&&)void/1204, call is cold and code would grow at least by 36
+/usr/include/c++/11/bits/stl_vector.h:1204:21: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::push_back(std::pair<unsigned int, unsigned int>&&)/1008->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::emplace_back<std::pair<unsigned int, unsigned int> >(std::pair<unsigned int, unsigned int>&&)std::pair<unsigned int, unsigned int>&/1133, growth 10 exceeds --param early-inlining-insns
+srcVect/ignition_cells.cpp:32:1: missed:   will not early inline: read_ignition_cells(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/712->std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()/985, call is cold and code would grow at least by 10
+srcVect/ignition_cells.cpp:32:1: missed:   will not early inline: read_ignition_cells(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/712->std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()/985, call is cold and code would grow at least by 10
+srcVect/ignition_cells.cpp:29:13: missed:   will not early inline: read_ignition_cells(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/712->std::basic_ifstream<char, std::char_traits<char> >::close()/1009, growth 5 exceeds --param early-inlining-insns divided by number of calls
+srcVect/ignition_cells.cpp:11:30: missed:   will not early inline: read_ignition_cells(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/712->std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/982, call is cold and code would grow at least by 28
+/usr/include/c++/11/fstream:573:7: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1019->std::basic_filebuf<char, std::char_traits<char> >::~basic_filebuf()/1163, call is cold and code would grow at least by 18
+/usr/include/c++/11/fstream:572:12: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1019->std::basic_ifstream<char, std::char_traits<char> >::open(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1166, call is cold and code would grow at least by 11
+/usr/include/c++/11/fstream:569:38: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1019->std::basic_istream<char, std::char_traits<char> >::basic_istream()/1156, call is cold and code would grow at least by 7
+/usr/include/c++/11/fstream:569:38: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1019->std::basic_ios<char, std::char_traits<char> >::basic_ios()/1149, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/fstream:605:9: missed:   will not early inline: std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()/1022->std::basic_filebuf<char, std::char_traits<char> >::~basic_filebuf()/1163, call is cold and code would grow at least by 18
+/usr/include/c++/11/bits/basic_string.h:672:19: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()/830->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()/1048, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<Cell, std::allocator<Cell> >::~vector()/1015->std::_Vector_base<Cell, std::allocator<Cell> >::~_Vector_base()/1144, growth 6 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:714:16: missed:   will not early inline: std::vector<Cell, std::allocator<Cell> >::operator=(std::vector<Cell, std::allocator<Cell> >&&)/1029->std::vector<Cell, std::allocator<Cell> >::_M_move_assign(std::vector<Cell, std::allocator<Cell> >&&, std::integral_constant<bool, true>)/1176, growth 7 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<int, std::allocator<int> >::~vector()/1026->std::_Vector_base<int, std::allocator<int> >::~_Vector_base()/1172, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/alloc_traits.h:464:28: missed:   will not early inline: std::allocator_traits<std::allocator<Cell> >::allocate(std::allocator<Cell>&, unsigned long)/1435->__gnu_cxx::new_allocator<Cell>::allocate(unsigned long, void const*)/1446, growth 6 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:305:26: missed:   will not early inline: std::_Vector_base<Cell, std::allocator<Cell> >::_Vector_base(unsigned long, std::allocator<Cell> const&)/1239->std::_Vector_base<Cell, std::allocator<Cell> >::_M_create_storage(unsigned long)/1334, growth 8 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_vector.h:512:30: missed:   will not early inline: std::vector<Cell, std::allocator<Cell> >::vector(unsigned long, std::allocator<Cell> const&)/1138->std::vector<Cell, std::allocator<Cell> >::_M_default_initialize(unsigned long)/1241, growth 4 exceeds --param early-inlining-insns divided by number of calls
+srcVect/matrix.hpp:7:83: missed:   will not early inline: Matrix<Cell>::Matrix(unsigned int, unsigned int)/1012->std::vector<Cell, std::allocator<Cell> >::vector(unsigned long, std::allocator<Cell> const&)/1138, growth 8 exceeds --param early-inlining-insns
+srcVect/landscape.cpp:62:1: missed:   will not early inline: Landscape::Landscape(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/722->std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()/1022, call is cold and code would grow at least by 10
+srcVect/landscape.cpp:62:1: missed:   will not early inline: Landscape::Landscape(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/722->std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()/1022, call is cold and code would grow at least by 10
+srcVect/landscape.cpp:62:1: missed:   will not early inline: Landscape::Landscape(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/722->std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()/1022, call is cold and code would grow at least by 10
+srcVect/landscape.cpp:62:1: missed:   will not early inline: Landscape::Landscape(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/722->std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()/1022, call is cold and code would grow at least by 10
+srcVect/landscape.cpp:61:23: missed:   will not early inline: Landscape::Landscape(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/722->std::basic_ifstream<char, std::char_traits<char> >::close()/1030, growth 5 exceeds --param early-inlining-insns divided by number of calls
+srcVect/landscape.cpp:30:45: missed:   will not early inline: Landscape::Landscape(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/722->std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1019, call is cold and code would grow at least by 28
+srcVect/landscape.cpp:28:22: missed:   will not early inline: Landscape::Landscape(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/722->std::basic_ifstream<char, std::char_traits<char> >::close()/1030, growth 5 exceeds --param early-inlining-insns divided by number of calls
+srcVect/landscape.cpp:11:48: missed:   will not early inline: Landscape::Landscape(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)/722->std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::_Ios_Openmode)/1019, call is cold and code would grow at least by 28
+/usr/include/c++/11/bits/stl_bvector.h:287:14: missed:   will not early inline: std::_Bit_iterator::operator+=(long)/119->std::_Bit_iterator_base::_M_incr(long)/99, growth 9 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_bvector.h:907:23: missed:   will not early inline: std::vector<bool, std::allocator<bool> >::operator[](unsigned long)/1830->std::_Bit_iterator::operator[](long) const/121, growth 6 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<unsigned int, std::allocator<unsigned int> >::~vector()/1887->std::_Vector_base<unsigned int, std::allocator<unsigned int> >::~_Vector_base()/1905, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:543:28: missed:   will not early inline: std::_Bvector_base<std::allocator<bool> >::~_Bvector_base()/1997->std::_Bvector_base<std::allocator<bool> >::_M_deallocate()/2137, growth 12 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~vector()/1890->std::_Vector_base<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~_Vector_base()/2072, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/alloc_traits.h:464:28: missed:   will not early inline: std::allocator_traits<std::allocator<unsigned int> >::allocate(std::allocator<unsigned int>&, unsigned long)/2380->__gnu_cxx::new_allocator<unsigned int>::allocate(unsigned long, void const*)/2391, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:305:26: missed:   will not early inline: std::_Vector_base<unsigned int, std::allocator<unsigned int> >::_Vector_base(unsigned long, std::allocator<unsigned int> const&)/2176->std::_Vector_base<unsigned int, std::allocator<unsigned int> >::_M_create_storage(unsigned long)/2277, growth 8 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_vector.h:512:30: missed:   will not early inline: std::vector<unsigned int, std::allocator<unsigned int> >::vector(unsigned long, std::allocator<unsigned int> const&)/2064->std::vector<unsigned int, std::allocator<unsigned int> >::_M_default_initialize(unsigned long)/2178, growth 4 exceeds --param early-inlining-insns divided by number of calls
+srcVect/matrix.hpp:7:83: missed:   will not early inline: Matrix<unsigned int>::Matrix(unsigned int, unsigned int)/1884->std::vector<unsigned int, std::allocator<unsigned int> >::vector(unsigned long, std::allocator<unsigned int> const&)/2064, growth 8 exceeds --param early-inlining-insns
+srcVect/many_simulations.cpp:25:3: missed:   will not early inline: burned_amounts_per_cell(Landscape const&, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&, SimulationParams, float, float, float, float, unsigned int)/1567->Fire::~Fire()/1545, growth 4 exceeds --param early-inlining-insns divided by number of calls
+srcVect/many_simulations.cpp:20:42: missed:   will not early inline: burned_amounts_per_cell(Landscape const&, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&, SimulationParams, float, float, float, float, unsigned int)/1567->Matrix<bool>::SmartReference::operator bool() const/657, call is cold and code would grow at least by 9
+/usr/include/c++/11/bits/stl_bvector.h:257:17: missed:   will not early inline: std::_Bit_iterator::operator++()/115->std::_Bit_iterator_base::_M_bump_up()/97, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:287:14: missed:   will not early inline: std::_Bit_iterator::operator+=(long)/119->std::_Bit_iterator_base::_M_incr(long)/99, growth 9 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_bvector.h:353:17: missed:   will not early inline: std::_Bit_const_iterator::operator++()/136->std::_Bit_iterator_base::_M_bump_up()/97, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:907:23: missed:   will not early inline: std::vector<bool, std::allocator<bool> >::operator[](unsigned long)/2478->std::_Bit_iterator::operator[](long) const/121, growth 6 exceeds --param early-inlining-insns divided by number of calls
+srcVect/matrix.hpp:51:23: missed:   will not early inline: Matrix<bool>::SmartReference::operator=(bool const&)/658->std::_Bit_reference::operator=(bool)/86, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<unsigned int, std::allocator<unsigned int> >::~vector()/2544->std::_Vector_base<unsigned int, std::allocator<unsigned int> >::~_Vector_base()/2541, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~vector()/2557->std::_Vector_base<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~_Vector_base()/2554, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:543:28: missed:   will not early inline: std::_Bvector_base<std::allocator<bool> >::~_Bvector_base()/2674->std::_Bvector_base<std::allocator<bool> >::_M_deallocate()/2852, growth 12 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/alloc_traits.h:464:28: missed:   will not early inline: std::allocator_traits<std::allocator<std::pair<unsigned int, unsigned int> > >::allocate(std::allocator<std::pair<unsigned int, unsigned int> >&, unsigned long)/3028->__gnu_cxx::new_allocator<std::pair<unsigned int, unsigned int> >::allocate(unsigned long, void const*)/3113, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/alloc_traits.h:464:28: missed:   will not early inline: std::allocator_traits<std::allocator<unsigned int> >::allocate(std::allocator<unsigned int>&, unsigned long)/3032->__gnu_cxx::new_allocator<unsigned int>::allocate(unsigned long, void const*)/3117, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/alloc_traits.h:464:28: missed:   will not early inline: std::allocator_traits<std::allocator<unsigned long> >::allocate(std::allocator<unsigned long>&, unsigned long)/3047->__gnu_cxx::new_allocator<unsigned long>::allocate(unsigned long, void const*)/3123, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:657:21: missed:   will not early inline: std::vector<bool, std::allocator<bool> >::vector(unsigned long, bool const&, std::allocator<bool> const&)/2668->std::vector<bool, std::allocator<bool> >::_M_initialize_value(bool)/2851, growth 9 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_bvector.h:644:31: missed:   will not early inline: std::vector<bool, std::allocator<bool> >::vector(unsigned long, std::allocator<bool> const&)/2472->std::vector<bool, std::allocator<bool> >::vector(unsigned long, bool const&, std::allocator<bool> const&)/2668, growth 10 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_vector.h:305:26: missed:   will not early inline: std::_Vector_base<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_Vector_base(unsigned long, std::allocator<std::pair<unsigned int, unsigned int> > const&)/2798->std::_Vector_base<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_create_storage(unsigned long)/2942, growth 8 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_vector.h:305:26: missed:   will not early inline: std::_Vector_base<unsigned int, std::allocator<unsigned int> >::_Vector_base(unsigned long, std::allocator<unsigned int> const&)/2804->std::_Vector_base<unsigned int, std::allocator<unsigned int> >::_M_create_storage(unsigned long)/2949, growth 8 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/vector.tcc:436:14: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_realloc_insert<std::pair<unsigned int, unsigned int> const&>(__gnu_cxx::__normal_iterator<std::pair<unsigned int, unsigned int>*, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > >, std::pair<unsigned int, unsigned int> const&)void/2770->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_check_len(unsigned long, char const*) const/2902, growth 11 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_vector.h:1198:21: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::push_back(std::pair<unsigned int, unsigned int> const&)/2562->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_realloc_insert<std::pair<unsigned int, unsigned int> const&>(__gnu_cxx::__normal_iterator<std::pair<unsigned int, unsigned int>*, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > >, std::pair<unsigned int, unsigned int> const&)void/2770, call is cold and code would grow at least by 36
+/usr/include/c++/11/bits/vector.tcc:436:14: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_realloc_insert<std::pair<unsigned int, unsigned int> >(__gnu_cxx::__normal_iterator<std::pair<unsigned int, unsigned int>*, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > >, std::pair<unsigned int, unsigned int>&&)void/2921->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_check_len(unsigned long, char const*) const/2902, growth 11 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/vector.tcc:121:21: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::emplace_back<std::pair<unsigned int, unsigned int> >(std::pair<unsigned int, unsigned int>&&)std::pair<unsigned int, unsigned int>&/2779->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::_M_realloc_insert<std::pair<unsigned int, unsigned int> >(__gnu_cxx::__normal_iterator<std::pair<unsigned int, unsigned int>*, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > >, std::pair<unsigned int, unsigned int>&&)void/2921, call is cold and code would grow at least by 36
+/usr/include/c++/11/bits/stl_vector.h:1204:21: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::push_back(std::pair<unsigned int, unsigned int>&&)/2574->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::emplace_back<std::pair<unsigned int, unsigned int> >(std::pair<unsigned int, unsigned int>&&)std::pair<unsigned int, unsigned int>&/2779, growth 10 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/vector.tcc:436:14: missed:   will not early inline: std::vector<unsigned int, std::allocator<unsigned int> >::_M_realloc_insert<unsigned int const&>(__gnu_cxx::__normal_iterator<unsigned int*, std::vector<unsigned int, std::allocator<unsigned int> > >, unsigned int const&)void/2777->std::vector<unsigned int, std::allocator<unsigned int> >::_M_check_len(unsigned long, char const*) const/2913, growth 11 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_vector.h:1198:21: missed:   will not early inline: std::vector<unsigned int, std::allocator<unsigned int> >::push_back(unsigned int const&)/2563->std::vector<unsigned int, std::allocator<unsigned int> >::_M_realloc_insert<unsigned int const&>(__gnu_cxx::__normal_iterator<unsigned int*, std::vector<unsigned int, std::allocator<unsigned int> > >, unsigned int const&)void/2777, call is cold and code would grow at least by 39
+/usr/include/c++/11/bits/stl_algobase.h:385:18: missed:   will not early inline: std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/3187->std::_Bit_reference::operator=(bool)/86, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_algobase.h:495:30: missed:   will not early inline: std::__copy_move_a2<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/3170->std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/3187, call is cold and code would grow at least by 18
+/usr/include/c++/11/bits/stl_algobase.h:529:31: missed:   will not early inline: std::__copy_move_a<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/3054->std::__copy_move_a1<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/3129, call is cold and code would grow at least by 8
+/usr/include/c++/11/bits/stl_algobase.h:620:7: missed:   will not early inline: std::copy<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/2937->std::__copy_move_a<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/3054, call is cold and code would grow at least by 10
+/usr/include/c++/11/bits/stl_bvector.h:1132:18: missed:   will not early inline: std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)/2793->std::copy<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)std::_Bit_iterator/2937, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:664:17: missed:   will not early inline: std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&)/2576->std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)/2793, call is cold and code would grow at least by 7
+srcVect/matrix.hpp:34:20: missed:   will not early inline: Matrix<bool>::Matrix(Matrix<bool> const&)/2210->std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&)/2576, call is cold and code would grow at least by 27
+srcVect/spread_functions.cpp:216:67: missed:   will not early inline: simulate_fire(Landscape const&, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&, SimulationParams, float, float, float, float)/2215->std::vector<unsigned int, std::allocator<unsigned int> >::vector(std::vector<unsigned int, std::allocator<unsigned int> > const&)/2582, call is cold and code would grow at least by 12
+srcVect/spread_functions.cpp:216:67: missed:   will not early inline: simulate_fire(Landscape const&, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&, SimulationParams, float, float, float, float)/2215->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::vector(std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&)/2579, call is cold and code would grow at least by 10
+srcVect/spread_functions.cpp:212:31: missed:   will not early inline: simulate_fire(Landscape const&, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&, SimulationParams, float, float, float, float)/2215->std::vector<unsigned int, std::allocator<unsigned int> >::push_back(unsigned int const&)/2563, growth 8 exceeds --param early-inlining-insns
+srcVect/spread_functions.cpp:201:56: missed:   will not early inline: simulate_fire(Landscape const&, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&, SimulationParams, float, float, float, float)/2215->Matrix<bool>::SmartReference::operator=(bool const&)/658, call is cold and code would grow at least by 11
+srcVect/spread_functions.cpp:135:65: missed:   will not early inline: simulate_fire(Landscape const&, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&, SimulationParams, float, float, float, float)/2215->Matrix<bool>::SmartReference::operator bool() const/657, call is cold and code would grow at least by 9
+srcVect/spread_functions.cpp:69:38: missed:   will not early inline: simulate_fire(Landscape const&, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&, SimulationParams, float, float, float, float)/2215->Matrix<bool>::SmartReference::operator=(bool const&)/658, call is cold and code would grow at least by 11
+srcVect/spread_functions.cpp:64:54: missed:   will not early inline: simulate_fire(Landscape const&, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&, SimulationParams, float, float, float, float)/2215->Matrix<bool>::Matrix(unsigned int, unsigned int)/654, growth 4 exceeds --param early-inlining-insns divided by number of calls
+srcVect/spread_functions.cpp:60:29: missed:   will not early inline: simulate_fire(Landscape const&, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&, SimulationParams, float, float, float, float)/2215->std::vector<unsigned int, std::allocator<unsigned int> >::push_back(unsigned int const&)/2563, growth 8 exceeds --param early-inlining-insns
+srcVect/spread_functions.cpp:56:25: missed:   will not early inline: simulate_fire(Landscape const&, std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > > const&, SimulationParams, float, float, float, float)/2215->std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::push_back(std::pair<unsigned int, unsigned int> const&)/2562, growth 9 exceeds --param early-inlining-insns
+srcVect/spread_functions_vectorized.cpp:143:35: missed:   will not early inline: spread_probability_vectorized(float const*, float const*, float const*, float const*, float const*, float const*, float, float, float, float, float, float const*, float, float, float, float, float*, int)/6892->_mm256_exp_ps(float __vector(8))/6891, growth 7 exceeds --param early-inlining-insns
+srcVect/spread_functions_vectorized.cpp:139:42: missed:   will not early inline: spread_probability_vectorized(float const*, float const*, float const*, float const*, float const*, float const*, float, float, float, float, float, float const*, float, float, float, float, float*, int)/6892->_mm256_exp_ps(float __vector(8))/6891, growth 7 exceeds --param early-inlining-insns
+srcVect/spread_functions_vectorized.cpp:196:34: missed:   will not early inline: vectorized_spread_probability_batch(float, float, float const*, float const*, float const*, float const*, float, float, float, float, float, float const*, float, float, float, float, float*, int)/6893->spread_probability_vectorized(float const*, float const*, float const*, float const*, float const*, float const*, float, float, float, float, float, float const*, float, float, float, float, float*, int)/6892, call is cold and code would grow at least by 47
+/usr/include/c++/11/bits/basic_ios.h:450:45: missed:   will not early inline: std::basic_ios<char, std::char_traits<char> >::widen(char) const/1065->std::ctype<char>::widen(char) const/560, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/ostream:685:39: missed:   will not early inline: std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)std::basic_ostream<char, std::char_traits<char> >&/946->std::basic_ios<char, std::char_traits<char> >::widen(char) const/1065, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.tcc:225:25: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)void/1070->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char const*, char const*)/1155, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:539:14: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&)/949->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)void/1070, growth 21 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/basic_string.h:672:19: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()/781->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()/977, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<Cell, std::allocator<Cell> >::~vector()/952->std::_Vector_base<Cell, std::allocator<Cell> >::~_Vector_base()/1075, growth 6 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~vector()/955->std::_Vector_base<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~_Vector_base()/1083, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<unsigned int, std::allocator<unsigned int> >::~vector()/958->std::_Vector_base<unsigned int, std::allocator<unsigned int> >::~_Vector_base()/1091, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.tcc:225:25: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)void/1253->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char*, char*)/1306, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:255:23: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)void/1180->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)void/1253, growth 21 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/basic_string.h:6136:19: missed:   will not early inline: std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >/925->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*)/1037, call is cold and code would grow at least by 9
+/usr/include/c++/11/bits/basic_string.h:6135:45: missed:   will not early inline: std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >/925->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)/1035, growth 5 exceeds --param early-inlining-insns divided by number of calls
+graphics/burned_probabilities_data.cpp:57:38: missed:   will not early inline: main/680->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/945, growth 7 exceeds --param early-inlining-insns
+graphics/burned_probabilities_data.cpp:57:38: missed:   will not early inline: main/680->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/945, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/burned_probabilities_data.cpp:49:24: missed:   will not early inline: main/680->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/945, growth 4 exceeds --param early-inlining-insns divided by number of calls
+graphics/burned_probabilities_data.cpp:45:18: missed:   will not early inline: main/680->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/945, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/burned_probabilities_data.cpp:44:59: missed:   will not early inline: main/680->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/945, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/burned_probabilities_data.cpp:44:18: missed:   will not early inline: main/680->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/945, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/burned_probabilities_data.cpp:34:51: missed:   will not early inline: main/680->std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >/925, growth 5 exceeds --param early-inlining-insns divided by number of calls
+graphics/burned_probabilities_data.cpp:29:31: missed:   will not early inline: main/680->std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >/925, growth 5 exceeds --param early-inlining-insns divided by number of calls
+graphics/burned_probabilities_data.cpp:29:72: missed:   will not early inline: main/680->std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >/925, growth 5 exceeds --param early-inlining-insns divided by number of calls
+graphics/burned_probabilities_data.cpp:25:47: missed:   will not early inline: main/680->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&)/949, growth 8 exceeds --param early-inlining-insns
+graphics/burned_probabilities_data.cpp:20:44: missed:   will not early inline: main/680->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/945, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/burned_probabilities_data.cpp:20:44: missed:   will not early inline: main/680->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/945, growth 7 exceeds --param early-inlining-insns
+graphics/burned_probabilities_data.cpp:20:44: missed:   will not early inline: main/680->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/945, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/burned_probabilities_data.cpp:62:1: missed:   will not early inline: _GLOBAL__sub_I_main/1487->__static_initialization_and_destruction_0(int, int)/1368, growth 3 exceeds --param early-inlining-insns divided by number of calls
+missed:   not inlinable: append.isra/22301 -> __builtin_strlen/1504, function body not available
+missed:   not inlinable: append.isra/22301 -> __throw_length_error/1511, function body not available
+missed:   not inlinable: append.isra/22301 -> _M_append/1510, function body not available
+missed:   not inlinable: widen.isra/22300 -> __throw_bad_cast/1501, function body not available
+missed:   not inlinable: endl.isra/22299 -> put/1500, function body not available
+missed:   not inlinable: endl.isra/22299 -> flush/1503, function body not available
+missed:   not inlinable: getline.isra/22298 -> getline/3063, function body not available
+missed:   not inlinable: open.isra/22294 -> open/4903, function body not available
+missed:   not inlinable: open.isra/22294 -> clear/1515, function body not available
+missed:   not inlinable: emplace_back.isra/22292 -> _M_realloc_insert/4461, --param max-inline-insns-auto limit reached
+missed:   not inlinable: _M_check_len.constprop.isra/22288 -> __throw_length_error/1511, function body not available
+missed:   not inlinable: _M_check_len.constprop.isra/22286 -> __throw_length_error/1511, function body not available
+missed:   not inlinable: _M_check_len.constprop.isra/22284 -> __throw_length_error/1511, function body not available
+missed:   not inlinable: _M_copy_aligned.constprop.isra/22283 -> __builtin_memmove/3071, function body not available
+missed:   not inlinable: __static_initialization_and_destruction_0.constprop/22280 -> __ct_comp /1516, function body not available
+missed:   not inlinable: __static_initialization_and_destruction_0.constprop/22280 -> __cxa_atexit/1517, function body not available
+/usr/include/c++/11/bits/basic_string.tcc:212:28: missed:   not inlinable: _M_construct.constprop/22279 -> __throw_logic_error/1505, function body not available
+/usr/include/c++/11/bits/basic_string.tcc:219:13: missed:   not inlinable: _M_construct.constprop/22279 -> _M_create/1506, function body not available
+/usr/include/c++/11/bits/basic_string.tcc:225:25: missed:   not inlinable: _M_construct.constprop/22279 -> _S_copy_chars/1155, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base .constprop/22278 -> __builtin_strlen/1504, function body not available
+missed:   not inlinable: __ct_base .constprop/22278 -> _M_construct.constprop/22279, --param max-inline-insns-auto limit reached
+/usr/include/c++/11/ext/new_allocator.h:111:22: missed:   not inlinable: allocate.constprop/22276 -> __builtin_expect/3067, function body not available
+/usr/include/c++/11/ext/new_allocator.h:116:41: missed:   not inlinable: allocate.constprop/22276 -> __throw_bad_array_new_length/3068, function body not available
+/usr/include/c++/11/ext/new_allocator.h:117:28: missed:   not inlinable: allocate.constprop/22276 -> __throw_bad_alloc/3069, function body not available
+/usr/include/c++/11/ext/new_allocator.h:127:41: missed:   not inlinable: allocate.constprop/22276 -> operator new/3070, function body not available
+/usr/include/c++/11/ext/new_allocator.h:111:22: missed:   not inlinable: allocate.constprop/22275 -> __builtin_expect/3067, function body not available
+/usr/include/c++/11/ext/new_allocator.h:116:41: missed:   not inlinable: allocate.constprop/22275 -> __throw_bad_array_new_length/3068, function body not available
+/usr/include/c++/11/ext/new_allocator.h:117:28: missed:   not inlinable: allocate.constprop/22275 -> __throw_bad_alloc/3069, function body not available
+/usr/include/c++/11/ext/new_allocator.h:127:41: missed:   not inlinable: allocate.constprop/22275 -> operator new/3070, function body not available
+missed:   not inlinable: _M_realloc_insert.constprop/22269 -> __builtin_memmove/3071, function body not available
+missed:   not inlinable: _M_realloc_insert.constprop/22269 -> __builtin_memcpy/1508, function body not available
+missed:   not inlinable: _M_realloc_insert.constprop/22269 -> operator delete/1509, function body not available
+missed:   not inlinable: __ct_base .constprop/22266 -> _M_deallocate/4437, call is unlikely and code size would grow
+missed:   not inlinable: simulate_fire.constprop/22265 -> omp_get_wtime/14478, function body not available
+missed:   not inlinable: simulate_fire.constprop/22265 -> rand/14481, function body not available
+missed:   not inlinable: simulate_fire.constprop/22265 -> omp_get_wtime/14478, function body not available
+missed:   not inlinable: simulate_fire.constprop/22265 -> __fprintf_chk/14492, function body not available
+missed:   not inlinable: simulate_fire.constprop/22265 -> _M_deallocate/4437, call is unlikely and code size would grow
+missed:   not inlinable: simulate_fire.constprop/22265 -> __dt_base /1091, call is unlikely and code size would grow
+missed:   not inlinable: simulate_fire.constprop/22265 -> __dt_base /1083, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base .constprop/22263 -> __throw_length_error/1511, function body not available
+missed:   not inlinable: __ct_base .constprop/22263 -> _M_create_storage/10806, call is unlikely and code size would grow
+missed:   not inlinable: burned_amounts_per_cell.constprop/22262 -> simulate_fire.constprop/22265, --param max-inline-insns-auto limit reached
+missed:   not inlinable: burned_amounts_per_cell.constprop/22262 -> __dt_base /1091, call is unlikely and code size would grow
+missed:   not inlinable: _M_realloc_insert.constprop/22260 -> __builtin_memmove/3071, function body not available
+missed:   not inlinable: _M_realloc_insert.constprop/22260 -> __builtin_memcpy/1508, function body not available
+missed:   not inlinable: _M_realloc_insert.constprop/22260 -> operator delete/1509, function body not available
+missed:   not inlinable: operator++.constprop/22258 -> operator++.isra/22296, call is unlikely and code size would grow
+missed:   not inlinable: operator++.constprop/22258 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: operator++.constprop/22258 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: _M_move_assign.constprop/22257 -> __dt_base /1075, call is unlikely and code size would grow
+missed:   not inlinable: allocate.constprop/22256 -> __builtin_expect/3067, function body not available
+missed:   not inlinable: allocate.constprop/22256 -> __throw_bad_array_new_length/3068, function body not available
+missed:   not inlinable: allocate.constprop/22256 -> __throw_bad_alloc/3069, function body not available
+missed:   not inlinable: allocate.constprop/22256 -> operator new/8376, function body not available
+missed:   not inlinable: __ct_base .constprop/22255 -> __throw_length_error/1511, function body not available
+missed:   not inlinable: spread_probability_vectorized/21515 -> __builtin_ia32_minps256/22212, function body not available
+missed:   not inlinable: spread_probability_vectorized/21515 -> __builtin_ia32_roundps256/22211, function body not available
+missed:   not inlinable: __ct_base /13704 -> __builtin_memmove/3071, function body not available
+missed:   not inlinable: push_back/13684 -> _M_realloc_insert/13892, --param max-inline-insns-auto limit reached
+missed:   not inlinable: __ct_base /7456 -> __dt_base /1075, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __dt_comp /4169, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __dt_comp /4169, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __cxa_free_exception/4891, function body not available
+missed:   not inlinable: __ct_base /7456 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __cxa_free_exception/4891, function body not available
+missed:   not inlinable: __ct_base /7456 -> __cxa_free_exception/4891, function body not available
+missed:   not inlinable: __ct_base /7456 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __cxa_free_exception/4891, function body not available
+missed:   not inlinable: __ct_base /7456 -> __dt_comp /4169, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __dt_comp /4169, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> close/4193, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> strtol/4942, function body not available
+missed:   not inlinable: __ct_base /7456 -> strtod/8435, function body not available
+missed:   not inlinable: __ct_base /7456 -> strtod/8435, function body not available
+missed:   not inlinable: __ct_base /7456 -> strtod/8435, function body not available
+missed:   not inlinable: __ct_base /7456 -> strtod/8435, function body not available
+missed:   not inlinable: __ct_base /7456 -> strtol/4942, function body not available
+missed:   not inlinable: __ct_base /7456 -> strtol/4942, function body not available
+missed:   not inlinable: __ct_base /7456 -> strtol/4942, function body not available
+missed:   not inlinable: __ct_base /7456 -> __cxa_throw/4879, function body not available
+missed:   not inlinable: __ct_base /7456 -> __ct_comp /4878, function body not available
+missed:   not inlinable: __ct_base /7456 -> __cxa_allocate_exception/4877, function body not available
+missed:   not inlinable: __ct_base /7456 -> operator++.isra/22296, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __ct_comp /2258, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __cxa_throw/4879, function body not available
+missed:   not inlinable: __ct_base /7456 -> __ct_comp /4878, function body not available
+missed:   not inlinable: __ct_base /7456 -> __cxa_allocate_exception/4877, function body not available
+missed:   not inlinable: __ct_base /7456 -> is_open/4936, function body not available
+missed:   not inlinable: __ct_base /7456 -> __ct_comp /4166, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> close/4193, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __dt_base /1075, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> strtol/4942, function body not available
+missed:   not inlinable: __ct_base /7456 -> operator[]/2235, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> strtol/4942, function body not available
+missed:   not inlinable: __ct_base /7456 -> operator[]/2235, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __cxa_throw/4879, function body not available
+missed:   not inlinable: __ct_base /7456 -> __ct_comp /4878, function body not available
+missed:   not inlinable: __ct_base /7456 -> __cxa_allocate_exception/4877, function body not available
+missed:   not inlinable: __ct_base /7456 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> operator++.isra/22296, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __ct_comp /2258, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /7456 -> __cxa_throw/4879, function body not available
+missed:   not inlinable: __ct_base /7456 -> __ct_comp /4878, function body not available
+missed:   not inlinable: __ct_base /7456 -> __cxa_allocate_exception/4877, function body not available
+missed:   not inlinable: __ct_base /7456 -> is_open/4936, function body not available
+missed:   not inlinable: __ct_base /7456 -> __ct_comp /4166, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> __dt_comp /4169, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> __dt_base /1083, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> __cxa_free_exception/4891, function body not available
+missed:   not inlinable: read_ignition_cells/5773 -> __cxa_free_exception/4891, function body not available
+missed:   not inlinable: read_ignition_cells/5773 -> __dt_comp /4169, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> close/4193, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> strtol/4942, function body not available
+missed:   not inlinable: read_ignition_cells/5773 -> strtol/4942, function body not available
+missed:   not inlinable: read_ignition_cells/5773 -> __cxa_throw/4879, function body not available
+missed:   not inlinable: read_ignition_cells/5773 -> __ct_comp /4878, function body not available
+missed:   not inlinable: read_ignition_cells/5773 -> __cxa_allocate_exception/4877, function body not available
+missed:   not inlinable: read_ignition_cells/5773 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> __ct_comp /2258, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/5773 -> __cxa_throw/4879, function body not available
+missed:   not inlinable: read_ignition_cells/5773 -> __ct_comp /4878, function body not available
+missed:   not inlinable: read_ignition_cells/5773 -> __cxa_allocate_exception/4877, function body not available
+missed:   not inlinable: read_ignition_cells/5773 -> is_open/4936, function body not available
+missed:   not inlinable: read_ignition_cells/5773 -> __ct_comp /4166, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /4195 -> _M_deallocate/4437, call is unlikely and code size would grow
+/usr/include/c++/11/ext/new_allocator.h:145:19: missed:   not inlinable: _M_realloc_insert/4461 -> operator delete/1509, function body not available
+missed:   not inlinable: _M_deallocate/4437 -> operator delete/1509, function body not available
+missed:   not inlinable: _M_initialize_value/4436 -> __builtin_memset/4941, function body not available
+missed:   not inlinable: __dt_comp /4169 -> __dt_base /4935, function body not available
+missed:   not inlinable: __ct_comp /4166 -> __dt_base /4935, function body not available
+missed:   not inlinable: __ct_comp /4166 -> __dt_comp /4329, call is unlikely and code size would grow
+missed:   not inlinable: __ct_comp /4166 -> init/4895, function body not available
+missed:   not inlinable: __ct_comp /4166 -> __ct_comp /4894, function body not available
+missed:   not inlinable: __dt_base /4328 -> __cxa_end_catch/1497, function body not available
+missed:   not inlinable: __dt_base /4328 -> __cxa_begin_catch/1496, function body not available
+missed:   not inlinable: __dt_base /4328 -> __builtin_eh_pointer/1495, function body not available
+missed:   not inlinable: __dt_base /4328 -> __dt_comp /4922, function body not available
+missed:   not inlinable: __dt_base /4328 -> __dt_comp /4905, function body not available
+missed:   not inlinable: __dt_base /4328 -> close/4904, function body not available
+missed:   not inlinable: close/4193 -> close/4904, function body not available
+/usr/include/c++/11/bits/basic_ios.h:158:20: missed:   not inlinable: _ZNSt14basic_ifstreamIcSt11char_traitsIcEE4openERKNSt7__cxx1112basic_stringIcS1_SaIcEEESt13_Ios_Openmode.part.0/4958 -> clear/1515, function body not available
+missed:   not inlinable: __ct_base /4314 -> __ct_base /4900, function body not available
+missed:   not inlinable: __ct_base /4321 -> init/4895, function body not available
+missed:   not inlinable: __ct_base /2257 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /2257 -> __dt_base /2564, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /2257 -> operator++.isra/22296, call is unlikely and code size would grow
+missed:   not inlinable: readNextRow/2237 -> find/3062, function body not available
+missed:   not inlinable: _M_realloc_insert/2664 -> operator delete/1509, function body not available
+missed:   not inlinable: _M_realloc_insert/2664 -> __builtin_memcpy/1508, function body not available
+missed:   not inlinable: _M_realloc_insert/2664 -> __builtin_memmove/3071, function body not available
+missed:   not inlinable: __ct_base /2264 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /2264 -> __ct_comp /1036, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /2574 -> __builtin_memmove/3071, function body not available
+missed:   not inlinable: _M_create_storage/2761 -> allocate.constprop/22276, call is unlikely and code size would grow
+missed:   not inlinable: __dt_base /2564 -> operator delete/1509, function body not available
+missed:   not inlinable: main/680 -> __cxa_end_catch/1497, function body not available
+missed:   not inlinable: main/680 -> __cxa_end_catch/1497, function body not available
+missed:   not inlinable: main/680 -> endl.isra/22299, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> operator<</945, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> operator<</945, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> __cxa_begin_catch/1496, function body not available
+missed:   not inlinable: main/680 -> __builtin_eh_pointer/1495, function body not available
+missed:   not inlinable: main/680 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> __dt_base /1075, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> __dt_base /1083, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> __dt_base /1091, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> __dt_base /1075, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> __dt_base /1083, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> __dt_base /1091, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> _M_insert/1512, function body not available
+missed:   not inlinable: main/680 -> endl.isra/22299, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> operator<</1494, function body not available
+missed:   not inlinable: main/680 -> operator<</945, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> endl.isra/22299, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> _M_insert/1512, function body not available
+missed:   not inlinable: main/680 -> operator<</945, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> _M_insert/1512, function body not available
+missed:   not inlinable: main/680 -> operator<</945, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> read_ignition_cells/5773, --param max-inline-insns-auto limit reached
+missed:   not inlinable: main/680 -> operator+/925, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> __ct_comp /7457, --param max-inline-insns-auto limit reached
+missed:   not inlinable: main/680 -> operator+/925, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> operator+/925, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> endl.isra/22299, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> operator<</945, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> operator<</945, call is unlikely and code size would grow
+missed:   not inlinable: main/680 -> operator<</945, call is unlikely and code size would grow
+missed:   not inlinable: operator+/925 -> _M_dispose/977, call is unlikely and code size would grow
+missed:   not inlinable: operator+/925 -> __ct_comp /1036, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /1035 -> _M_construct.constprop/22279, call is unlikely and code size would grow
+missed:   not inlinable: __dt_base /1091 -> operator delete/1509, function body not available
+missed:   not inlinable: __dt_base /1083 -> operator delete/1509, function body not available
+missed:   not inlinable: _ZNSt12_Vector_baseI4CellSaIS0_EE13_M_deallocateEPS0_m.part.0/1542 -> operator delete/1513, function body not available
+missed:   not inlinable: _ZNKSt5ctypeIcE5widenEc.part.0/1527 -> _M_widen_init/1502, function body not available
+missed:   not inlinable: operator<</945 -> __ostream_insert/1514, function body not available
+missed:   not inlinable: operator<</945 -> __builtin_strlen/1504, function body not available
+missed:   not inlinable: _ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc.part.0/1526 -> clear/1515, function body not available
+missed:   not inlinable: _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE7_S_copyEPcPKcm.part.0/1523 -> __builtin_memcpy/1508, function body not available
+missed:   not inlinable: _M_dispose/977 -> operator delete/1509, function body not available
+missed:   not inlinable: main/680 -> burned_amounts_per_cell.constprop/22262, --param max-inline-insns-auto limit reached
+missed:   not inlinable: push_back/13685 -> _M_realloc_insert.constprop/22269, --param max-inline-insns-auto limit reached
+missed:   not inlinable: simulate_fire.constprop/22265 -> __ct_comp /4196, --param max-inline-insns-single limit reached
+missed:   not inlinable: _M_create_storage/10806 -> allocate.constprop/22276, call is unlikely and code size would grow
+missed:   not inlinable: emplace_back.isra/22297 -> _M_realloc_insert/2664, --param max-inline-insns-auto limit reached
+missed:   not inlinable: read_ignition_cells/5773 -> operator++.isra/22296, --param max-inline-insns-auto limit reached
+missed:   not inlinable: __ct_base /7456 -> operator++.isra/22296, --param max-inline-insns-auto limit reached
+missed:   not inlinable: burned_amounts_per_cell.constprop/22262 -> simulate_fire.constprop/22265, --param large-stack-frame-growth limit reached
+missed:   not inlinable: burned_amounts_per_cell.constprop/22262 -> simulate_fire.constprop/22265, --param large-stack-frame-growth limit reached
+/usr/include/c++/11/bits/stl_bvector.h:93:8: missed: failed: evolution of base is not affine.
+/usr/include/c++/11/bits/stl_bvector.h:93:8: missed: failed: evolution of base is not affine.
+/usr/include/c++/11/bits/stl_bvector.h:87:17: missed: failed: evolution of base is not affine.
+/usr/include/c++/11/bits/stl_bvector.h:93:8: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:41:6: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:41:6: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:41:6: missed: failed: evolution of base is not affine.
+/usr/include/c++/11/bits/stl_bvector.h:87:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:126:41: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:126:41: missed: not vectorized: control flow in loop.
+/usr/include/c++/11/bits/stl_bvector.h:87:17: missed: failed: evolution of base is not affine.
+srcVect/many_simulations.cpp:21:38: missed: failed: evolution of base is not affine.
+srcVect/many_simulations.cpp:21:38: missed: failed: evolution of base is not affine.
+/usr/include/c++/11/bits/stl_bvector.h:87:17: missed: failed: evolution of base is not affine.
+srcVect/many_simulations.cpp:21:38: missed: failed: evolution of base is not affine.
+srcVect/many_simulations.cpp:21:38: missed: failed: evolution of base is not affine.
+/usr/include/c++/11/bits/basic_string.tcc:225:25: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)void/2651->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char const*, char const*)/2779, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_ios.h:450:45: missed:   will not early inline: std::basic_ios<char, std::char_traits<char> >::widen(char) const/2686->std::ctype<char>::widen(char) const/560, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/ostream:685:39: missed:   will not early inline: std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)std::basic_ostream<char, std::char_traits<char> >&/2501->std::basic_ios<char, std::char_traits<char> >::widen(char) const/2686, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:539:14: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&)/2470->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)void/2651, growth 21 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<unsigned int, std::allocator<unsigned int> >::~vector()/2482->std::_Vector_base<unsigned int, std::allocator<unsigned int> >::~_Vector_base()/2479, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:672:19: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()/2269->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()/2527, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_bvector.h:543:28: missed:   will not early inline: std::_Bvector_base<std::allocator<bool> >::~_Bvector_base()/2677->std::_Bvector_base<std::allocator<bool> >::_M_deallocate()/2793, growth 12 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<Cell, std::allocator<Cell> >::~vector()/2504->std::_Vector_base<Cell, std::allocator<Cell> >::~_Vector_base()/2692, growth 6 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/stl_vector.h:683:7: missed:   will not early inline: std::vector<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~vector()/2507->std::_Vector_base<std::pair<unsigned int, unsigned int>, std::allocator<std::pair<unsigned int, unsigned int> > >::~_Vector_base()/2700, growth 5 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.tcc:225:25: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)void/2908->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char*, char*)/2964, growth 4 exceeds --param early-inlining-insns divided by number of calls
+/usr/include/c++/11/bits/basic_string.h:255:23: missed:   will not early inline: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)void/2820->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)void/2908, growth 21 exceeds --param early-inlining-insns
+/usr/include/c++/11/bits/basic_string.h:6136:19: missed:   will not early inline: std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >/2413->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*)/2587, call is cold and code would grow at least by 9
+/usr/include/c++/11/bits/basic_string.h:6135:45: missed:   will not early inline: std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >/2413->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)/2585, growth 5 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:63:38: missed:   will not early inline: main/2168->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/2500, growth 7 exceeds --param early-inlining-insns
+graphics/fire_animation_data.cpp:63:38: missed:   will not early inline: main/2168->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/2500, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:62:3: missed:   will not early inline: main/2168->Fire::~Fire()/2166, growth 4 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:62:3: missed:   will not early inline: main/2168->Fire::~Fire()/2166, growth 4 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:57:52: missed:   will not early inline: main/2168->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/2500, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:55:41: missed:   will not early inline: main/2168->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/2500, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:55:22: missed:   will not early inline: main/2168->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/2500, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:47:61: missed:   will not early inline: main/2168->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/2500, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:47:20: missed:   will not early inline: main/2168->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/2500, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:33:51: missed:   will not early inline: main/2168->std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >/2413, growth 5 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:29:47: missed:   will not early inline: main/2168->std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >/2413, growth 5 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:29:88: missed:   will not early inline: main/2168->std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >/2413, growth 5 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:26:47: missed:   will not early inline: main/2168->std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&)/2470, growth 8 exceeds --param early-inlining-insns
+graphics/fire_animation_data.cpp:21:44: missed:   will not early inline: main/2168->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/2500, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:21:44: missed:   will not early inline: main/2168->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/2500, growth 7 exceeds --param early-inlining-insns
+graphics/fire_animation_data.cpp:21:44: missed:   will not early inline: main/2168->std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)std::basic_ostream<char, std::char_traits<char> >&/2500, growth 3 exceeds --param early-inlining-insns divided by number of calls
+graphics/fire_animation_data.cpp:68:1: missed:   will not early inline: _GLOBAL__sub_I_main/3159->__static_initialization_and_destruction_0(int, int)/3030, growth 3 exceeds --param early-inlining-insns divided by number of calls
+missed:   not inlinable: append.isra/23974 -> __builtin_strlen/3175, function body not available
+missed:   not inlinable: append.isra/23974 -> __throw_length_error/3182, function body not available
+missed:   not inlinable: append.isra/23974 -> _M_append/3181, function body not available
+missed:   not inlinable: widen.isra/23973 -> __throw_bad_cast/3172, function body not available
+missed:   not inlinable: endl.isra/23972 -> put/3171, function body not available
+missed:   not inlinable: endl.isra/23972 -> flush/3174, function body not available
+missed:   not inlinable: getline.isra/23971 -> getline/4740, function body not available
+missed:   not inlinable: open.isra/23967 -> open/6580, function body not available
+missed:   not inlinable: open.isra/23967 -> clear/3187, function body not available
+missed:   not inlinable: emplace_back.isra/23965 -> _M_realloc_insert/6138, --param max-inline-insns-auto limit reached
+missed:   not inlinable: _M_check_len.constprop.isra/23961 -> __throw_length_error/3182, function body not available
+missed:   not inlinable: _M_check_len.constprop.isra/23960 -> __throw_length_error/3182, function body not available
+missed:   not inlinable: _M_check_len.constprop.isra/23958 -> __throw_length_error/3182, function body not available
+missed:   not inlinable: _M_copy_aligned.constprop.isra/23957 -> __builtin_memmove/4748, function body not available
+missed:   not inlinable: __static_initialization_and_destruction_0.constprop/23954 -> __ct_comp /3188, function body not available
+missed:   not inlinable: __static_initialization_and_destruction_0.constprop/23954 -> __cxa_atexit/3189, function body not available
+/usr/include/c++/11/bits/basic_string.tcc:212:28: missed:   not inlinable: _M_construct.constprop/23953 -> __throw_logic_error/3176, function body not available
+/usr/include/c++/11/bits/basic_string.tcc:219:13: missed:   not inlinable: _M_construct.constprop/23953 -> _M_create/3177, function body not available
+/usr/include/c++/11/bits/basic_string.tcc:225:25: missed:   not inlinable: _M_construct.constprop/23953 -> _S_copy_chars/2779, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base .constprop/23952 -> __builtin_strlen/3175, function body not available
+missed:   not inlinable: __ct_base .constprop/23952 -> _M_construct.constprop/23953, --param max-inline-insns-auto limit reached
+/usr/include/c++/11/ext/new_allocator.h:111:22: missed:   not inlinable: allocate.constprop/23951 -> __builtin_expect/4744, function body not available
+/usr/include/c++/11/ext/new_allocator.h:116:41: missed:   not inlinable: allocate.constprop/23951 -> __throw_bad_array_new_length/4745, function body not available
+/usr/include/c++/11/ext/new_allocator.h:117:28: missed:   not inlinable: allocate.constprop/23951 -> __throw_bad_alloc/4746, function body not available
+/usr/include/c++/11/ext/new_allocator.h:127:41: missed:   not inlinable: allocate.constprop/23951 -> operator new/4747, function body not available
+/usr/include/c++/11/ext/new_allocator.h:111:22: missed:   not inlinable: allocate.constprop/23950 -> __builtin_expect/4744, function body not available
+/usr/include/c++/11/ext/new_allocator.h:116:41: missed:   not inlinable: allocate.constprop/23950 -> __throw_bad_array_new_length/4745, function body not available
+/usr/include/c++/11/ext/new_allocator.h:117:28: missed:   not inlinable: allocate.constprop/23950 -> __throw_bad_alloc/4746, function body not available
+/usr/include/c++/11/ext/new_allocator.h:127:41: missed:   not inlinable: allocate.constprop/23950 -> operator new/4747, function body not available
+missed:   not inlinable: _M_realloc_insert.constprop/23944 -> __builtin_memmove/4748, function body not available
+missed:   not inlinable: _M_realloc_insert.constprop/23944 -> __builtin_memcpy/3179, function body not available
+missed:   not inlinable: _M_realloc_insert.constprop/23944 -> operator delete/3180, function body not available
+missed:   not inlinable: __ct_base .constprop/23940 -> _ZNSt6vectorIbSaIbEE13_M_initializeEm.part.0/6681, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base .constprop/23940 -> _M_deallocate/2793, call is unlikely and code size would grow
+missed:   not inlinable: simulate_fire.constprop/23939 -> omp_get_wtime/16155, function body not available
+missed:   not inlinable: simulate_fire.constprop/23939 -> rand/16158, function body not available
+missed:   not inlinable: simulate_fire.constprop/23939 -> omp_get_wtime/16155, function body not available
+missed:   not inlinable: simulate_fire.constprop/23939 -> __fprintf_chk/16169, function body not available
+missed:   not inlinable: simulate_fire.constprop/23939 -> _M_deallocate/2793, call is unlikely and code size would grow
+missed:   not inlinable: simulate_fire.constprop/23939 -> __dt_base /2479, call is unlikely and code size would grow
+missed:   not inlinable: simulate_fire.constprop/23939 -> __dt_base /2700, call is unlikely and code size would grow
+missed:   not inlinable: simulate_fire.constprop/23939 -> _M_deallocate/2793, call is unlikely and code size would grow
+missed:   not inlinable: simulate_fire.constprop/23939 -> __dt_base /2479, call is unlikely and code size would grow
+missed:   not inlinable: simulate_fire.constprop/23939 -> __dt_base /2700, call is unlikely and code size would grow
+missed:   not inlinable: _M_realloc_insert.constprop/23937 -> __builtin_memmove/4748, function body not available
+missed:   not inlinable: _M_realloc_insert.constprop/23937 -> __builtin_memcpy/3179, function body not available
+missed:   not inlinable: _M_realloc_insert.constprop/23937 -> operator delete/3180, function body not available
+missed:   not inlinable: operator++.constprop/23935 -> operator++.isra/23969, call is unlikely and code size would grow
+missed:   not inlinable: operator++.constprop/23935 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: operator++.constprop/23935 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: _M_move_assign.constprop/23934 -> __dt_base /2692, call is unlikely and code size would grow
+missed:   not inlinable: allocate.constprop/23933 -> __builtin_expect/4744, function body not available
+missed:   not inlinable: allocate.constprop/23933 -> __throw_bad_array_new_length/4745, function body not available
+missed:   not inlinable: allocate.constprop/23933 -> __throw_bad_alloc/4746, function body not available
+missed:   not inlinable: allocate.constprop/23933 -> operator new/10053, function body not available
+missed:   not inlinable: __ct_base .constprop/23932 -> __throw_length_error/3182, function body not available
+missed:   not inlinable: spread_probability_vectorized/23192 -> __builtin_ia32_minps256/23889, function body not available
+missed:   not inlinable: spread_probability_vectorized/23192 -> __builtin_ia32_roundps256/23888, function body not available
+missed:   not inlinable: __ct_base /15381 -> __builtin_memmove/4748, function body not available
+missed:   not inlinable: push_back/15361 -> _M_realloc_insert/15569, --param max-inline-insns-auto limit reached
+missed:   not inlinable: _M_create_storage/12483 -> allocate.constprop/23951, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_base /2692, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_comp /5846, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_comp /5846, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __cxa_free_exception/6568, function body not available
+missed:   not inlinable: __ct_base /9133 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __cxa_free_exception/6568, function body not available
+missed:   not inlinable: __ct_base /9133 -> __cxa_free_exception/6568, function body not available
+missed:   not inlinable: __ct_base /9133 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __cxa_free_exception/6568, function body not available
+missed:   not inlinable: __ct_base /9133 -> __dt_comp /5846, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_comp /5846, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> close/5870, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> strtol/3183, function body not available
+missed:   not inlinable: __ct_base /9133 -> strtod/10112, function body not available
+missed:   not inlinable: __ct_base /9133 -> strtod/10112, function body not available
+missed:   not inlinable: __ct_base /9133 -> strtod/10112, function body not available
+missed:   not inlinable: __ct_base /9133 -> strtod/10112, function body not available
+missed:   not inlinable: __ct_base /9133 -> strtol/3183, function body not available
+missed:   not inlinable: __ct_base /9133 -> strtol/3183, function body not available
+missed:   not inlinable: __ct_base /9133 -> strtol/3183, function body not available
+missed:   not inlinable: __ct_base /9133 -> __cxa_throw/6556, function body not available
+missed:   not inlinable: __ct_base /9133 -> __ct_comp /6555, function body not available
+missed:   not inlinable: __ct_base /9133 -> __cxa_allocate_exception/6554, function body not available
+missed:   not inlinable: __ct_base /9133 -> operator++.isra/23969, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __ct_comp /3935, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __cxa_throw/6556, function body not available
+missed:   not inlinable: __ct_base /9133 -> __ct_comp /6555, function body not available
+missed:   not inlinable: __ct_base /9133 -> __cxa_allocate_exception/6554, function body not available
+missed:   not inlinable: __ct_base /9133 -> is_open/6613, function body not available
+missed:   not inlinable: __ct_base /9133 -> __ct_comp /5843, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> close/5870, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_base /2692, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> strtol/3183, function body not available
+missed:   not inlinable: __ct_base /9133 -> operator[]/3912, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> strtol/3183, function body not available
+missed:   not inlinable: __ct_base /9133 -> operator[]/3912, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __cxa_throw/6556, function body not available
+missed:   not inlinable: __ct_base /9133 -> __ct_comp /6555, function body not available
+missed:   not inlinable: __ct_base /9133 -> __cxa_allocate_exception/6554, function body not available
+missed:   not inlinable: __ct_base /9133 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> operator++.isra/23969, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __ct_comp /3935, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /9133 -> __cxa_throw/6556, function body not available
+missed:   not inlinable: __ct_base /9133 -> __ct_comp /6555, function body not available
+missed:   not inlinable: __ct_base /9133 -> __cxa_allocate_exception/6554, function body not available
+missed:   not inlinable: __ct_base /9133 -> is_open/6613, function body not available
+missed:   not inlinable: __ct_base /9133 -> __ct_comp /5843, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> __dt_comp /5846, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> __dt_base /2700, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> __cxa_free_exception/6568, function body not available
+missed:   not inlinable: read_ignition_cells/7450 -> __cxa_free_exception/6568, function body not available
+missed:   not inlinable: read_ignition_cells/7450 -> __dt_comp /5846, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> close/5870, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> strtol/3183, function body not available
+missed:   not inlinable: read_ignition_cells/7450 -> strtol/3183, function body not available
+missed:   not inlinable: read_ignition_cells/7450 -> __cxa_throw/6556, function body not available
+missed:   not inlinable: read_ignition_cells/7450 -> __ct_comp /6555, function body not available
+missed:   not inlinable: read_ignition_cells/7450 -> __cxa_allocate_exception/6554, function body not available
+missed:   not inlinable: read_ignition_cells/7450 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> __ct_comp /3935, call is unlikely and code size would grow
+missed:   not inlinable: read_ignition_cells/7450 -> __cxa_throw/6556, function body not available
+missed:   not inlinable: read_ignition_cells/7450 -> __ct_comp /6555, function body not available
+missed:   not inlinable: read_ignition_cells/7450 -> __cxa_allocate_exception/6554, function body not available
+missed:   not inlinable: read_ignition_cells/7450 -> is_open/6613, function body not available
+missed:   not inlinable: read_ignition_cells/7450 -> __ct_comp /5843, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /5872 -> _M_deallocate/2793, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /5872 -> _ZNSt6vectorIbSaIbEE13_M_initializeEm.part.0/6681, call is unlikely and code size would grow
+/usr/include/c++/11/ext/new_allocator.h:145:19: missed:   not inlinable: _M_realloc_insert/6138 -> operator delete/3180, function body not available
+/usr/include/c++/11/bits/alloc_traits.h:464:28: missed:   not inlinable: _M_realloc_insert/6138 -> allocate.constprop/23950, call is unlikely and code size would grow
+missed:   not inlinable: _M_create_storage/6160 -> allocate.constprop/23950, call is unlikely and code size would grow
+missed:   not inlinable: _ZNSt6vectorIbSaIbEE13_M_initializeEm.part.0/6681 -> allocate.constprop/23950, call is unlikely and code size would grow
+missed:   not inlinable: _ZNSt6vectorIbSaIbEE13_M_initializeEm.part.0/6681 -> _M_incr/4922, call is unlikely and code size would grow
+missed:   not inlinable: _M_initialize_value/6113 -> __builtin_memset/6618, function body not available
+missed:   not inlinable: __dt_comp /5846 -> __dt_base /6612, function body not available
+missed:   not inlinable: __ct_comp /5843 -> __dt_base /6612, function body not available
+missed:   not inlinable: __ct_comp /5843 -> __dt_comp /6006, call is unlikely and code size would grow
+missed:   not inlinable: __ct_comp /5843 -> init/6572, function body not available
+missed:   not inlinable: __ct_comp /5843 -> __ct_comp /6571, function body not available
+missed:   not inlinable: __dt_base /6005 -> __cxa_end_catch/3168, function body not available
+missed:   not inlinable: __dt_base /6005 -> __cxa_begin_catch/3167, function body not available
+missed:   not inlinable: __dt_base /6005 -> __builtin_eh_pointer/3166, function body not available
+missed:   not inlinable: __dt_base /6005 -> __dt_comp /6599, function body not available
+missed:   not inlinable: __dt_base /6005 -> __dt_comp /6582, function body not available
+missed:   not inlinable: __dt_base /6005 -> close/6581, function body not available
+missed:   not inlinable: close/5870 -> close/6581, function body not available
+/usr/include/c++/11/bits/basic_ios.h:158:20: missed:   not inlinable: _ZNSt14basic_ifstreamIcSt11char_traitsIcEE4openERKNSt7__cxx1112basic_stringIcS1_SaIcEEESt13_Ios_Openmode.part.0/6635 -> clear/3187, function body not available
+missed:   not inlinable: __ct_base /5991 -> __ct_base /6577, function body not available
+missed:   not inlinable: __ct_base /5998 -> init/6572, function body not available
+missed:   not inlinable: __ct_base /3934 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /3934 -> __dt_base /4241, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /3934 -> operator++.isra/23969, call is unlikely and code size would grow
+missed:   not inlinable: readNextRow/3914 -> find/4739, function body not available
+missed:   not inlinable: _M_realloc_insert/4341 -> operator delete/3180, function body not available
+missed:   not inlinable: _M_realloc_insert/4341 -> __builtin_memcpy/3179, function body not available
+missed:   not inlinable: _M_realloc_insert/4341 -> __builtin_memmove/4748, function body not available
+missed:   not inlinable: __ct_base /3941 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /3941 -> __ct_comp /2586, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /4251 -> __builtin_memmove/4748, function body not available
+missed:   not inlinable: _M_create_storage/4438 -> allocate.constprop/23951, call is unlikely and code size would grow
+missed:   not inlinable: __dt_base /4241 -> operator delete/3180, function body not available
+missed:   not inlinable: main/2168 -> __cxa_end_catch/3168, function body not available
+missed:   not inlinable: main/2168 -> __cxa_end_catch/3168, function body not available
+missed:   not inlinable: main/2168 -> endl.isra/23972, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> operator<</2500, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> operator<</2500, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> __cxa_begin_catch/3167, function body not available
+missed:   not inlinable: main/2168 -> __builtin_eh_pointer/3166, function body not available
+missed:   not inlinable: main/2168 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> __dt_base /2692, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> __dt_base /2700, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> __dt_base /2692, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> __dt_base /2700, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> __dt_comp /2167, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> _M_insert/3184, function body not available
+missed:   not inlinable: main/2168 -> _M_insert/3184, function body not available
+missed:   not inlinable: main/2168 -> endl.isra/23972, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> operator<</2500, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> _M_insert/3184, function body not available
+missed:   not inlinable: main/2168 -> operator<</2500, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> endl.isra/23972, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> _M_insert/3184, function body not available
+missed:   not inlinable: main/2168 -> operator<</2500, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> _M_insert/3184, function body not available
+missed:   not inlinable: main/2168 -> operator<</2500, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> strtol/3183, function body not available
+missed:   not inlinable: main/2168 -> simulate_fire.constprop/23939, --param max-inline-insns-auto limit reached
+missed:   not inlinable: main/2168 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> read_ignition_cells/7450, --param max-inline-insns-auto limit reached
+missed:   not inlinable: main/2168 -> operator+/2413, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> __ct_comp /9134, --param max-inline-insns-auto limit reached
+missed:   not inlinable: main/2168 -> operator+/2413, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> operator+/2413, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> endl.isra/23972, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> operator<</2500, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> operator<</2500, call is unlikely and code size would grow
+missed:   not inlinable: main/2168 -> operator<</2500, call is unlikely and code size would grow
+missed:   not inlinable: operator+/2413 -> _M_dispose/2527, call is unlikely and code size would grow
+missed:   not inlinable: operator+/2413 -> __ct_comp /2586, call is unlikely and code size would grow
+missed:   not inlinable: __ct_base /2585 -> _M_construct.constprop/23953, call is unlikely and code size would grow
+missed:   not inlinable: __dt_base /2166 -> _M_deallocate/2793, call is unlikely and code size would grow
+missed:   not inlinable: __dt_base /2166 -> __dt_base /2700, call is unlikely and code size would grow
+missed:   not inlinable: __dt_base /2166 -> __dt_base /2479, call is unlikely and code size would grow
+missed:   not inlinable: _M_deallocate/2793 -> operator delete/3180, function body not available
+missed:   not inlinable: __dt_base /2700 -> operator delete/3180, function body not available
+missed:   not inlinable: __dt_base /2479 -> operator delete/3180, function body not available
+missed:   not inlinable: _ZNSt12_Vector_baseI4CellSaIS0_EE13_M_deallocateEPS0_m.part.0/3216 -> operator delete/3185, function body not available
+missed:   not inlinable: _ZNKSt5ctypeIcE5widenEc.part.0/3199 -> _M_widen_init/3173, function body not available
+missed:   not inlinable: operator<</2500 -> __ostream_insert/3186, function body not available
+missed:   not inlinable: operator<</2500 -> __builtin_strlen/3175, function body not available
+missed:   not inlinable: _ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc.part.0/3198 -> clear/3187, function body not available
+missed:   not inlinable: _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE7_S_copyEPcPKcm.part.0/3195 -> __builtin_memcpy/3179, function body not available
+missed:   not inlinable: _M_dispose/2527 -> operator delete/3180, function body not available
+missed:   not inlinable: push_back/15362 -> _M_realloc_insert.constprop/23944, --param max-inline-insns-auto limit reached
+missed:   not inlinable: simulate_fire.constprop/23939 -> __ct_comp /5873, --param max-inline-insns-single limit reached
+missed:   not inlinable: emplace_back.isra/23970 -> _M_realloc_insert/4341, --param max-inline-insns-auto limit reached
+missed:   not inlinable: read_ignition_cells/7450 -> operator++.isra/23969, --param max-inline-insns-auto limit reached
+missed:   not inlinable: __ct_base /9133 -> operator++.isra/23969, --param max-inline-insns-auto limit reached
+missed:   not inlinable: main/2168 -> __dt_comp /2167, call is unlikely and code size would grow
+/usr/include/c++/11/bits/stl_bvector.h:93:8: missed: failed: evolution of base is not affine.
+/usr/include/c++/11/bits/stl_bvector.h:93:8: missed: failed: evolution of base is not affine.
+/usr/include/c++/11/bits/stl_bvector.h:87:17: missed: failed: evolution of base is not affine.
+/usr/include/c++/11/bits/stl_bvector.h:93:8: missed: failed: evolution of base is not affine.
+graphics/fire_animation_data.cpp:16:5: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+srcVect/matrix.hpp:10:52: missed: failed: evolution of base is not affine.
+graphics/fire_animation_data.cpp:16:5: missed: failed: evolution of base is not affine.
+graphics/fire_animation_data.cpp:16:5: missed: failed: evolution of base is not affine.
+/usr/include/c++/11/bits/stl_bvector.h:87:17: missed: failed: evolution of base is not affine.
+srcVect/spread_functions.cpp:126:41: missed: couldn't vectorize loop
+srcVect/spread_functions.cpp:126:41: missed: not vectorized: control flow in loop.
+graphics/fire_animation_data.cpp:51:34: missed: missed loop optimization: niters analysis ends up with assumptions.

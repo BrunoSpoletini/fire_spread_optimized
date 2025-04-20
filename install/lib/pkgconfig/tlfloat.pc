@@ -1,0 +1,9 @@
+prefix=/mnt/c/Users/bruno/Desktop/fire_spread_optimized/install
+libdir=/mnt/c/Users/bruno/Desktop/fire_spread_optimized/install/lib
+includedir=/mnt/c/Users/bruno/Desktop/fire_spread_optimized/install/include
+
+Name: TLFloat
+Description: C++ template library for floating point operations
+Version: 1.16.0
+Cflags: -I${includedir}
+Libs: -L${libdir} -ltlfloat
