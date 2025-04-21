@@ -18,7 +18,6 @@ float spread_probability(
   float slope_term = sin(atan((neighbour.elevation - burning.elevation) / distance));
   float wind_term = cos(angle - burning.wind_direction);
   float elev_term = (neighbour.elevation - elevation_mean) / elevation_sd;
-
   float linpred = params.independent_pred;
 
   if (neighbour.vegetation_type == SUBALPINE) {
@@ -31,7 +30,6 @@ float spread_probability(
 
   linpred += params.fwi_pred * neighbour.fwi;
   linpred += params.aspect_pred * neighbour.aspect;
-
   linpred += wind_term * params.wind_pred + elev_term * params.elevation_pred +
              slope_term * params.slope_pred;
 

@@ -121,6 +121,15 @@ Fire simulate_fire(
           }
 
 				}
+        if (!in_range[i] || !is_burnable[i]) {
+          neighbour_fwi[i] = 0.0f;
+          neighbour_aspect[i] = 0.0f;
+          neighbour_elevation[i] = 0.0f;
+          neighbour_vegetation_type[i] = 0.0f;
+          linpred_list[i] = 0.0f;
+          burning_cell_elevation[i] = 0.0f;
+          burning_cell_wind_direction[i] = 0.0f;
+        }
 			}
 
       spread_probability_vectorized(
@@ -147,7 +156,8 @@ Fire simulate_fire(
 			for (unsigned int n = 0; n < 8; n++) {
         float mask = (in_range[n] && is_burnable[n]) ? 1.0f : 0.0f;
         prob[n] = prob[n] * mask;
-					//if (in_range[n] && is_burnable[n]){
+        prob[n] = prob[n] * 0.96f; // To counteract the effects of exp aproximation (tends to underestimate -> 1/(1+exp(-linpred)) yields hig)
+
 					// Determinar si se quema
         if (prob[n] > 0.0f) {
           should_burn[n] = dist(gen) < prob[n];

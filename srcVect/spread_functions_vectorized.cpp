@@ -5,8 +5,7 @@
 #include <omp.h>
 #include <cstring>
 
-// Helper function for AVX2 exponential approximation
-// This is a simple implementation and could be improved for better accuracy
+//Helper function for AVX2 exponential approximation
 inline __m256 _mm256_exp_ps(__m256 x) {
     // Approximate exp(x) using polynomial approximation
     // exp(x) ≈ 1 + x + x^2/2 + x^3/6 + x^4/24 for small x
@@ -25,6 +24,7 @@ inline __m256 _mm256_exp_ps(__m256 x) {
                                      _mm256_add_ps(exp_term2, 
                                                   _mm256_add_ps(exp_term3, exp_term4))));
 }
+
 
 // Vectorized version using AVX2
 // This function processes 8 elements at once using AVX2

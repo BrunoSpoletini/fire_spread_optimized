@@ -1,0 +1,16 @@
+Random, Compilador,Optimizador,Landscape,Celdas quemadas por microsegundo
+random_mejorado, g++,-O0 -flto,../data/2000_8,0.688174
+random_mejorado, g++,-O1 -flto,../data/2000_8,3.327252
+random_mejorado, g++,-O2 -flto,../data/2000_8,3.301957
+random_mejorado, g++,-O3 -flto,../data/2000_8,3.462841
+random_mejorado, g++,-Ofast -flto,../data/2000_8,5.317319
+random_mejorado, g++,-O0 -flto,../data/1999_27j_S,0.696395
+random_mejorado, g++,-O1 -flto,../data/1999_27j_S,3.815291
+random_mejorado, g++,-O2 -flto,../data/1999_27j_S,3.835978
+random_mejorado, g++,-O3 -flto,../data/1999_27j_S,4.072935
+random_mejorado, g++,-Ofast -flto,../data/1999_27j_S,6.176696
+random_mejorado, g++,-O0 -flto,../data/2015_50,0.710419
+random_mejorado, g++,-O1 -flto,../data/2015_50,3.969969
+random_mejorado, g++,-O2 -flto,../data/2015_50,3.984203
+random_mejorado, g++,-O3 -flto,../data/2015_50,4.273082
+random_mejorado, g++,-Ofast -flto,../data/2015_50,6.414841

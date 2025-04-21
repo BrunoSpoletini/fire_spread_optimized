@@ -1,0 +1,78 @@
+Guia del lab 2:
+
+-- Guia de vectorizacion del proyecto firespread
+-- Mejoras del lab 1 --
+
+
+Bueno, en este video vamos a analizar las optimizaciones que hicimos en el proyecto firespread, 
+junto con el impacto que tuvieron en la performance del programa.
+----
+Primero vamos a ver las mejoras que hicimos con respecto al lab 1.
+La principal optimizacion que nos faltó fue cambiar la generación de numeros aleatorios,
+que afecta la probabilidad de que una celda se incendie.
+---
+Para esto lo que hicimos fue cambiar la funcion rand() por una alternativa mas eficiente, y generamos un float entre 0 y 1 con distribucion uniforme.
+Y para analizar la performance, corrimos el programa con las distintas flags de optimizacion y con flto, que fue la que nos dio mejores resultados en el laboratorio 1.
+---
+Analizando la version original del codigo junto con la version con el random mejorado, vemos que se logra una pequeña mejora de performance,
+especialmente con la bandera de optimizacion -Ofast.
+---
+Ahora pasando a la vectorización, intentamos hacer que el compilador lo haga de forma automática con la flag ftree-vectorize, pero no conseguimos ningun resultado significativo, 
+asi que tuvimos que intentar con la vectorizacion manual.
+---
+Para ver que parte del programa vectorizar, volvemos a analizamos el objetivo del programa, que es calcular la probabilidad de que cada celda de una grilla se incendie. 
+Para esto, a partir de un foco de incendio, se calcula la probabilidad de quemarse de las 8 celdas que tiene alrededor.
+
+En la imagen, la celda roja del centro es el foco, y las celdas del 1 al 8 son en las que se tiene que hacer el cálculo de la probabilidad.
+Para esto se ejecuta --- este codigo, en el que por cada celda vecina, se llama a una funcion que calcula la probabilidad de forma secuencial.
+Si hacemos la cuenta, --- vemos que la funcion spread_probability se puede llamar hasta 51.200 veces para un landscape de 80*80,
+asi que vamos a hacer todo lo posible por vectorizarla.
+---
+Esta es la funcion spread_probability. Recibe datos sobre el foco de incendio, sobre la celda que se esta calculando, y parametros que afectan a la probabilidad incendio.
+La vectorizacion automatica no puede vectorizar esta funcion, porque presenta 3 --- problemas.
+---
+El primero es que los datos que recibe no estan alineados en memoria. Recibe estructuras de datos, y la funcion se llama dentro de un loop, asi que se presenta una 
+situacion de Array of Structures que no es vectorizable.
+---
+El segundo son las funciones trigonometricas y la funcion exponencial, que no son vectorizables
+---
+Y el tercero es que existe control de flujo dentro de la funcion, que en este caso es la sección con los if else, que impide la vectorizacion.
+
+--- 
+
+Bueno, Que  es lo que hicimos?
+---
+Lo primero fue alinear los datos en memoria. 
+---
+En lugar de llamar 8 veces a la funcion con estructuras como parametros, desarmamos las estructuras de las 8 llamadas en listas de largo 8, e hicimos una unica llamada a la funcion.
+---
+Lo siguiente fue encontrar una version vectorizada de las funciones trigonometricas y la exponencial. 
+---
+Encontramos sleef, que es una libreria que define un monton de funciones en forma vectorizada para distintas arquitecturas, que es justo lo que necesitabamos;
+PERO no pudimos hacer que funcione,--- asi que tuvimos que buscar otra alternativa.
+
+Ahi nos encontramos con AVX2 intrisics, --- que son funciones que permiten usar directamente instrucciones SIMD del procesador desde C++ sin tener que escribir assembler.
+Con esto, pudimos definir las funciones que necesitabamos en forma vecotrizada.---
+
+Por ultimo, --- para solucionar el problema del control de flujo simplemente sacamos los condicionales de la funcion spread_probability y le pasamos el resultado
+a la funcion como parámetro.
+---
+Ahora, sirvió todo esto?
+Si hacemos un benchmark y graficamos los resultados, nos encontramos con esto.
+---
+Vemos que la version vectorizada de nuestro programa logro una mejora de hasta casi un x2 en velocidad de procesamiento de celdas quemadas por microsegundo, 
+asi que podemos decir que la vectorización fue un éxito.
+
+
+
+
+
+
+
+
+
+
+
+
+
+(a partir de -o2 ya se empieza a hacer vectorizacion automatica)

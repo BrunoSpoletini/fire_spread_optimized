@@ -50,7 +50,7 @@ def main():
 
     optimizadoresBase = list (map(lambda x: x + " -flto", optimizadores))
     optimizadoresVectAuto = list (map(lambda x: x + " -flto -ftree-vectorize -ffast-math ", optimizadores))
-    optimizadoresVectManual = list (map(lambda x: x + " -flto -fopenmp-simd -mavx2", optimizadores))
+    optimizadoresVectManual = list (map(lambda x: x + " -flto -fopenmp-simd -ffast-math -mavx2", optimizadores))
 
     #optimizadoresVectAutoVX2 = list (map(lambda x: x + " -flto -ftree-vectorize -ffast-math -mavx2", optimizadores))
 

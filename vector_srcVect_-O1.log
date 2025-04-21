@@ -1,2 +1,0 @@
-srcVect/spread_functions.cpp:108:57: optimized: loop vectorized using 16 byte vectors
-srcVect/spread_functions.cpp:116:57: optimized: loop vectorized using 16 byte vectors
