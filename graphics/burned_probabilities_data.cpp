@@ -4,7 +4,7 @@
 #include "ignition_cells.hpp"
 #include "landscape.hpp"
 #include "many_simulations.hpp"
-#include "../srcBase/spread_functions.hpp"
+#include "../srcParalel/spread_functions.hpp"
 
 #define DISTANCE 30
 #define ELEVATION_MEAN 1163.3
