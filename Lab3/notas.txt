@@ -1,0 +1,25 @@
+Para compilar y ejecutar el archivo basico, desde fire_spread_optimized/Lab3:
+
+Version vectorizada:
+Spole:
+    cd .. && make clean -f ./MakefileVect && make -f ./MakefileVect &&  
+        cd Lab3 && /usr/lib/linux-tools/5.15.0-139-generic/perf stat -r 4 ../graphics/fire_animation_data  ../data/1999_27j_S 0
+Nano:
+    cd .. && make clean -f ./MakefileVect && make -f ./MakefileVect &&      
+        cd Lab3 && perf stat -r 4 ../graphics/fire_animation_data  ../data/1999_27j_S 0
+
+Version paralelizada:
+Spole:
+    cd .. && make clean -f ./MakefileParalel && make -f ./MakefileParalel &&  
+        cd Lab3 && /usr/lib/linux-tools/5.15.0-139-generic/perf stat -r 4 ../graphics/fire_animation_data  ../data/1999_27j_S 0
+Nano:
+    cd .. && make clean -f ./MakefileVect && make -f ./MakefileVect &&      
+        cd Lab3 && perf stat -r 4 ../graphics/fire_animation_data  ../data/1999_27j_S 0
+
+Para generar el grafico de probabilidades:
+- compilar el makefile correspondiente 
+- cambiar en burned_probabilities_data.cpp 
+    - //#include "../srcVect/spread_functions.hpp"
+    - //#include "../srcParalel/spread_functions.hpp"
+- luego ejecutar:
+./graphics/burned_probabilities_data ./data/1999_27j_S | python3 ./graphics/draw_burned_probabilities.py 1999_27j_S_burned_probabilities.png
