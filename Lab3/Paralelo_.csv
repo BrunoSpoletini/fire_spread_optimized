@@ -1,2 +1,0 @@
-Compilador,Optimizador,Landscape,Celdas quemadas por microsegundo
-g++,-O3 -flto -fopenmp-simd -mavx2,../data/1999_27j_S,15.554479

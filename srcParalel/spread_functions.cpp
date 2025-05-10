@@ -76,6 +76,8 @@ Fire simulate_fire(
         burning_cell_wind_direction[8];
   int batch_size = 8;
 
+  omp_set_num_threads(omp_get_max_threads());
+
   while (burning_size > 0) {
     unsigned int end_forward = end;
     
@@ -102,7 +104,7 @@ Fire simulate_fire(
             local_burning_cell_wind_direction[8];
       
       // Parallelize the loop over burning cells
-      #pragma omp for 
+      #pragma omp for schedule(dynamic, 64)
       for (unsigned int b = start; b < end; b++) {
         unsigned int burning_cell_0 = burned_ids[b].first;
         unsigned int burning_cell_1 = burned_ids[b].second;
@@ -121,12 +123,8 @@ Fire simulate_fire(
 
           // Verificar si está quemado
           if (local_in_range[i]) {
-            // Use critical section to check burned_bin
-            bool already_burned;
-            //#pragma omp critical(burned_bin_read)
-            //{
-                already_burned = burned_bin[{local_neighbor_x[i], local_neighbor_y[i]}];
-            //}
+            bool already_burned = false;
+            already_burned = burned_bin[{local_neighbor_x[i], local_neighbor_y[i]}];
             
             // Verificar si es quemable
             local_is_burnable[i] = !already_burned && landscape[{ local_neighbor_x[i], local_neighbor_y[i] }].burnable;
@@ -193,33 +191,7 @@ Fire simulate_fire(
             local_should_burn[n] = local_dist(local_gen) < local_prob[n];
             
             if (local_should_burn[n]) {
-              // Use critical sections to update the burned_bin matrix
-              bool already_marked = false;
-              //#pragma omp critical(burned_bin_read)
-              //{
-                  //already_marked = burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}];
-              //}
-              //if (!already_marked) {
-                  //#pragma omp critical(burned_bin_write)
-                  //{
-                      //burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}] = true;
-                  //}
-                  // Add to thread-local buffer
-                  //thread_local_burned_ids[thread_id].push_back({local_neighbor_x[n], local_neighbor_y[n]});
-              if (!burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}]) {
-                thread_local_burned_ids[thread_id].emplace_back(local_neighbor_x[n], local_neighbor_y[n]);
-              }
-
-
-                // #pragma omp critical
-                // {
-                //   if (!burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}]) {
-                //     burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}] = true;
-                //     burned_ids.push_back({local_neighbor_x[n], local_neighbor_y[n]});
-                //     end_forward++;
-                //   }
-                // }
-              //}
+              thread_local_burned_ids[thread_id].emplace_back(local_neighbor_x[n], local_neighbor_y[n]);
             }
           }
         }

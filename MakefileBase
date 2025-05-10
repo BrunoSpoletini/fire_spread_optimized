@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -Wall -Wextra -Werror -fopenmp -march=native
-CXXOPT = -O0
+CXXOPT = -O3
 INCLUDE = -I./srcBase
 CXXCMD = $(CXX) $(CXXFLAGS) $(CXXOPT) $(INCLUDE)
 
