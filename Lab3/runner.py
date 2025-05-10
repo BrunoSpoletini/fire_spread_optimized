@@ -64,11 +64,10 @@ def main():
 
     #createCsvFile("asd", "srcBase", compiladores, optimizadoresVectManual)
     #createCsvFile("asd", "srcVect", compiladores, optimizadoresVectManual)
-    createCsvFile("asdParalelo", "srcParalel", compiladores, optimizadoresVectManual)
+    createCsvFile("Paralelo", "srcParalel", compiladores, optimizadoresVectManual)
 
 
-    #get_vectorization_info_not_vectorized(optimizadoresVectManual)
-    #get_vectorization_info()
+
 
 if __name__ == "__main__":
     main()

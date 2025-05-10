@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -fopenmp
+CXXFLAGS = -fopenmp -flto -fopenmp-simd -mavx2
 CXXOPT = -O0
 INCLUDE = -I./srcParalel
 CXXCMD = $(CXX) $(CXXFLAGS) $(CXXOPT) $(INCLUDE)
