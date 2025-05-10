@@ -83,7 +83,7 @@ Fire simulate_fire(
     std::vector<std::vector<std::pair<unsigned int, unsigned int>>> thread_local_burned_ids(max_threads);
     
     // Parallel region for processing burning cells
-    #pragma omp parallel
+    #pragma omp parallel 
     {
       int thread_id = omp_get_thread_num();
       std::mt19937& local_gen = thread_generators[thread_id];
@@ -102,7 +102,7 @@ Fire simulate_fire(
             local_burning_cell_wind_direction[8];
       
       // Parallelize the loop over burning cells
-      #pragma omp for
+      #pragma omp for 
       for (unsigned int b = start; b < end; b++) {
         unsigned int burning_cell_0 = burned_ids[b].first;
         unsigned int burning_cell_1 = burned_ids[b].second;
@@ -123,10 +123,10 @@ Fire simulate_fire(
           if (local_in_range[i]) {
             // Use critical section to check burned_bin
             bool already_burned;
-            #pragma omp critical(burned_bin_read)
-            {
+            //#pragma omp critical(burned_bin_read)
+            //{
                 already_burned = burned_bin[{local_neighbor_x[i], local_neighbor_y[i]}];
-            }
+            //}
             
             // Verificar si es quemable
             local_is_burnable[i] = !already_burned && landscape[{ local_neighbor_x[i], local_neighbor_y[i] }].burnable;
@@ -195,18 +195,31 @@ Fire simulate_fire(
             if (local_should_burn[n]) {
               // Use critical sections to update the burned_bin matrix
               bool already_marked = false;
-              #pragma omp critical(burned_bin_read)
-              {
-                  already_marked = burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}];
-              }
-              if (!already_marked) {
-                  #pragma omp critical(burned_bin_write)
-                  {
-                      burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}] = true;
-                  }
+              //#pragma omp critical(burned_bin_read)
+              //{
+                  //already_marked = burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}];
+              //}
+              //if (!already_marked) {
+                  //#pragma omp critical(burned_bin_write)
+                  //{
+                      //burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}] = true;
+                  //}
                   // Add to thread-local buffer
-                  thread_local_burned_ids[thread_id].push_back({local_neighbor_x[n], local_neighbor_y[n]});
+                  //thread_local_burned_ids[thread_id].push_back({local_neighbor_x[n], local_neighbor_y[n]});
+              if (!burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}]) {
+                thread_local_burned_ids[thread_id].emplace_back(local_neighbor_x[n], local_neighbor_y[n]);
               }
+
+
+                // #pragma omp critical
+                // {
+                //   if (!burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}]) {
+                //     burned_bin[{local_neighbor_x[n], local_neighbor_y[n]}] = true;
+                //     burned_ids.push_back({local_neighbor_x[n], local_neighbor_y[n]});
+                //     end_forward++;
+                //   }
+                // }
+              //}
             }
           }
         }
@@ -216,8 +229,12 @@ Fire simulate_fire(
     // Merge thread-local burned cells into the main vector
     for (int t = 0; t < max_threads; t++) {
       for (const auto& cell : thread_local_burned_ids[t]) {
-        burned_ids.push_back(cell);
-        end_forward++;
+        auto [x, y] = cell;
+        if (!burned_bin[{x, y}]) {
+          burned_bin[{x, y}] = true;
+          burned_ids.push_back(cell);
+          end_forward++;
+        }
       }
     }
 
@@ -225,9 +242,9 @@ Fire simulate_fire(
     start = end;
     end = end_forward;
     burning_size = end - start;
-
     burned_ids_steps.push_back(end);
   }
+  fprintf(stderr, "Celdas incendiadas: %ld\n", burned_ids.size());
   fprintf(stderr, "celdas incendiadas por microsegundo: %lf\n", burned_ids.size() / (1E06 * (omp_get_wtime()-t)));
 
   return { n_col, n_row, burned_bin, burned_ids, burned_ids_steps };

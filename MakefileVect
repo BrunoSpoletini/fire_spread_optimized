@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -fopenmp
-CXXOPT = -O0
+CXXFLAGS = -fopenmp -flto -fopenmp-simd -mavx2
+CXXOPT = -O3
 INCLUDE = -I./srcVect
 CXXCMD = $(CXX) $(CXXFLAGS) $(CXXOPT) $(INCLUDE)
 
