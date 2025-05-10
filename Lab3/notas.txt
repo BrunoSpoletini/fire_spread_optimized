@@ -13,7 +13,7 @@ Spole:
     cd .. && make clean -f ./MakefileParalel && make -f ./MakefileParalel &&  
         cd Lab3 && /usr/lib/linux-tools/5.15.0-139-generic/perf stat -r 4 ../graphics/fire_animation_data  ../data/1999_27j_S 0
 Nano:
-    cd .. && make clean -f ./MakefileVect && make -f ./MakefileVect &&      
+    cd .. && make clean -f ./MakefileParalel && make -f ./MakefileParalel &&      
         cd Lab3 && perf stat -r 4 ../graphics/fire_animation_data  ../data/1999_27j_S 0
 
 Para generar el grafico de probabilidades:
