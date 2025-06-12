@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "sleefdft.h": "c"
+        "sleefdft.h": "c",
+        "spread_functions_deprecated": "cpp"
     },
     "cmake.sourceDirectory": "C:/Users/bruno/Desktop/fire_spread_optimized/Lab2/simde"
 }

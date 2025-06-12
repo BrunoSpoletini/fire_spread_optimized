@@ -10,6 +10,16 @@
 #include "fires.hpp"
 #include "landscape.hpp"
 
+// Helper function for CUDA error checking
+#define CUDA_CHECK(call) \
+    do { \
+        cudaError_t error = call; \
+        if (error != cudaSuccess) { \
+            fprintf(stderr, "CUDA error at %s:%d: %s\n", __FILE__, __LINE__, cudaGetErrorString(error)); \
+            exit(1); \
+        } \
+    } while(0)
+
 float spread_probability(
     const Cell& burning, const Cell& neighbour, SimulationParams params, float angle,
     float distance, float elevation_mean, float elevation_sd, float upper_limit = 1.0
