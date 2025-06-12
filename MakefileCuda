@@ -6,15 +6,20 @@ INCLUDE = -I./srcCuda
 CXXCMD = $(CXX) $(CXXFLAGS) $(CXXOPT) $(INCLUDE)
 
 headers = $(wildcard ./srcCuda/*.hpp)
-sources = $(wildcard ./srcCuda/*.cpp) spread_functions.cu
-objects_names = $(sources:./srcCuda/%.cpp=%)
-objects = $(objects_names:%=./srcCuda/%.o)
+cpp_sources = $(wildcard ./srcCuda/*.cpp)
+cu_sources = $(wildcard ./srcCuda/*.cu)
+sources = $(cpp_sources) $(cu_sources)
+objects = $(sources:%.cpp=%.o)
+objects := $(objects:%.cu=%.o)
 
 mains = graphics/burned_probabilities_data graphics/fire_animation_data
 
 all: $(mains)
 
 %.o: %.cpp $(headers)
+	$(CXXCMD) -c $< -o $@
+
+%.o: %.cu $(headers)
 	$(CXXCMD) -c $< -o $@
 
 $(mains): %: %.cpp $(objects) $(headers)
