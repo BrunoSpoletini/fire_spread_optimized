@@ -163,7 +163,7 @@ Fire simulate_fire(
     char* cell_states_initial_d = nullptr;
     char* cell_states_final_d = nullptr;
     unsigned int* d_burned_size = nullptr;
-    unsigned short** d_burned_ids = nullptr;
+    unsigned short* d_burned_ids = nullptr;
     unsigned int** d_burned_ids_steps = nullptr;
     Cell* d_landscape = nullptr;
     curandState* d_states = nullptr;
@@ -203,7 +203,7 @@ Fire simulate_fire(
     h_burned_ids_steps.push_back(h_burned_size);
 
     // Copy burned_ids to device
-    short int** burned_ids_temp = new short int[2 * h_burned_size];
+    short int* burned_ids_temp = new short int[2 * h_burned_size];
     for (unsigned int i = 0; i < h_burned_size; i++) {
         burned_ids_temp[2*i] = h_burned_ids[i].first;
         burned_ids_temp[2*i+1] = h_burned_ids[i].second;
@@ -240,21 +240,31 @@ Fire simulate_fire(
 
     unsigned int iteration = 1;
 
-    short int d_last_burned_size = d_burned_size;
+    //short int d_last_burned_size = d_burned_size;
     
     while (h_burned) {
 
-        // Launch kernel
-        calculate_spread_probabilities<<<num_blocks, block_size>>>(
-            d_landscape, d_burned_ids, d_burned_size,
-            n_col, n_row, d_params, distance, elevation_mean, elevation_sd,
-            upper_limit, d_states, burned_d, cell_states_initial_d, cell_states_final_d
-        );
-
-        short int d_burned_iteration = d_burned_size - d_last_burned_size;
+        // // Launch kernel
+        // calculate_spread_probabilities<<<num_blocks, block_size>>>(
+        //     d_landscape, d_burned_ids, d_burned_size,
+        //     n_col, n_row, d_params, distance, elevation_mean, elevation_sd,
+        //     upper_limit, d_states, burned_d, cell_states_initial_d, cell_states_final_d
+        // );
 
         CUDA_CHECK(cudaGetLastError());
         CUDA_CHECK(cudaDeviceSynchronize());
+
+
+        // Add the number of cells that burned in the last iteration to burned_ids_steps
+        int old_burned_size = h_burned_size;
+        CUDA_CHECK(cudaMemcpy(&h_burned_size, d_burned_size, sizeof(unsigned int), cudaMemcpyDeviceToHost));
+        if (h_burned_size == old_burned_size) {
+            // No new cells burned, exit loop
+            h_burned = false;
+            break;
+        }
+        h_burned_ids_steps.push_back(h_burned_size);
+        
 
         // Swap initial and final states
         char* temp = cell_states_initial_d;
