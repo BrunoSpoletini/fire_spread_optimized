@@ -6,6 +6,7 @@
 #include <vector>
 #include <omp.h>
 #include <cstring>
+#include <cuda_runtime.h>
 
 #include "fires.hpp"
 #include "landscape.hpp"

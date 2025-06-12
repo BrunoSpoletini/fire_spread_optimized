@@ -1,13 +1,14 @@
-CXX = g++
-CXXFLAGS = -Wall -Wextra -Werror -fopenmp -march=native
+CXX = nvcc
+CXXFLAGS = -Wno-deprecated-gpu-targets -arch=sm_75 --compiler-options '-Wall -Wextra -Werror -fopenmp -march=native'
+
 CXXOPT = -O3
-INCLUDE = -I./srcBase
+INCLUDE = -I./srcCuda
 CXXCMD = $(CXX) $(CXXFLAGS) $(CXXOPT) $(INCLUDE)
 
-headers = $(wildcard ./srcBase/*.hpp)
-sources = $(wildcard ./srcBase/*.cpp)
-objects_names = $(sources:./srcBase/%.cpp=%)
-objects = $(objects_names:%=./srcBase/%.o)
+headers = $(wildcard ./srcCuda/*.hpp)
+sources = $(wildcard ./srcCuda/*.cpp) spread_functions.cu
+objects_names = $(sources:./srcCuda/%.cpp=%)
+objects = $(objects_names:%=./srcCuda/%.o)
 
 mains = graphics/burned_probabilities_data graphics/fire_animation_data
 
