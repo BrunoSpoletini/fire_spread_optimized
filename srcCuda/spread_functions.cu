@@ -71,17 +71,17 @@ __global__ void calculate_spread_probabilities(
 ) {
     // const float angles[8] = { M_PI * 3 / 4, M_PI, M_PI * 5 / 4, M_PI / 2, M_PI * 3 / 2,
     //                           M_PI / 4,     0,    M_PI * 7 / 4 };
-    // const int moves[8][2] = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 },
-    //                           { 0, 1 },   { 1, -1 }, { 1, 0 },  { 1, 1 } };
+    const int moves[8][2] = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 },
+                              { 0, 1 },   { 1, -1 }, { 1, 0 },  { 1, 1 } };
 
     unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;
     
     if (idx >= (n_col * n_row)) return; // Ensure we don't exceed the number of cells in the grid
 
     // Get the current cell coordinates
-    // unsigned int cell_x = idx % n_col;
-    // unsigned int cell_y = idx / n_col;
-    // const Cell& current_cell = landscape[cell_y * n_col + cell_x];
+    unsigned int cell_x = idx % n_col;
+    unsigned int cell_y = idx / n_col;
+    const Cell& current_cell = landscape[cell_y * n_col + cell_x];
 
     if (!current_cell.burnable) {
         // If the cell is not burnable, just copy the state
@@ -103,8 +103,8 @@ __global__ void calculate_spread_probabilities(
         return; // If dead, remains dead
     } else if (cell_states_initial[idx] == 'U') {
         // Check cell neighbors to see if any are burning
-        bool is_burning_neighbor = false;
-        float spreading_prob[8];
+        // bool is_burning_neighbor = false;
+        // float spreading_prob[8];
         for (int n = 0; n < 8; n++) {
             int neighbor_x = cell_x + moves[n][0];
             int neighbor_y = cell_y + moves[n][1];
@@ -116,7 +116,7 @@ __global__ void calculate_spread_probabilities(
 
             // Check if neighbor is burning
             if (cell_states_initial[neighbor_y * n_col + neighbor_x] == 'B') {
-                is_burning_neighbor = true;
+                // is_burning_neighbor = true;
 
                 break;
             }
