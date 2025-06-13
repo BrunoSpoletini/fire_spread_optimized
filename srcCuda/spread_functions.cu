@@ -240,7 +240,7 @@ Fire simulate_fire(
 
     // Copy initial cell states to DEVICE    
     CUDA_CHECK(cudaMemcpy(cell_states_initial_d, cell_states_initial_h, n_col * n_row * sizeof(char), cudaMemcpyHostToDevice));
-
+    
     // Copy params to device
     CUDA_CHECK(cudaMemcpy(d_params, &params, sizeof(SimulationParams), cudaMemcpyHostToDevice));
 
@@ -258,7 +258,7 @@ Fire simulate_fire(
     CUDA_CHECK(cudaMemcpy(d_landscape, landscape_data, landscape_size, cudaMemcpyHostToDevice));
 
     // Initialize random states
-    int block_size = 256;
+    int block_size = 512;
     int num_blocks = (n_col * n_row + block_size - 1) / block_size;
     init_random_states<<<num_blocks, block_size>>>(d_states, time(NULL));
     CUDA_CHECK(cudaGetLastError());
@@ -277,8 +277,8 @@ Fire simulate_fire(
             upper_limit, d_states, burned_d, cell_states_initial_d, cell_states_final_d
         );
 
-        CUDA_CHECK(cudaGetLastError());
-        CUDA_CHECK(cudaDeviceSynchronize());
+        //CUDA_CHECK(cudaGetLastError());
+        //CUDA_CHECK(cudaDeviceSynchronize()); TO DO es necesario?
 
         // Add the number of cells that burned in the last iteration to burned_ids_steps
         unsigned int old_burned_size = h_burned_size;
@@ -287,7 +287,7 @@ Fire simulate_fire(
         if (h_burned_size == old_burned_size) {
             // No new cells burned, exit loop
             h_burned = false;
-            fprintf(stderr, "Iteration %d: %u cells burned\n", iteration, h_burned_size);
+            //fprintf(stderr, "Iteration %d: %u cells burned\n", iteration, h_burned_size);
             break;
         }
         h_burned_ids_steps.push_back(h_burned_size - old_burned_size);
@@ -335,7 +335,7 @@ Fire simulate_fire(
     double seconds = milliseconds / 1000.0;
 
     // fprintf(stderr, "Celdas incendiadas: %ld\n", burned_ids.size());
-    fprintf(stderr, "celdas incendiadas por microsegundo: %lf\n", h_burned_size / (1E06 * seconds));
+    //fprintf(stderr, "celdas incendiadas por microsegundo: %lf\n", h_burned_size / (1E06 * seconds));
 
     // Free device memory
     if (d_landscape) CUDA_CHECK(cudaFree(d_landscape));
