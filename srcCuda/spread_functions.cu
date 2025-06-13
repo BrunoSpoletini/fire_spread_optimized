@@ -50,11 +50,9 @@ __device__ float spread_probability(
   return prob;
 }
 
-//          d_landscape, d_burned_ids, d_burned_size,
-//          n_col, n_row, d_params, distance, elevation_mean, elevation_sd,
-//          upper_limit, d_states, burned_d, cell_states_initial_d, cell_states_final_d
-
 // CUDA kernel for spread probability calculation
+// Each thread processes one cell, if some of its neighbors are burning,
+// it calculates the probability of burning itself based on the parameters
 __global__ void calculate_spread_probabilities(
     const Cell* __restrict__ landscape,
     const unsigned short* __restrict__ burned_ids,
@@ -67,8 +65,9 @@ __global__ void calculate_spread_probabilities(
     float elevation_sd,
     float upper_limit,
     curandState* states,
-    unsigned int* new_burned_cells,
-    unsigned int* n_new_burned
+    bool* burned_bin,
+    char* cell_states_initial,
+    char* cell_states_final
 ) {
     const float angles[8] = { M_PI * 3 / 4, M_PI, M_PI * 5 / 4, M_PI / 2, M_PI * 3 / 2,
                               M_PI / 4,     0,    M_PI * 7 / 4 };
@@ -76,54 +75,62 @@ __global__ void calculate_spread_probabilities(
                               { 0, 1 },   { 1, -1 }, { 1, 0 },  { 1, 1 } };
 
     unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    if (idx >= n_burning_cells) return;
+    
+    // Loop
+    if (idx >= (n_col * n_row)) return; // Ensure we don't exceed the number of cells in the grid
+    
+    // Get the current cell coordinates
+    unsigned int cell_x = idx % n_col;
+    unsigned int cell_y = idx / n_col;
+    const Cell& current_cell = landscape[cell_y * n_col + cell_x];
 
-    // Get burning cell coordinates
-    unsigned int burning_cell_0 = burning_cells[idx * 2];
-    unsigned int burning_cell_1 = burning_cells[idx * 2 + 1];
-    const Cell& burning_cell = landscape[burning_cell_1 * n_col + burning_cell_0];
 
-    // Get the random state for this cell
-    unsigned int cell_idx = burning_cell_1 * n_col + burning_cell_0;
-    curandState localState = states[cell_idx];
+    // // Get burning cell coordinates
+    // unsigned int burning_cell_0 = burning_cells[idx * 2];
+    // unsigned int burning_cell_1 = burning_cells[idx * 2 + 1];
+    // const Cell& burning_cell = landscape[burning_cell_1 * n_col + burning_cell_0];
 
-    // Process each neighbor
-    for (int n = 0; n < 8; n++) {
-        int neighbor_x = burning_cell_0 + moves[n][0];
-        int neighbor_y = burning_cell_1 + moves[n][1];
+    // // Get the random state for this cell
+    // unsigned int cell_idx = burning_cell_1 * n_col + burning_cell_0;
+    // curandState localState = states[cell_idx];
 
-        // Check if neighbor is in range
-        if (neighbor_x < 0 || neighbor_x >= n_col || neighbor_y < 0 || neighbor_y >= n_row) {
-            continue;
-        }
+    // // Process each neighbor
+    // for (int n = 0; n < 8; n++) {
+    //     int neighbor_x = burning_cell_0 + moves[n][0];
+    //     int neighbor_y = burning_cell_1 + moves[n][1];
 
-        // Check if already burned
-        if (burned_bin[neighbor_y * n_col + neighbor_x]) {
-            continue;
-        }
+    //     // Check if neighbor is in range
+    //     if (neighbor_x < 0 || neighbor_x >= n_col || neighbor_y < 0 || neighbor_y >= n_row) {
+    //         continue;
+    //     }
 
-        const Cell& neighbor = landscape[neighbor_y * n_col + neighbor_x];
-        if (!neighbor.burnable) {
-            continue;
-        }
+    //     // Check if already burned
+    //     if (burned_bin[neighbor_y * n_col + neighbor_x]) {
+    //         continue;
+    //     }
 
-        // Calculate spread probability using the helper function
-        float prob = spread_probability(burning_cell, neighbor, *params, angles[n], 
-                                      distance, elevation_mean, elevation_sd, upper_limit);
+    //     const Cell& neighbor = landscape[neighbor_y * n_col + neighbor_x];
+    //     if (!neighbor.burnable) {
+    //         continue;
+    //     }
 
-        // Random number generation and burn decision
-        float random_value = curand_uniform(&localState);
+    //     // Calculate spread probability using the helper function
+    //     float prob = spread_probability(burning_cell, neighbor, *params, angles[n], 
+    //                                   distance, elevation_mean, elevation_sd, upper_limit);
 
-        if (random_value < prob) {
-            // Atomically add new burned cell
-            unsigned int new_idx = atomicAdd(n_new_burned, 1);
-            new_burned_cells[new_idx * 2] = neighbor_x;
-            new_burned_cells[new_idx * 2 + 1] = neighbor_y;
-        }
-    }
+    //     // Random number generation and burn decision
+    //     float random_value = curand_uniform(&localState);
 
-    // Save the updated random state
-    states[cell_idx] = localState;
+    //     if (random_value < prob) {
+    //         // Atomically add new burned cell
+    //         unsigned int new_idx = atomicAdd(n_new_burned, 1);
+    //         new_burned_cells[new_idx * 2] = neighbor_x;
+    //         new_burned_cells[new_idx * 2 + 1] = neighbor_y;
+    //     }
+    // }
+
+    // // Save the updated random state
+    // states[cell_idx] = localState;
 }
 
 // Initialize random states
