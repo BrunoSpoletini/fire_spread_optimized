@@ -56,7 +56,7 @@ __device__ float spread_probability(
 __global__ void calculate_spread_probabilities(
     const Cell* __restrict__ landscape,
     const unsigned short* __restrict__ burned_ids,
-    unsigned int burned_size,
+    unsigned int* burned_size,
     unsigned int n_col,
     unsigned int n_row,
     const SimulationParams* params,
@@ -69,10 +69,10 @@ __global__ void calculate_spread_probabilities(
     char* cell_states_initial,
     char* cell_states_final
 ) {
-    const float angles[8] = { M_PI * 3 / 4, M_PI, M_PI * 5 / 4, M_PI / 2, M_PI * 3 / 2,
-                              M_PI / 4,     0,    M_PI * 7 / 4 };
-    const int moves[8][2] = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 },
-                              { 0, 1 },   { 1, -1 }, { 1, 0 },  { 1, 1 } };
+    // const float angles[8] = { M_PI * 3 / 4, M_PI, M_PI * 5 / 4, M_PI / 2, M_PI * 3 / 2,
+    //                           M_PI / 4,     0,    M_PI * 7 / 4 };
+    // const int moves[8][2] = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 },
+    //                           { 0, 1 },   { 1, -1 }, { 1, 0 },  { 1, 1 } };
 
     unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;
     
@@ -80,9 +80,9 @@ __global__ void calculate_spread_probabilities(
     if (idx >= (n_col * n_row)) return; // Ensure we don't exceed the number of cells in the grid
     
     // Get the current cell coordinates
-    unsigned int cell_x = idx % n_col;
-    unsigned int cell_y = idx / n_col;
-    const Cell& current_cell = landscape[cell_y * n_col + cell_x];
+    // unsigned int cell_x = idx % n_col;
+    // unsigned int cell_y = idx / n_col;
+    // const Cell& current_cell = landscape[cell_y * n_col + cell_x];
 
 
     // // Get burning cell coordinates
@@ -180,7 +180,6 @@ Fire simulate_fire(
 
     // Variables sizes
     size_t d_burned_ids_size = 2 * n_col * n_row * sizeof(unsigned short);
-    size_t d_burned_ids_steps_size = (n_col * n_row) * sizeof(unsigned int);
 
     // Allocate device memory with error checking
     CUDA_CHECK(cudaMalloc(&cell_states_initial_d, n_col * n_row * sizeof(char)));
@@ -209,14 +208,15 @@ Fire simulate_fire(
         h_burned_ids.push_back(cell);
     }
     h_burned_ids_steps.push_back(h_burned_size);
+    CUDA_CHECK(cudaMemcpy(d_burned_size, &h_burned_size, sizeof(unsigned int), cudaMemcpyHostToDevice));
 
     // Copy burned_ids to device
-    short int* burned_ids_temp = new short int[2 * h_burned_size];
-    for (unsigned int i = 0; i < h_burned_size; i++) {
+    unsigned short* burned_ids_temp = new unsigned short[2 * h_burned_size];
+    for (unsigned short i = 0; i < h_burned_size; i++) {
         burned_ids_temp[2*i] = h_burned_ids[i].first;
         burned_ids_temp[2*i+1] = h_burned_ids[i].second;
     }
-    CUDA_CHECK(cudaMemcpy(&d_burned_ids, burned_ids_temp, 2 * h_burned_size * sizeof(unsigned int), cudaMemcpyHostToDevice));
+    CUDA_CHECK(cudaMemcpy(d_burned_ids, burned_ids_temp, 2 * h_burned_size * sizeof(unsigned short), cudaMemcpyHostToDevice));
     delete[] burned_ids_temp;
 
     // Copy initial cell states to DEVICE    
@@ -261,10 +261,10 @@ Fire simulate_fire(
         CUDA_CHECK(cudaGetLastError());
         CUDA_CHECK(cudaDeviceSynchronize());
 
-
         // Add the number of cells that burned in the last iteration to burned_ids_steps
         unsigned int old_burned_size = h_burned_size;
         CUDA_CHECK(cudaMemcpy(&h_burned_size, d_burned_size, sizeof(unsigned int), cudaMemcpyDeviceToHost));
+
         if (h_burned_size == old_burned_size) {
             // No new cells burned, exit loop
             h_burned = false;
@@ -302,8 +302,8 @@ Fire simulate_fire(
         burned_bin[{x, y}] = (cell_states_final_h[i] != 'U');
     }
 
-    short int* h_burned_ids_aux = new short int[2 * n_col * n_row];
-    CUDA_CHECK(cudaMemcpy(&h_burned_ids_aux, d_burned_ids, d_burned_ids_size, cudaMemcpyDeviceToHost));
+    unsigned short* h_burned_ids_aux = new unsigned short[2 * n_col * n_row];
+    CUDA_CHECK(cudaMemcpy(h_burned_ids_aux, d_burned_ids, d_burned_ids_size, cudaMemcpyDeviceToHost));
     for (unsigned int i = 0; i < 2 * n_col * n_row; i += 2) {
         h_burned_ids.push_back({h_burned_ids_aux[i], h_burned_ids_aux[i + 1]});
     }
