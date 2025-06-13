@@ -69,8 +69,8 @@ __global__ void calculate_spread_probabilities(
     char* cell_states_initial,
     char* cell_states_final
 ) {
-    // const float angles[8] = { M_PI * 3 / 4, M_PI, M_PI * 5 / 4, M_PI / 2, M_PI * 3 / 2,
-    //                           M_PI / 4,     0,    M_PI * 7 / 4 };
+    const float angles[8] = { M_PI * 3 / 4, M_PI, M_PI * 5 / 4, M_PI / 2, M_PI * 3 / 2,
+                              M_PI / 4,     0,    M_PI * 7 / 4 };
     const int moves[8][2] = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 },
                               { 0, 1 },   { 1, -1 }, { 1, 0 },  { 1, 1 } };
 
@@ -89,11 +89,10 @@ __global__ void calculate_spread_probabilities(
         return;
     }
 
-    // TO DO - RESOLVER RANDOMS
-    // // // Get the random state for this cell
-    // // unsigned int cell_idx = burning_cell_1 * n_col + burning_cell_0;
-    // // curandState localState = states[cell_idx];
-
+    // Get the random state for this cell
+    curandState localState = states[idx]; 
+    // TO DO:
+    // Hacer que cada thread tenga 8 numeros random, uno por vecino
 
     if (cell_states_initial[idx] == 'B') {
         cell_states_final[idx] = 'D';
@@ -104,63 +103,53 @@ __global__ void calculate_spread_probabilities(
     } else if (cell_states_initial[idx] == 'U') {
         // Check cell neighbors to see if any are burning
         // bool is_burning_neighbor = false;
-        // float spreading_prob[8];
+        float spreading_prob[8];
+        cell_states_final[idx] = 'U'; // Unburned, unless a neighbor...
+
         for (int n = 0; n < 8; n++) {
             int neighbor_x = cell_x + moves[n][0];
             int neighbor_y = cell_y + moves[n][1];
 
             // Check if neighbor is in range
             if (neighbor_x < 0 || neighbor_x >= n_col || neighbor_y < 0 || neighbor_y >= n_row) {
+                spreading_prob[n] = 0.0f; // Out of bounds, no spread
                 continue;
             }
 
             // Check if neighbor is burning
             if (cell_states_initial[neighbor_y * n_col + neighbor_x] == 'B') {
-                // is_burning_neighbor = true;
 
-                break;
+                // Calculate spread probability using the helper function
+                const Cell& neighbor = landscape[neighbor_y * n_col + neighbor_x];
+
+                // TODO: check angles
+                spreading_prob[n] = spread_probability(
+                    neighbor, current_cell, *params, angles[n], distance,
+                    elevation_mean, elevation_sd, upper_limit
+                );
+
+                // Random number generation and burn decision
+                float random_value = curand_uniform(&localState);
+
+                if (random_value < spreading_prob[n]) {
+                    // Atomically add new burned cell
+                    unsigned int new_idx = atomicAdd(burned_size, 1);
+                    unsigned short* burned_ids_temp = (unsigned short*)burned_ids;
+                    burned_ids_temp[new_idx * 2] = cell_x;
+                    burned_ids_temp[new_idx * 2 + 1] = cell_y;
+
+                    // Mark the cell as burning
+                    cell_states_final[idx] = 'B';
+                    break; // Stop checking neighbors once we decide to burn
+                } 
+            } else {
+                spreading_prob[n] = 0.0f; // Not burning, no spread
+                continue;
             }
         }
-
-
-
     }
-    // for (int n = 0; n < 8; n++) {
-    //     int neighbor_x = burning_cell_0 + moves[n][0];
-    //     int neighbor_y = burning_cell_1 + moves[n][1];
-
-    //     // Check if neighbor is in range
-    //     if (neighbor_x < 0 || neighbor_x >= n_col || neighbor_y < 0 || neighbor_y >= n_row) {
-    //         continue;
-    //     }
-
-    //     // Check if already burned
-    //     if (burned_bin[neighbor_y * n_col + neighbor_x]) {
-    //         continue;
-    //     }
-
-    //     const Cell& neighbor = landscape[neighbor_y * n_col + neighbor_x];
-    //     if (!neighbor.burnable) {
-    //         continue;
-    //     }
-
-    //     // Calculate spread probability using the helper function
-    //     float prob = spread_probability(burning_cell, neighbor, *params, angles[n], 
-    //                                   distance, elevation_mean, elevation_sd, upper_limit);
-
-    //     // Random number generation and burn decision
-    //     float random_value = curand_uniform(&localState);
-
-    //     if (random_value < prob) {
-    //         // Atomically add new burned cell
-    //         unsigned int new_idx = atomicAdd(n_new_burned, 1);
-    //         new_burned_cells[new_idx * 2] = neighbor_x;
-    //         new_burned_cells[new_idx * 2 + 1] = neighbor_y;
-    //     }
-    // }
-
-    // // Save the updated random state
-    // states[cell_idx] = localState;
+    // Save the updated random state
+    states[idx] = localState;
 }
 
 // Initialize random states
@@ -298,16 +287,16 @@ Fire simulate_fire(
         if (h_burned_size == old_burned_size) {
             // No new cells burned, exit loop
             h_burned = false;
+            fprintf(stderr, "Iteration %d: %u cells burned\n", iteration, h_burned_size);
             break;
         }
-        h_burned_ids_steps.push_back(h_burned_size);
+        h_burned_ids_steps.push_back(h_burned_size - old_burned_size);
 
         // Swap initial and final states
         char* temp = cell_states_initial_d;
         cell_states_initial_d = cell_states_final_d;
         cell_states_final_d = temp;
 
-        // PASAR QUEMANDOSE A QUEMADOS CAPAZ
 
         // // --- DEBUG ---
         // // Get number of new burned cells
@@ -332,11 +321,21 @@ Fire simulate_fire(
         burned_bin[{x, y}] = (cell_states_final_h[i] != 'U');
     }
 
-    unsigned short* h_burned_ids_aux = new unsigned short[2 * n_col * n_row];
-    CUDA_CHECK(cudaMemcpy(h_burned_ids_aux, d_burned_ids, d_burned_ids_size, cudaMemcpyDeviceToHost));
-    for (unsigned int i = 0; i < 2 * n_col * n_row; i += 2) {
+    unsigned short* h_burned_ids_aux = new unsigned short[h_burned_size * 2];
+    CUDA_CHECK(cudaMemcpy(h_burned_ids_aux, d_burned_ids, h_burned_size * 2 * sizeof(unsigned short), cudaMemcpyDeviceToHost));
+    for (unsigned int i = 0; i < 2 * h_burned_size; i += 2) {
         h_burned_ids.push_back({h_burned_ids_aux[i], h_burned_ids_aux[i + 1]});
     }
+    
+    // Get elapsed time using CUDA events
+    CUDA_CHECK(cudaEventRecord(stop_event));
+    CUDA_CHECK(cudaEventSynchronize(stop_event));
+    float milliseconds = 0;
+    CUDA_CHECK(cudaEventElapsedTime(&milliseconds, start_event, stop_event));
+    double seconds = milliseconds / 1000.0;
+
+    // fprintf(stderr, "Celdas incendiadas: %ld\n", burned_ids.size());
+    fprintf(stderr, "celdas incendiadas por microsegundo: %lf\n", h_burned_size / (1E06 * seconds));
 
     // Free device memory
     if (d_landscape) CUDA_CHECK(cudaFree(d_landscape));
@@ -347,20 +346,11 @@ Fire simulate_fire(
     if (burned_d) CUDA_CHECK(cudaFree(burned_d));
     if (d_burned_ids) CUDA_CHECK(cudaFree(d_burned_ids));
     if (d_burned_size) CUDA_CHECK(cudaFree(d_burned_size));
-    
-    // Get elapsed time using CUDA events
-    CUDA_CHECK(cudaEventRecord(stop_event));
-    CUDA_CHECK(cudaEventSynchronize(stop_event));
-    float milliseconds = 0;
-    CUDA_CHECK(cudaEventElapsedTime(&milliseconds, start_event, stop_event));
-    double seconds = milliseconds / 1000.0;
-
-    // fprintf(stderr, "Celdas incendiadas: %ld\n", burned_ids.size());
-    // fprintf(stderr, "celdas incendiadas por microsegundo: %lf\n", burned_ids.size() / (1E06 * seconds));
 
     // Clean up CUDA events
     CUDA_CHECK(cudaEventDestroy(start_event));
     CUDA_CHECK(cudaEventDestroy(stop_event));
+
 
     delete[] landscape_data;
     delete[] h_burned_ids_aux;
