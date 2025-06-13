@@ -54,9 +54,9 @@ __device__ float spread_probability(
 // Each thread processes one cell, if some of its neighbors are burning,
 // it calculates the probability of burning itself based on the parameters
 __global__ void calculate_spread_probabilities(
-    const Cell* __restrict__ landscape,
-    const unsigned short* __restrict__ burned_ids,
-    unsigned int burned_size,
+    const Cell* landscape,
+    const unsigned short* burned_ids,
+    unsigned int* burned_size,
     unsigned int n_col,
     unsigned int n_row,
     const SimulationParams* params,
@@ -76,25 +76,55 @@ __global__ void calculate_spread_probabilities(
 
     unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;
     
-    // Loop
     if (idx >= (n_col * n_row)) return; // Ensure we don't exceed the number of cells in the grid
-    
+
     // Get the current cell coordinates
     unsigned int cell_x = idx % n_col;
     unsigned int cell_y = idx / n_col;
     const Cell& current_cell = landscape[cell_y * n_col + cell_x];
 
+    if (!current_cell.burnable) {
+        // If the cell is not burnable, just copy the state
+        cell_states_final[idx] = cell_states_initial[idx];
+        return;
+    }
 
-    // // Get burning cell coordinates
-    // unsigned int burning_cell_0 = burning_cells[idx * 2];
-    // unsigned int burning_cell_1 = burning_cells[idx * 2 + 1];
-    // const Cell& burning_cell = landscape[burning_cell_1 * n_col + burning_cell_0];
+    // TO DO - RESOLVER RANDOMS
+    // // // Get the random state for this cell
+    // // unsigned int cell_idx = burning_cell_1 * n_col + burning_cell_0;
+    // // curandState localState = states[cell_idx];
 
-    // // Get the random state for this cell
-    // unsigned int cell_idx = burning_cell_1 * n_col + burning_cell_0;
-    // curandState localState = states[cell_idx];
 
-    // // Process each neighbor
+    if (cell_states_initial[idx] == 'B') {
+        cell_states_final[idx] = 'D';
+        return; // If burning, kill cell
+    } else if (cell_states_initial[idx] == 'D') {
+        cell_states_final[idx] = cell_states_initial[idx];
+        return; // If dead, remains dead
+    } else if (cell_states_initial[idx] == 'U') {
+        // Check cell neighbors to see if any are burning
+        bool is_burning_neighbor = false;
+        float spreading_prob[8];
+        for (int n = 0; n < 8; n++) {
+            int neighbor_x = cell_x + moves[n][0];
+            int neighbor_y = cell_y + moves[n][1];
+
+            // Check if neighbor is in range
+            if (neighbor_x < 0 || neighbor_x >= n_col || neighbor_y < 0 || neighbor_y >= n_row) {
+                continue;
+            }
+
+            // Check if neighbor is burning
+            if (cell_states_initial[neighbor_y * n_col + neighbor_x] == 'B') {
+                is_burning_neighbor = true;
+
+                break;
+            }
+        }
+
+
+
+    }
     // for (int n = 0; n < 8; n++) {
     //     int neighbor_x = burning_cell_0 + moves[n][0];
     //     int neighbor_y = burning_cell_1 + moves[n][1];
