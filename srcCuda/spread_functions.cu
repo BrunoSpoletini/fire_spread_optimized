@@ -26,28 +26,27 @@ __device__ float spread_probability(
     const Cell& burning, const Cell& neighbour, SimulationParams params, float angle,
     float distance, float elevation_mean, float elevation_sd, float upper_limit = 1.0
 ) {
+    float slope_term = sin(atan((neighbour.elevation - burning.elevation) / distance));
+    float wind_term = cos(angle - burning.wind_direction);
+    float elev_term = (neighbour.elevation - elevation_mean) / elevation_sd;
+    float linpred = params.independent_pred;
 
-  float slope_term = sin(atan((neighbour.elevation - burning.elevation) / distance));
-  float wind_term = cos(angle - burning.wind_direction);
-  float elev_term = (neighbour.elevation - elevation_mean) / elevation_sd;
-  float linpred = params.independent_pred;
+    if (neighbour.vegetation_type == SUBALPINE) {
+        linpred += params.subalpine_pred;
+    } else if (neighbour.vegetation_type == WET) {
+        linpred += params.wet_pred;
+    } else if (neighbour.vegetation_type == DRY) {
+        linpred += params.dry_pred;
+    }
 
-  if (neighbour.vegetation_type == SUBALPINE) {
-    linpred += params.subalpine_pred;
-  } else if (neighbour.vegetation_type == WET) {
-    linpred += params.wet_pred;
-  } else if (neighbour.vegetation_type == DRY) {
-    linpred += params.dry_pred;
-  }
+    linpred += params.fwi_pred * neighbour.fwi;
+    linpred += params.aspect_pred * neighbour.aspect;
+    linpred += wind_term * params.wind_pred + elev_term * params.elevation_pred +
+        slope_term * params.slope_pred;
 
-  linpred += params.fwi_pred * neighbour.fwi;
-  linpred += params.aspect_pred * neighbour.aspect;
-  linpred += wind_term * params.wind_pred + elev_term * params.elevation_pred +
-             slope_term * params.slope_pred;
+    float prob = upper_limit / (1 + exp(-linpred));
 
-             float prob = upper_limit / (1 + exp(-linpred));
-
-  return prob;
+    return prob;
 }
 
 // CUDA kernel for spread probability calculation
@@ -103,7 +102,6 @@ __global__ void calculate_spread_probabilities(
     } else if (cell_states_initial[idx] == 'U') {
         // Check cell neighbors to see if any are burning
         // bool is_burning_neighbor = false;
-        float spreading_prob[8];
         cell_states_final[idx] = 'U'; // Unburned, unless a neighbor...
 
         for (int n = 0; n < 8; n++) {
@@ -111,10 +109,8 @@ __global__ void calculate_spread_probabilities(
             int neighbor_y = cell_y + moves[n][1];
 
             // Check if neighbor is in range
-            if (neighbor_x < 0 || neighbor_x >= n_col || neighbor_y < 0 || neighbor_y >= n_row) {
-                spreading_prob[n] = 0.0f; // Out of bounds, no spread
+            if (neighbor_x < 0 || neighbor_x >= n_col || neighbor_y < 0 || neighbor_y >= n_row)
                 continue;
-            }
 
             // Check if neighbor is burning
             if (cell_states_initial[neighbor_y * n_col + neighbor_x] == 'B') {
@@ -123,15 +119,15 @@ __global__ void calculate_spread_probabilities(
                 const Cell& neighbor = landscape[neighbor_y * n_col + neighbor_x];
 
                 // TODO: check angles
-                spreading_prob[n] = spread_probability(
-                    neighbor, current_cell, *params, angles[n], distance,
+                float spreading_prob = spread_probability(
+                    neighbor, current_cell, *params, angles[7 - n], distance,
                     elevation_mean, elevation_sd, upper_limit
                 );
 
                 // Random number generation and burn decision
                 float random_value = curand_uniform(&localState);
 
-                if (random_value < spreading_prob[n]) {
+                if (random_value < spreading_prob) {
                     // Atomically add new burned cell
                     unsigned int new_idx = atomicAdd(burned_size, 1);
                     unsigned short* burned_ids_temp = (unsigned short*)burned_ids;
@@ -142,9 +138,6 @@ __global__ void calculate_spread_probabilities(
                     cell_states_final[idx] = 'B';
                     break; // Stop checking neighbors once we decide to burn
                 } 
-            } else {
-                spreading_prob[n] = 0.0f; // Not burning, no spread
-                continue;
             }
         }
     }
@@ -278,7 +271,7 @@ Fire simulate_fire(
         );
 
         //CUDA_CHECK(cudaGetLastError());
-        //CUDA_CHECK(cudaDeviceSynchronize()); TO DO es necesario?
+        CUDA_CHECK(cudaDeviceSynchronize());
 
         // Add the number of cells that burned in the last iteration to burned_ids_steps
         unsigned int old_burned_size = h_burned_size;
@@ -334,8 +327,8 @@ Fire simulate_fire(
     CUDA_CHECK(cudaEventElapsedTime(&milliseconds, start_event, stop_event));
     double seconds = milliseconds / 1000.0;
 
-    // fprintf(stderr, "Celdas incendiadas: %ld\n", burned_ids.size());
-    //fprintf(stderr, "celdas incendiadas por microsegundo: %lf\n", h_burned_size / (1E06 * seconds));
+    fprintf(stderr, "Celdas incendiadas: %ld\n", burned_ids.size());
+    fprintf(stderr, "celdas incendiadas por microsegundo: %lf\n", h_burned_size / (1E06 * seconds));
 
     // Free device memory
     if (d_landscape) CUDA_CHECK(cudaFree(d_landscape));
