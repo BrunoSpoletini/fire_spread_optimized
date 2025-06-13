@@ -169,12 +169,11 @@ Fire simulate_fire(
     size_t landscape_size = n_col * n_row * sizeof(Cell);
 
     // Device variables
-    bool burned_d;
+    bool* burned_d;
     char* cell_states_initial_d = nullptr;
     char* cell_states_final_d = nullptr;
-    unsigned int d_burned_size = nullptr;
+    unsigned int* d_burned_size;
     unsigned short* d_burned_ids = nullptr;
-    unsigned int* d_burned_ids_steps = nullptr;
     Cell* d_landscape = nullptr;
     curandState* d_states = nullptr;
     SimulationParams* d_params = nullptr;
@@ -186,17 +185,15 @@ Fire simulate_fire(
     // Allocate device memory with error checking
     CUDA_CHECK(cudaMalloc(&cell_states_initial_d, n_col * n_row * sizeof(char)));
     CUDA_CHECK(cudaMalloc(&cell_states_final_d, n_col * n_row * sizeof(char)));
-    CUDA_CHECK(cudaMalloc(&d_burned_size, sizeof(int)));
+    CUDA_CHECK(cudaMalloc(&d_burned_size, sizeof(unsigned int)));
     CUDA_CHECK(cudaMalloc(&burned_d, sizeof(bool)));
     CUDA_CHECK(cudaMalloc(&d_burned_ids, d_burned_ids_size));
-    CUDA_CHECK(cudaMalloc(&d_burned_ids_steps, d_burned_ids_steps_size));
     CUDA_CHECK(cudaMalloc(&d_landscape, landscape_size));
     CUDA_CHECK(cudaMalloc(&d_states, n_col * n_row * sizeof(curandState)));
     CUDA_CHECK(cudaMalloc(&d_params, sizeof(SimulationParams)));
 
     // Initialize device memory to zero
     CUDA_CHECK(cudaMemset(d_burned_ids, 0, d_burned_ids_size));
-    CUDA_CHECK(cudaMemset(d_burned_ids_steps, 0, d_burned_ids_steps_size));
 
     // Initialize cell states in HOST
     for (unsigned int i = 0; i < n_col; i++) {
@@ -220,7 +217,6 @@ Fire simulate_fire(
         burned_ids_temp[2*i+1] = h_burned_ids[i].second;
     }
     CUDA_CHECK(cudaMemcpy(&d_burned_ids, burned_ids_temp, 2 * h_burned_size * sizeof(unsigned int), cudaMemcpyHostToDevice));
-    //CUDA_CHECK(cudaMemcpy(&d_burned_ids_steps, burned_ids_steps.back(), sizeof(unsigned int), cudaMemcpyHostToDevice));
     delete[] burned_ids_temp;
 
     // Copy initial cell states to DEVICE    
@@ -267,7 +263,7 @@ Fire simulate_fire(
 
 
         // Add the number of cells that burned in the last iteration to burned_ids_steps
-        int old_burned_size = h_burned_size;
+        unsigned int old_burned_size = h_burned_size;
         CUDA_CHECK(cudaMemcpy(&h_burned_size, d_burned_size, sizeof(unsigned int), cudaMemcpyDeviceToHost));
         if (h_burned_size == old_burned_size) {
             // No new cells burned, exit loop
@@ -275,18 +271,11 @@ Fire simulate_fire(
             break;
         }
         h_burned_ids_steps.push_back(h_burned_size);
-        
 
         // Swap initial and final states
         char* temp = cell_states_initial_d;
         cell_states_initial_d = cell_states_final_d;
         cell_states_final_d = temp;
-
-        // Copy burned flag back to host
-        CUDA_CHECK(cudaMemcpy(&h_burned, burned_d, sizeof(bool), cudaMemcpyDeviceToHost))
-
-        // Agregar celdas incendiadas a steps
-        CUDA_CHECK(cudaMemcpy(d_burned_ids_steps + iteration * sizeof(unsigned short), &d_burned_iteration, sizeof(short int), cudaMemcpyDeviceToDevice));
 
         // PASAR QUEMANDOSE A QUEMADOS CAPAZ
 
@@ -306,11 +295,11 @@ Fire simulate_fire(
         ++iteration;
     }
 
-    CUDA_CHECK(cudaMemcpy(&cell_states_final_h, cell_states_final_d, n_col * n_row * sizeof(char), cudaMemcpyDeviceToHost));
+    CUDA_CHECK(cudaMemcpy(cell_states_final_h, cell_states_final_d, n_col * n_row * sizeof(char), cudaMemcpyDeviceToHost));
     for (unsigned int i = 0; i < n_col * n_row; i++) {
         unsigned int x = i % n_col;
         unsigned int y = i / n_col;
-        burned_bin[x][y] = (cell_states_final_h[i] != 'U');
+        burned_bin[{x, y}] = (cell_states_final_h[i] != 'U');
     }
 
     short int* h_burned_ids_aux = new short int[2 * n_col * n_row];
@@ -318,11 +307,6 @@ Fire simulate_fire(
     for (unsigned int i = 0; i < 2 * n_col * n_row; i += 2) {
         h_burned_ids.push_back({h_burned_ids_aux[i], h_burned_ids_aux[i + 1]});
     }
-
-    short int* h_burned_ids_steps_aux = new short int[n_col * n_row];
-    CUDA_CHECK(cudaMemcpy(&h_burned_ids_steps_aux, d_burned_ids_steps, d_burned_ids_steps_size, cudaMemcpyDeviceToHost));
-    for (unsigned int i = 0; i < n_col * n_row; i++)
-        h_burned_ids_steps.push_back(h_burned_ids_steps_aux[i]);
 
     // Free device memory
     if (d_landscape) CUDA_CHECK(cudaFree(d_landscape));
@@ -332,7 +316,6 @@ Fire simulate_fire(
     if (cell_states_final_d) CUDA_CHECK(cudaFree(cell_states_final_d));
     if (burned_d) CUDA_CHECK(cudaFree(burned_d));
     if (d_burned_ids) CUDA_CHECK(cudaFree(d_burned_ids));
-    if (d_burned_ids_steps) CUDA_CHECK(cudaFree(d_burned_ids_steps));
     if (d_burned_size) CUDA_CHECK(cudaFree(d_burned_size));
     
     // Get elapsed time using CUDA events
@@ -351,7 +334,6 @@ Fire simulate_fire(
 
     delete[] landscape_data;
     delete[] h_burned_ids_aux;
-    delete[] h_burned_ids_steps_aux;
 
     return { n_col, n_row, burned_bin, h_burned_ids, h_burned_ids_steps };
 }
