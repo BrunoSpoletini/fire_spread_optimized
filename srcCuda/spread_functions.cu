@@ -50,12 +50,15 @@ __device__ float spread_probability(
   return prob;
 }
 
+//          d_landscape, d_burned_ids, d_burned_size,
+//          n_col, n_row, d_params, distance, elevation_mean, elevation_sd,
+//          upper_limit, d_states, burned_d, cell_states_initial_d, cell_states_final_d
+
 // CUDA kernel for spread probability calculation
 __global__ void calculate_spread_probabilities(
     const Cell* __restrict__ landscape,
-    const bool* __restrict__ burned_bin,
-    const unsigned int* __restrict__ burning_cells,
-    unsigned int n_burning_cells,
+    const unsigned short* __restrict__ burned_ids,
+    unsigned int burned_size,
     unsigned int n_col,
     unsigned int n_row,
     const SimulationParams* params,
@@ -162,9 +165,9 @@ Fire simulate_fire(
     bool burned_d;
     char* cell_states_initial_d = nullptr;
     char* cell_states_final_d = nullptr;
-    unsigned int* d_burned_size = nullptr;
+    unsigned int d_burned_size = nullptr;
     unsigned short* d_burned_ids = nullptr;
-    unsigned int** d_burned_ids_steps = nullptr;
+    unsigned int* d_burned_ids_steps = nullptr;
     Cell* d_landscape = nullptr;
     curandState* d_states = nullptr;
     SimulationParams* d_params = nullptr;
@@ -176,6 +179,7 @@ Fire simulate_fire(
     // Allocate device memory with error checking
     CUDA_CHECK(cudaMalloc(&cell_states_initial_d, n_col * n_row * sizeof(char)));
     CUDA_CHECK(cudaMalloc(&cell_states_final_d, n_col * n_row * sizeof(char)));
+    CUDA_CHECK(cudaMalloc(&d_burned_size, sizeof(int)));
     CUDA_CHECK(cudaMalloc(&burned_d, sizeof(bool)));
     CUDA_CHECK(cudaMalloc(&d_burned_ids, d_burned_ids_size));
     CUDA_CHECK(cudaMalloc(&d_burned_ids_steps, d_burned_ids_steps_size));
@@ -244,12 +248,12 @@ Fire simulate_fire(
     
     while (h_burned) {
 
-        // // Launch kernel
-        // calculate_spread_probabilities<<<num_blocks, block_size>>>(
-        //     d_landscape, d_burned_ids, d_burned_size,
-        //     n_col, n_row, d_params, distance, elevation_mean, elevation_sd,
-        //     upper_limit, d_states, burned_d, cell_states_initial_d, cell_states_final_d
-        // );
+        // Launch kernel
+        calculate_spread_probabilities<<<num_blocks, block_size>>>(
+            d_landscape, d_burned_ids, d_burned_size,
+            n_col, n_row, d_params, distance, elevation_mean, elevation_sd,
+            upper_limit, d_states, burned_d, cell_states_initial_d, cell_states_final_d
+        );
 
         CUDA_CHECK(cudaGetLastError());
         CUDA_CHECK(cudaDeviceSynchronize());
